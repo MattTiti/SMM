@@ -65,6 +65,11 @@ const ClientLayout = ({ children }) => {
         <Toaster
           toastOptions={{
             duration: 3000,
+            success: {
+              iconTheme: {
+                primary: config.colors.toast,
+              },
+            },
           }}
         />
 
