@@ -28,8 +28,8 @@ const categories = [
     label: "Entertainment",
   },
   {
-    value: "utilities",
-    label: "Utilities",
+    value: "dining",
+    label: "Dining",
   },
   {
     value: "transportation",
@@ -52,6 +52,14 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
     setOpen(false);
   };
 
+  const findCategory = (value) => {
+    return categories.find((category) => category.value === value) ||
+    {
+      value: "other",
+      label: "Other",
+    };
+  };
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -62,7 +70,7 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
           className="w-full justify-between text-muted-foreground"
         >
           {value
-            ? categories.find((category) => category.value === value)?.label
+            ? findCategory(value)?.label
             : "Select category"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

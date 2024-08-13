@@ -31,3 +31,23 @@ export async function PUT(req) {
     );
   }
 }
+
+export async function GET(req) {
+  const userId = req.nextUrl.searchParams.get('userId');
+
+  if (!userId) {
+    return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
+  }
+
+  try {
+    await connectMongo(); // Ensure you are connected to MongoDB
+
+    // Fetch expenses for the user
+    const expenses = await Expense.find({ userId }).lean();
+
+    return NextResponse.json({ expenses });
+  } catch (error) {
+    console.error('Error fetching expenses:', error);
+    return NextResponse.json({ error: 'Error fetching expenses' }, { status: 500 });
+  }
+}

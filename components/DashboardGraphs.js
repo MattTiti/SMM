@@ -38,7 +38,7 @@ import DashboardPieChart from "./DashboardPieChart";
 
 const DashboardGraphs = () => {
   return (
-    <div>
+    <div className="space-y-4">
       <DashboardPieChart />
       <Card className="overflow-hidden">
         <CardHeader className="flex flex-row items-start">
