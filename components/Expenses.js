@@ -17,45 +17,53 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import axios from "axios";
 import { CategoryCombobox } from "@/components/CategoryCombobox";
 import { FaTrash } from "react-icons/fa";
 import { toast } from "react-hot-toast";
-import { useSession } from "next-auth/react";
 import Spinner from "@/components/Spinner";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogFooter,
+} from "@/components/ui/alert-dialog";
 
-const Expenses = () => {
-  const { data: session } = useSession();
-  const userId = session?.user?.id;
-
-  const [rows, setRows] = useState([{ name: "", cost: "", category: "" }]);
+const Expenses = ({
+  selectedMonth,
+  setSelectedMonth,
+  budget,
+  rows,
+  setRows,
+  userId,
+  loading,
+  setLoading,
+}) => {
   const [smartAddValue, setSmartAddValue] = useState("");
+  const [resetDialogOpen, setResetDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  // Fetch expenses on component mount
-  useEffect(() => {
-    const fetchExpenses = async () => {
-      if (!userId) return;
-
-      setLoading(true);
-      try {
-        const response = await axios.get(`/api/expenses`, {
-          params: { userId },
-        });
-
-        setRows(response.data.expenses[0].expenses);
-        console.log("Expenses fetched:", response.data.expenses[0].expenses);
-      } catch (error) {
-        toast.error("Error fetching expenses");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchExpenses();
-  }, [userId]);
 
   const addRow = () => {
     setRows([...rows, { name: "", cost: "", category: "" }]);
@@ -67,6 +75,26 @@ const Expenses = () => {
 
   const handleDeleteRow = (index) => {
     setRows(rows.filter((_, i) => i !== index));
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    console.log("Saving expenses:", rows, "Budget:", budget);
+    try {
+      const response = await axios.put("/api/expenses", {
+        userId,
+        month: selectedMonth,
+        budget,
+        expenses: rows,
+      });
+      console.log("Expenses and budget saved:", response.data);
+      toast.success("Expenses saved successfully!");
+    } catch (error) {
+      toast.error("Error saving expenses");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSmartAdd = async () => {
@@ -91,21 +119,18 @@ const Expenses = () => {
     }
   };
 
-  const handleSave = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    console.log("Saving expenses:", rows);
+  const handleReset = async () => {
+    setRows([{ name: "", cost: "", category: "" }]);
     try {
       const response = await axios.put("/api/expenses", {
         userId,
-        expenses: rows,
+        month: selectedMonth,
+        budget,
+        expenses: [{ name: "", cost: "", category: "" }],
       });
-      console.log("Expenses saved:", response.data);
-      toast.success("Expenses saved successfully!");
+      toast.success("Expenses cleared successfully!");
     } catch (error) {
       toast.error("Error saving expenses");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -113,11 +138,27 @@ const Expenses = () => {
     <form onSubmit={handleSave} className="lg:col-span-2">
       <Card className="sm:col-span-2">
         <CardHeader className="pb-3 flex justify-between items-start">
-          <div>
-            <CardTitle>Track Your Expenses</CardTitle>
-            <CardDescription>
-              Enter your expenses below to keep track of your spending.
-            </CardDescription>
+          <div className="flex w-full justify-between">
+            <div>
+              <CardTitle>Track Your Expenses</CardTitle>
+              <CardDescription>
+                Enter your expenses below to keep track of your spending.
+              </CardDescription>
+            </div>
+            <Select onValueChange={setSelectedMonth} value={selectedMonth}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select Month" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="august">August</SelectItem>
+                  <SelectItem value="september">September</SelectItem>
+                  <SelectItem value="october">October</SelectItem>
+                  <SelectItem value="november">November</SelectItem>
+                  <SelectItem value="december">December</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
         </CardHeader>
         <CardContent>
@@ -188,40 +229,70 @@ const Expenses = () => {
           )}
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button type="button" onClick={addRow}>
-            + Add Row
-          </Button>
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <Button type="button" onClick={() => setOpen(true)}>
-                Smart Add
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Smart Add</DialogTitle>
-                <DialogDescription>
-                  Paste or type values below and click "Smart Add" to extract expenses. Longer text will take longer to process.
-                </DialogDescription>
-              </DialogHeader>
-              {loading ? (
-                <Spinner />
-              ) : (
-                <>
-                  <textarea
-                    placeholder="Paste or type values here..."
-                    className="w-full h-24 p-2 border rounded"
-                    value={smartAddValue}
-                    onChange={(e) => setSmartAddValue(e.target.value)}
-                  />
-                  <Button onClick={handleSmartAdd} className="mt-2">
-                    + Add
-                  </Button>
-                </>
-              )}
-            </DialogContent>
-          </Dialog>
-          <Button type="submit">Save</Button>
+          <div className="flex gap-4">
+            <Button type="button" onClick={addRow}>
+              + Add Row
+            </Button>
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <Button type="button" onClick={() => setOpen(true)}>
+                  + Smart Add
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Smart Add</DialogTitle>
+                  <DialogDescription>
+                    Paste or type values below and click "Smart Add" to extract
+                    expenses. Longer text will take longer to process.
+                  </DialogDescription>
+                </DialogHeader>
+                {loading ? (
+                  <Spinner />
+                ) : (
+                  <>
+                    <textarea
+                      placeholder="Paste or type values here..."
+                      className="w-full h-24 p-2 border rounded"
+                      value={smartAddValue}
+                      onChange={(e) => setSmartAddValue(e.target.value)}
+                    />
+                    <Button onClick={handleSmartAdd} className="mt-2">
+                      + Add
+                    </Button>
+                  </>
+                )}
+              </DialogContent>
+            </Dialog>
+          </div>
+          <div className="flex gap-4">
+            <AlertDialog
+              open={resetDialogOpen}
+              onOpenChange={setResetDialogOpen}
+            >
+              <AlertDialogTrigger asChild>
+                <Button type="button" variant="ghost">
+                  Reset
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Confirm Reset</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Are you sure you want to reset all expenses? This action
+                    cannot be undone.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleReset}>
+                    Confirm Reset
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+            <Button type="submit">Save</Button>
+          </div>
         </CardFooter>
       </Card>
     </form>

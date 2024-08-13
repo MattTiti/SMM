@@ -1,6 +1,4 @@
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, ListFilter, File } from "lucide-react";
-
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,46 +9,47 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from "@/components/ui/pagination";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Progress } from "@/components/ui/progress";
-import Expenses from "@/components/Expenses";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
-const DashboardSummary = () => {
+const DashboardSummary = ({
+  setBudget,
+  budget,
+  rows,
+  selectedMonth,
+  userId,
+}) => {
+  const [open, setOpen] = useState(false);
+
+  const handleSaveBudget = async () => {
+    try {
+      await axios.put("/api/expenses", {
+        userId,
+        month: selectedMonth,
+        budget,
+        expenses: rows,
+      });
+      toast.success("Budget saved successfully!");
+    } catch (error) {
+      console.log("Error saving budget:", error);
+      toast.error("Error saving budget");
+    } finally {
+      setOpen(false);
+    }
+  };
+
   return (
     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 lg:col-span-2">
       <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
-        <CardHeader className="pb-3">
-          <CardTitle>Your Orders</CardTitle>
-          <CardDescription className="max-w-lg text-balance leading-relaxed">
-            Introducing Our Dynamic Orders Dashboard for Seamless Management and
-            Insightful Analysis.
-          </CardDescription>
-        </CardHeader>
-        <CardFooter>
-          <Button>Create New Order</Button>
-        </CardFooter>
-      </Card>
-      <Card x-chunk="dashboard-05-chunk-1">
         <CardHeader className="pb-2">
           <CardDescription>This Week</CardDescription>
           <CardTitle className="text-4xl">$1,329</CardTitle>
@@ -64,10 +63,39 @@ const DashboardSummary = () => {
           <Progress value={25} aria-label="25% increase" />
         </CardFooter>
       </Card>
-      <Card x-chunk="dashboard-05-chunk-2">
+      <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-1">
         <CardHeader className="pb-2">
-          <CardDescription>This Month</CardDescription>
-          <CardTitle className="text-4xl">$5,329</CardTitle>
+          <div className="flex justify-between">
+            <div>
+              <CardDescription>This Month</CardDescription>
+              <CardTitle className="text-4xl">$5,329/{budget}</CardTitle>
+            </div>
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" className="ml-4">
+                  Set Budget
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Set Monthly Budget</DialogTitle>
+                  <DialogDescription>
+                    Set your budget for the month
+                  </DialogDescription>
+                </DialogHeader>
+                <Input
+                  type="number"
+                  value={budget}
+                  onChange={(e) => setBudget(e.target.value)}
+                  placeholder="Enter budget"
+                  className="mt-4"
+                />
+                <Button onClick={handleSaveBudget} className="mt-4">
+                  Save Budget
+                </Button>
+              </DialogContent>
+            </Dialog>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="text-xs text-muted-foreground">

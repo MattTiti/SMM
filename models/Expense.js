@@ -7,6 +7,14 @@ const ExpenseSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    month: {
+      type: String,
+      required: true,
+    },
+    budget: {
+      type: String,
+      required: true,
+    },
     expenses: [
       {
         name: {
