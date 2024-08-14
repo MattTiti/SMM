@@ -60,6 +60,8 @@ const Expenses = ({
   userId,
   loading,
   setLoading,
+  setUpdate,
+  update,
 }) => {
   const [smartAddValue, setSmartAddValue] = useState("");
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
@@ -87,9 +89,10 @@ const Expenses = ({
   };
 
   const handleSave = async (e) => {
-    setSavedRows(rows);
     e.preventDefault();
     setLoading(true);
+    setSavedRows(rows);
+
     console.log("Saving expenses:", rows, "Budget:", budget);
     try {
       const response = await axios.put("/api/expenses", {
@@ -104,6 +107,7 @@ const Expenses = ({
       toast.error("Error saving expenses");
     } finally {
       setLoading(false);
+      setUpdate(!update);
     }
   };
 
@@ -155,12 +159,19 @@ const Expenses = ({
                 Enter your expenses below to keep track of your spending.
               </CardDescription>
             </div>
-            <Select onValueChange={setSelectedMonth} value={selectedMonth}>
+            <Select onValueChange={setSelectedMonth} value={selectedMonth} >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select Month" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
+                  <SelectItem value="january">January</SelectItem>
+                  <SelectItem value="february">February</SelectItem>
+                  <SelectItem value="march">March</SelectItem>
+                  <SelectItem value="april">April</SelectItem>
+                  <SelectItem value="may">May</SelectItem>
+                  <SelectItem value="june">June</SelectItem>
+                  <SelectItem value="july">July</SelectItem>
                   <SelectItem value="august">August</SelectItem>
                   <SelectItem value="september">September</SelectItem>
                   <SelectItem value="october">October</SelectItem>

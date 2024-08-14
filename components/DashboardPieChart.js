@@ -15,14 +15,15 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { capitalizeFirstLetter, formatCurrency } from "@/lib/utils";
 
-const DashboardPieChart = ({ rows = [], selectedMonth }) => {
+const DashboardPieChart = ({ monthlyExpenses = [], selectedMonth }) => {
   // Aggregate spending by category
   const spendingByCategory = React.useMemo(() => {
     const categoryMap = {};
 
-    rows?.forEach((row) => {
-      const category = row.category || "Other";
+    monthlyExpenses?.forEach((row) => {
+      const category = capitalizeFirstLetter(row.category) || "Other";
       const cost = parseFloat(row.cost || 0);
 
       if (categoryMap[category]) {
@@ -37,16 +38,28 @@ const DashboardPieChart = ({ rows = [], selectedMonth }) => {
       cost,
       fill: `hsl(var(--color-${category.toLowerCase()}))`,
     }));
-  }, [rows]);
+  }, [monthlyExpenses]);
 
+  // Calculate total spending
   const totalSpending = React.useMemo(() => {
     return spendingByCategory.reduce((acc, curr) => acc + curr.cost, 0);
   }, [spendingByCategory]);
 
-  const capitalizeFirstLetter = (string) => {
-    if (!string) return ""; // Handle empty strings or undefined
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+  // Find highest and lowest expense categories
+  const highestCategory = React.useMemo(() => {
+    return spendingByCategory.reduce(
+      (max, curr) => (curr.cost > max.cost ? curr : max),
+      spendingByCategory[0] || { category: "N/A", cost: 0 }
+    );
+  }, [spendingByCategory]);
+
+  const lowestCategory = React.useMemo(() => {
+    return spendingByCategory.reduce(
+      (min, curr) => (curr.cost < min.cost ? curr : min),
+      spendingByCategory[0] || { category: "N/A", cost: 0 }
+    );
+  }, [spendingByCategory]);
+
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
@@ -82,12 +95,9 @@ const DashboardPieChart = ({ rows = [], selectedMonth }) => {
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-3xl font-bold"
+                          className="fill-foreground text-xl font-bold"
                         >
-                          {totalSpending.toLocaleString("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                          })}
+                          {formatCurrency(totalSpending)}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
@@ -107,10 +117,10 @@ const DashboardPieChart = ({ rows = [], selectedMonth }) => {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          Highest expense category — {highestCategory.category} ({formatCurrency(highestCategory.cost)})
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing spending by category for the last 6 months
+          Lowest expense category — {lowestCategory.category} ({formatCurrency(lowestCategory.cost)})
         </div>
       </CardFooter>
     </Card>

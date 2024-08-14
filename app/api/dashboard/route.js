@@ -17,9 +17,10 @@ export async function GET(req) {
     await connectMongo();
 
     // Fetch expenses for the user and month
-    const expenses = await Expense.find({ userId, month }).lean();
-
-    return NextResponse.json({ expenses });
+    const monthlyExpenses = await Expense.find({ userId, month }).lean();
+    const allExpenses = await Expense.find({ userId }).lean();
+    
+    return NextResponse.json({ monthlyExpenses, allExpenses });
   } catch (error) {
     console.error("Error fetching expenses:", error);
     return NextResponse.json(

@@ -11,11 +11,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Expenses from "@/components/Expenses";
 import DashboardSummary from "@/components/DashboardSummary";
-import DashboardGraphs from "@/components/DashboardGraphs";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import DashboardPieChart from "@/components/DashboardPieChart";
+import DashboardBarChart from "@/components/DashboardBarChart";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -23,10 +24,14 @@ export default function Dashboard() {
 
   const [selectedMonth, setSelectedMonth] = useState("august"); // Default month
   const [budget, setBudget] = useState("0"); // Add budget state
-  const [savedRows, setSavedRows] = useState([
+  const [monthlyExpenses, setMonthlyExpenses] = useState([
+    { name: "", cost: "", category: "" },
+  ]);
+  const [yearlyExpenses, setYearlyExpenses] = useState([
     { name: "", cost: "", category: "" },
   ]);
   const [loading, setLoading] = useState(true);
+  const [update, setUpdate] = useState(false);
 
   // Fetch expenses on component mount
   useEffect(() => {
@@ -39,9 +44,11 @@ export default function Dashboard() {
           params: { userId, month: selectedMonth },
         });
 
-        const data = response.data.expenses[0];
-        setSavedRows(data.expenses || [{ name: "", cost: "", category: "" }]);
-        setBudget(data.budget || "0");
+        const data = response?.data?.monthlyExpenses[0];
+        console.log(response)
+        setMonthlyExpenses(data?.expenses || [{ name: "", cost: "", category: "" }]);
+        setYearlyExpenses(response?.data?.allExpenses || [{ name: "", cost: "", category: "" }]);
+        setBudget(data?.budget || "0");
       } catch (error) {
         console.error("Error fetching expenses:", error);
         toast.error("Error fetching expenses");
@@ -51,7 +58,7 @@ export default function Dashboard() {
     };
 
     fetchExpenses();
-  }, [userId, selectedMonth]);
+  }, [userId, selectedMonth, update]);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -84,21 +91,26 @@ export default function Dashboard() {
               budget={budget}
               userId={userId}
               selectedMonth={selectedMonth}
-              rows={savedRows}
+              rows={monthlyExpenses}
             />
             <Expenses
               selectedMonth={selectedMonth}
               setSelectedMonth={setSelectedMonth}
               budget={budget}
-              savedRows={savedRows}
-              setSavedRows={setSavedRows}
+              savedRows={monthlyExpenses}
+              setSavedRows={setMonthlyExpenses}
               userId={userId}
               loading={loading}
               setLoading={setLoading}
+              update={update}
+              setUpdate={setUpdate}
             />
           </div>
           <div className="self-start">
-            <DashboardGraphs rows={savedRows} selectedMonth={selectedMonth} />
+            <div className="space-y-4">
+              <DashboardPieChart monthlyExpenses={monthlyExpenses} selectedMonth={selectedMonth} />
+              <DashboardBarChart yearlyExpenses={yearlyExpenses} selectedMonth={selectedMonth} />
+            </div>
           </div>
         </div>
       </div>
