@@ -45,6 +45,10 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(selectedCategory || "");
 
+  React.useEffect(() => {
+    setValue(selectedCategory || "");
+  }, [selectedCategory]);
+
   const handleSelect = (currentValue) => {
     const newValue = currentValue === value ? "" : currentValue;
     setValue(newValue);
@@ -53,11 +57,12 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
   };
 
   const findCategory = (value) => {
-    return categories.find((category) => category.value === value) ||
-    {
-      value: "other",
-      label: "Other",
-    };
+    return (
+      categories.find((category) => category.value === value) || {
+        value: "other",
+        label: "Other",
+      }
+    );
   };
 
   return (
@@ -69,9 +74,7 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
           aria-expanded={open}
           className="w-full justify-between text-muted-foreground"
         >
-          {value
-            ? findCategory(value)?.label
-            : "Select category"}
+          {value ? findCategory(value)?.label : "Select category"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>

@@ -48,7 +48,7 @@ ChartContainer.displayName = "Chart"
 
 const ChartStyle = ({
   id,
-  config
+  config = {},
 }) => {
   const colorConfig = Object.entries(config).filter(([_, config]) => config.theme || config.color)
 
@@ -264,13 +264,9 @@ const ChartLegendContent = React.forwardRef((
 ChartLegendContent.displayName = "ChartLegend"
 
 // Helper to extract item config from a payload.
-function getPayloadConfigFromPayload(
-  config,
-  payload,
-  key
-) {
+function getPayloadConfigFromPayload(config, payload, key) {
   if (typeof payload !== "object" || payload === null) {
-    return undefined
+    return undefined;
   }
 
   const payloadPayload =
@@ -278,27 +274,29 @@ function getPayloadConfigFromPayload(
     typeof payload.payload === "object" &&
     payload.payload !== null
       ? payload.payload
-      : undefined
+      : undefined;
 
-  let configLabelKey = key
+  let configLabelKey = key;
 
-  if (
-    key in payload &&
-    typeof payload[key] === "string"
-  ) {
-    configLabelKey = payload[key]
+  if (key in payload && typeof payload[key] === "string") {
+    configLabelKey = payload[key];
   } else if (
     payloadPayload &&
     key in payloadPayload &&
     typeof payloadPayload[key] === "string"
   ) {
-    configLabelKey = payloadPayload[key]
+    configLabelKey = payloadPayload[key];
+  }
+
+  if (!config || configLabelKey === null) {
+    return undefined;
   }
 
   return configLabelKey in config
     ? config[configLabelKey]
     : config[key];
 }
+
 
 export {
   ChartContainer,

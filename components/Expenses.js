@@ -55,8 +55,8 @@ const Expenses = ({
   selectedMonth,
   setSelectedMonth,
   budget,
-  rows,
-  setRows,
+  savedRows,
+  setSavedRows,
   userId,
   loading,
   setLoading,
@@ -64,7 +64,16 @@ const Expenses = ({
   const [smartAddValue, setSmartAddValue] = useState("");
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const [rows, setRows] = useState([{ name: "", cost: "", category: "" }]);
 
+  useEffect(() => {
+    if (savedRows) {
+      setRows(savedRows);
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }, [savedRows]);
   const addRow = () => {
     setRows([...rows, { name: "", cost: "", category: "" }]);
   };
@@ -78,6 +87,7 @@ const Expenses = ({
   };
 
   const handleSave = async (e) => {
+    setSavedRows(rows);
     e.preventDefault();
     setLoading(true);
     console.log("Saving expenses:", rows, "Budget:", budget);
@@ -107,7 +117,7 @@ const Expenses = ({
       const newExpenses = Array.isArray(response.data.expenses)
         ? response.data.expenses
         : [response.data.expenses];
-
+      setSavedRows([...rows, ...newExpenses]);
       setRows([...rows, ...newExpenses]);
 
       toast.success("Expenses parsed successfully!");
@@ -175,55 +185,56 @@ const Expenses = ({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {rows.map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell>
-                      <Input
-                        placeholder="Enter name"
-                        value={row.name}
-                        onChange={(e) =>
-                          setRows(
-                            rows.map((r, i) =>
-                              i === index ? { ...r, name: e.target.value } : r
+                {rows &&
+                  rows.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell>
+                        <Input
+                          placeholder="Enter name"
+                          value={row.name}
+                          onChange={(e) =>
+                            setRows(
+                              rows.map((r, i) =>
+                                i === index ? { ...r, name: e.target.value } : r
+                              )
                             )
-                          )
-                        }
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Input
-                        placeholder="Enter cost"
-                        type="number"
-                        value={row.cost}
-                        onChange={(e) =>
-                          setRows(
-                            rows.map((r, i) =>
-                              i === index ? { ...r, cost: e.target.value } : r
+                          }
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Input
+                          placeholder="Enter cost"
+                          type="number"
+                          value={row.cost}
+                          onChange={(e) =>
+                            setRows(
+                              rows.map((r, i) =>
+                                i === index ? { ...r, cost: e.target.value } : r
+                              )
                             )
-                          )
-                        }
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <CategoryCombobox
-                        selectedCategory={row.category}
-                        onCategoryChange={(category) =>
-                          handleCategoryChange(index, category)
-                        }
-                      />
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleDeleteRow(index)}
-                      >
-                        <FaTrash className="text-zinc-200" />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                          }
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <CategoryCombobox
+                          selectedCategory={row.category || ""}
+                          onCategoryChange={(category) =>
+                            handleCategoryChange(index, category)
+                          }
+                        />
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDeleteRow(index)}
+                        >
+                          <FaTrash className="text-zinc-200" />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           )}

@@ -23,7 +23,9 @@ export default function Dashboard() {
 
   const [selectedMonth, setSelectedMonth] = useState("august"); // Default month
   const [budget, setBudget] = useState("0"); // Add budget state
-  const [rows, setRows] = useState([{ name: "", cost: "", category: "" }]);
+  const [savedRows, setSavedRows] = useState([
+    { name: "", cost: "", category: "" },
+  ]);
   const [loading, setLoading] = useState(true);
 
   // Fetch expenses on component mount
@@ -38,7 +40,7 @@ export default function Dashboard() {
         });
 
         const data = response.data.expenses[0];
-        setRows(data.expenses || [{ name: "", cost: "", category: "" }]);
+        setSavedRows(data.expenses || [{ name: "", cost: "", category: "" }]);
         setBudget(data.budget || "0");
       } catch (error) {
         console.error("Error fetching expenses:", error);
@@ -82,21 +84,21 @@ export default function Dashboard() {
               budget={budget}
               userId={userId}
               selectedMonth={selectedMonth}
-              rows={rows}
+              rows={savedRows}
             />
             <Expenses
               selectedMonth={selectedMonth}
               setSelectedMonth={setSelectedMonth}
               budget={budget}
-              rows={rows}
-              setRows={setRows}
+              savedRows={savedRows}
+              setSavedRows={setSavedRows}
               userId={userId}
               loading={loading}
               setLoading={setLoading}
             />
           </div>
           <div className="self-start">
-            <DashboardGraphs />
+            <DashboardGraphs rows={savedRows} selectedMonth={selectedMonth} />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -30,6 +30,19 @@ const DashboardSummary = ({
 }) => {
   const [open, setOpen] = useState(false);
 
+  // Calculate the total cost from the rows
+  const totalCost = useMemo(() => {
+    return rows.reduce((sum, row) => sum + parseFloat(row.cost || 0), 0);
+  }, [rows]);
+
+  // Format numbers as currency
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(amount);
+  };
+
   const handleSaveBudget = async () => {
     try {
       await axios.put("/api/expenses", {
@@ -49,26 +62,14 @@ const DashboardSummary = ({
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 lg:col-span-2">
-      <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
-        <CardHeader className="pb-2">
-          <CardDescription>This Week</CardDescription>
-          <CardTitle className="text-4xl">$1,329</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-xs text-muted-foreground">
-            +25% from last week
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Progress value={25} aria-label="25% increase" />
-        </CardFooter>
-      </Card>
-      <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-1">
+      <Card className="sm:col-span-4" x-chunk="dashboard-05-chunk-1">
         <CardHeader className="pb-2">
           <div className="flex justify-between">
             <div>
               <CardDescription>This Month</CardDescription>
-              <CardTitle className="text-4xl">$5,329/{budget}</CardTitle>
+              <CardTitle className="text-4xl">
+                {`${formatCurrency(totalCost)} / ${formatCurrency(budget)}`}
+              </CardTitle>
             </div>
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
@@ -99,11 +100,15 @@ const DashboardSummary = ({
         </CardHeader>
         <CardContent>
           <div className="text-xs text-muted-foreground">
-            +10% from last month
+            {`${formatCurrency(budget - totalCost)} left`}
           </div>
         </CardContent>
         <CardFooter>
-          <Progress value={12} aria-label="12% increase" />
+          <Progress
+            value={totalCost > budget ? 100 : (totalCost / budget) * 100}
+            aria-label="Progress"
+            color={totalCost > budget ? "bg-red-500" : "bg-primary"}
+          />
         </CardFooter>
       </Card>
     </div>

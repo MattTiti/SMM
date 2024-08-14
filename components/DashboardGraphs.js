@@ -36,10 +36,10 @@ import { Progress } from "@/components/ui/progress";
 import Expenses from "@/components/Expenses";
 import DashboardPieChart from "./DashboardPieChart";
 
-const DashboardGraphs = () => {
+const DashboardGraphs = ({ rows, selectedMonth }) => {
   return (
     <div className="space-y-4">
-      <DashboardPieChart />
+      <DashboardPieChart rows={rows} selectedMonth={selectedMonth} />
       <Card className="overflow-hidden">
         <CardHeader className="flex flex-row items-start">
           <CardTitle>Graphs</CardTitle>
