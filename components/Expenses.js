@@ -159,7 +159,7 @@ const Expenses = ({
                 Enter your expenses below to keep track of your spending.
               </CardDescription>
             </div>
-            <Select onValueChange={setSelectedMonth} value={selectedMonth} >
+            <Select onValueChange={setSelectedMonth} value={selectedMonth}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select Month" />
               </SelectTrigger>
@@ -265,7 +265,7 @@ const Expenses = ({
                 <DialogHeader>
                   <DialogTitle>Smart Add</DialogTitle>
                   <DialogDescription>
-                    Paste or type values below and click "Smart Add" to extract
+                    Paste or type values below and click Smart Add to extract
                     expenses. Longer text will take longer to process.
                   </DialogDescription>
                 </DialogHeader>
