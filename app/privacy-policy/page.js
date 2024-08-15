@@ -57,51 +57,35 @@ const PrivacyPolicy = () => {
           className="leading-relaxed whitespace-pre-wrap"
           style={{ fontFamily: "sans-serif" }}
         >
-          {`Last Updated: 2023-08-25
+          {`Last Updated: August 15, 2024
 
-Thank you for visiting ShipFast ("we," "us," or "our"). This Privacy Policy outlines how we collect, use, and protect your personal and non-personal information when you use our website located at https://shipfa.st (the "Website").
-
-By accessing or using the Website, you agree to the terms of this Privacy Policy. If you do not agree with the practices described in this policy, please do not use the Website.
+Welcome to ShowMeMoney (the "Website"). This Privacy Policy explains how we collect, use, and protect your personal information when you use the Website operated by ShowMeMoney ("we," "our," or "us").
 
 1. Information We Collect
 
-1.1 Personal Data
-
-We collect the following personal information from you:
-
-Name: We collect your name to personalize your experience and communicate with you effectively.
-Email: We collect your email address to send you important information regarding your orders, updates, and communication.
-Payment Information: We collect payment details to process your orders securely. However, we do not store your payment information on our servers. Payments are processed by trusted third-party payment processors.
-
-1.2 Non-Personal Data
-
-We may use web cookies and similar technologies to collect non-personal information such as your IP address, browser type, device information, and browsing patterns. This information helps us to enhance your browsing experience, analyze trends, and improve our services.
-
+Personal Data: We collect your name, email address, and payment information when you use our Website.
+Non-Personal Data: We also collect non-personal data through the use of web cookies.
 2. Purpose of Data Collection
 
-We collect and use your personal data for the sole purpose of order processing. This includes processing your orders, sending order confirmations, providing customer support, and keeping you updated about the status of your orders.
+We collect your personal data to process orders and provide you with our services. The non-personal data collected through cookies helps us improve your experience on our Website.
 
 3. Data Sharing
 
-We do not share your personal data with any third parties except as required for order processing (e.g., sharing your information with payment processors). We do not sell, trade, or rent your personal information to others.
+We do not share your personal data with any third parties. Your information is used solely by ShowMeMoney to provide and improve our services.
 
 4. Children's Privacy
 
-ShipFast is not intended for children under the age of 13. We do not knowingly collect personal information from children. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us at the email address provided below.
+We do not knowingly collect personal data from children under the age of 13. If we become aware that we have inadvertently collected such data, we will take steps to delete it as soon as possible.
 
-5. Updates to the Privacy Policy
+5. Updates to This Privacy Policy
 
-We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. Any updates will be posted on this page, and we may notify you via email about significant changes.
+We may update this Privacy Policy from time to time. If we make any changes, we will notify you by email. Your continued use of the Website after such changes constitutes your acceptance of the updated Privacy Policy.
 
 6. Contact Information
 
-If you have any questions, concerns, or requests related to this Privacy Policy, you can contact us at:
+If you have any questions or concerns about this Privacy Policy, please contact us at matt@showmemoney.app.
 
-Email: marc@shipfa.st
-
-For all other inquiries, please visit our Contact Us page on the Website.
-
-By using ShipFast, you consent to the terms of this Privacy Policy.`}
+`}
         </pre>
       </div>
     </main>
