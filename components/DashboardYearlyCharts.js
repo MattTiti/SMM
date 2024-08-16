@@ -30,17 +30,36 @@ const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
     },
   };
 
+  const monthsOrder = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   // Aggregate total spending per month
-  const monthlySpending = yearlyExpenses.map((monthData) => {
-    const totalSpending = monthData?.expenses?.reduce(
-      (acc, expense) => acc + parseFloat(expense.cost || 0),
-      0
+  const monthlySpending = yearlyExpenses
+    .map((monthData) => {
+      const totalSpending = monthData?.expenses?.reduce(
+        (acc, expense) => acc + parseFloat(expense.cost || 0),
+        0
+      );
+      return {
+        month: capitalizeFirstLetter(monthData?.month),
+        totalSpending,
+      };
+    })
+    .sort(
+      (a, b) => monthsOrder.indexOf(a.month) - monthsOrder.indexOf(b.month)
     );
-    return {
-      month: capitalizeFirstLetter(monthData?.month),
-      totalSpending,
-    };
-  });
 
   // Find the selected month's data and previous month's data
   const selectedMonthData = monthlySpending.find(

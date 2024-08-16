@@ -50,7 +50,7 @@ import {
   AlertDialogCancel,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
-import { set } from "mongoose";
+import { CirclePlus, WandSparkles } from "lucide-react";
 
 const Expenses = ({
   selectedMonth,
@@ -123,15 +123,25 @@ const Expenses = ({
         ? response.data.expenses
         : [response.data.expenses];
 
+      let newRows = [...rows, ...newExpenses];
+
+      // Filter out the initial empty row if it exists
+      newRows = newRows.filter(
+        (row) =>
+          row.name.trim() !== "" ||
+          row.cost.trim() !== "" ||
+          row.category.trim() !== ""
+      );
+
       try {
         // Saving the response data before updating state because the state update is async
-        const response = await axios.put("/api/expenses", {
+        const saveResponse = await axios.put("/api/expenses", {
           userId,
           month: selectedMonth,
           budget,
-          expenses: [...rows, ...newExpenses],
+          expenses: newRows,
         });
-        console.log("Expenses and budget saved:", response.data);
+        console.log("Expenses and budget saved:", saveResponse.data);
         toast.success("Expenses saved successfully!");
       } catch (error) {
         toast.error("Error saving expenses");
@@ -269,12 +279,12 @@ const Expenses = ({
         <CardFooter className="flex justify-between">
           <div className="flex gap-4">
             <Button type="button" onClick={addRow}>
-              + Add Row
+              <CirclePlus size={16} className="mr-1" /> Add Row
             </Button>
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
                 <Button type="button" onClick={() => setOpen(true)}>
-                  + Smart Add
+                  <WandSparkles size={14} className="mr-1" /> Smart Add
                 </Button>
               </DialogTrigger>
               <DialogContent>
@@ -296,7 +306,7 @@ const Expenses = ({
                       onChange={(e) => setSmartAddValue(e.target.value)}
                     />
                     <Button onClick={handleSmartAdd} className="mt-2">
-                      + Add
+                      <CirclePlus size={16} className="mr-1" /> Add
                     </Button>
                   </>
                 )}
