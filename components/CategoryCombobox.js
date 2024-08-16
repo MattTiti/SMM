@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -17,27 +15,63 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  ShoppingCart,
+  Film,
+  Utensils,
+  Car,
+  Home,
+  CreditCard,
+  Heart,
+  Plane,
+  MoreHorizontal,
+} from "lucide-react";
 
 const categories = [
   {
     value: "groceries",
     label: "Groceries",
+    icon: ShoppingCart,
   },
   {
     value: "entertainment",
     label: "Entertainment",
+    icon: Film,
   },
   {
     value: "dining",
     label: "Dining",
+    icon: Utensils,
   },
   {
     value: "transportation",
     label: "Transportation",
+    icon: Car,
+  },
+  {
+    value: "housing",
+    label: "Housing",
+    icon: Home,
+  },
+  {
+    value: "subscriptions",
+    label: "Subscriptions",
+    icon: CreditCard,
+  },
+  {
+    value: "health",
+    label: "Health",
+    icon: Heart,
+  },
+  {
+    value: "vacation",
+    label: "Vacation",
+    icon: Plane,
   },
   {
     value: "other",
     label: "Other",
+    icon: MoreHorizontal,
   },
 ];
 
@@ -61,9 +95,12 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
       categories.find((category) => category.value === value) || {
         value: "other",
         label: "Other",
+        icon: MoreHorizontal,
       }
     );
   };
+
+  const selectedCategoryData = findCategory(value);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -74,7 +111,14 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
           aria-expanded={open}
           className="w-full justify-between text-muted-foreground"
         >
-          {value ? findCategory(value)?.label : "Select category"}
+          {value ? (
+            <div className="flex items-center">
+              <selectedCategoryData.icon className="mr-2 h-4 w-4" />
+              {selectedCategoryData.label}
+            </div>
+          ) : (
+            "Select category"
+          )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -96,6 +140,7 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
                       value === category.value ? "opacity-100" : "opacity-0"
                     )}
                   />
+                  <category.icon className="mr-2 h-4 w-4" />
                   {category.label}
                 </CommandItem>
               ))}

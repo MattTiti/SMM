@@ -1,32 +1,22 @@
 "use client";
-import { FaUserCircle } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import Expenses from "@/components/Expenses";
 import DashboardSummary from "@/components/DashboardSummary";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import DashboardPieChart from "@/components/DashboardPieChart";
-import DashboardBarChart from "@/components/DashboardBarChart";
+import DashboardMonthlyCharts from "@/components/DashboardMonthlyCharts";
+import DashboardYearlyCharts from "@/components/DashboardYearlyCharts";
 import ButtonCheckout from "@/components/ButtonCheckout";
-import config from "@/config";
-export const dynamic = "force-dynamic";
 import ButtonAccount from "@/components/ButtonAccount";
+export const dynamic = "force-dynamic";
+
 export default function Dashboard() {
   const { data: session } = useSession();
   const userId = session?.user?.id;
   console.log(session);
-  const [selectedMonth, setSelectedMonth] = useState("august"); // Default month
-  const [budget, setBudget] = useState("0"); // Add budget state
+  const [selectedMonth, setSelectedMonth] = useState("august");
+  const [budget, setBudget] = useState("0");
   const [monthlyExpenses, setMonthlyExpenses] = useState([
     { name: "", cost: "", category: "" },
   ]);
@@ -97,11 +87,11 @@ export default function Dashboard() {
           </div>
           <div className="self-start">
             <div className="space-y-4">
-              <DashboardPieChart
+              <DashboardMonthlyCharts
                 monthlyExpenses={monthlyExpenses}
                 selectedMonth={selectedMonth}
               />
-              <DashboardBarChart
+              <DashboardYearlyCharts
                 yearlyExpenses={yearlyExpenses}
                 selectedMonth={selectedMonth}
               />

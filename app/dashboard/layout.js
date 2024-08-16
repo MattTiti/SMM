@@ -20,7 +20,7 @@ export default async function LayoutPrivate({ children }) {
   const user = await User.findById(session?.user?.id);
   console.log(user);
   if (!user.hasAccess) {
-    redirect("/");
+    redirect("/no-purchase");
   }
 
   return <>{children}</>;

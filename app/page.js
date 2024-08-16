@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Problem from "@/components/Problem";
@@ -14,7 +14,7 @@ export default function Home() {
       <Suspense>
         <Header />
       </Suspense>
-      <main>
+      <main className="bg-base-100">
         <Hero />
         <Problem />
         <FeaturesAccordion />

@@ -156,7 +156,7 @@ const Expenses = ({
             <div>
               <CardTitle>Track Your Expenses</CardTitle>
               <CardDescription>
-                Enter your expenses below to keep track of your spending.
+                Enter expenses and save changes to see updated graphics
               </CardDescription>
             </div>
             <Select onValueChange={setSelectedMonth} value={selectedMonth}>

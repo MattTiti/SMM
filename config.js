@@ -1,15 +1,13 @@
 import themes from "daisyui/src/theming/themes";
 
 const config = {
-  // REQUIRED
   appName: "ShowMeMoney",
-  // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
     "The NextJS boilerplate with all you need to build your SaaS, AI tool, or any other web app.",
-  // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "showmemoney.app",
   crisp: {
     // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
+    // id: "17f9c26c-fa15-4ec3-9696-37686a1950dbv",
     id: "",
     // Hide Crisp by default, except on route "/". Crisp is toggled with <ButtonSupport/>. If you want to show Crisp on every routes, just remove this below
     onlyShowOnRoutes: ["/"],
@@ -18,23 +16,21 @@ const config = {
     // Create multiple plans in your Stripe dashboard, then add them here. You can add as many plans as you want, just make sure to add the priceId
     plans: [
       {
-        // REQUIRED — we use this to find the plan in the webhook (for instance if you want to update the user's credits based on the plan)
         priceId:
           process.env.NODE_ENV === "development"
-            ? "price_1PnnxFDrCLxk48BSLGg4PPWz"
-            : "price_1PnnxFDrCLxk48BSLGg4PPWz",
+            ? "price_1PoDXsDrCLxk48BS4z8Na468"
+            : "price_1PoDXsDrCLxk48BS4z8Na468",
         //  REQUIRED - Name of the plan, displayed on the pricing page
-        name: "Starter",
+        name: "Yearly",
+        mode: "subscription",
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
-        description: "Perfect for small projects",
+        description: "Full access to all features for a year",
         // The price you want to display, the one user will be charged on Stripe.
-        price: 8.99,
+        price: 9.99,
         // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
-        priceAnchor: 12.99,
+        priceAnchor: 14.99,
         features: [
-          {
-            name: "NextJS boilerplate",
-          },
+          { name: "NextJS boilerplate" },
           { name: "User oauth" },
           { name: "Database" },
           { name: "Emails" },
@@ -45,16 +41,15 @@ const config = {
         isFeatured: true,
         priceId:
           process.env.NODE_ENV === "development"
-            ? "price_1O5KtcAxyNprDp7iftKnrrpw"
-            : "price_456",
-        name: "Advanced",
-        description: "You need more power",
-        price: 99,
-        priceAnchor: 149,
+            ? "price_1PoDZ3DrCLxk48BSmRdObek5"
+            : "price_1PoDZ3DrCLxk48BSmRdObek5",
+        name: "Unlimited",
+        mode: "payment",
+        description: "A one-time payment for lifetime access",
+        price: 14.99,
+        priceAnchor: 24.99,
         features: [
-          {
-            name: "NextJS boilerplate",
-          },
+          { name: "NextJS boilerplate" },
           { name: "User oauth" },
           { name: "Database" },
           { name: "Emails" },
@@ -64,29 +59,15 @@ const config = {
       },
     ],
   },
-  aws: {
-    // If you use AWS S3/Cloudfront, put values in here
-    bucket: "bucket-name",
-    bucketUrl: `https://bucket-name.s3.amazonaws.com/`,
-    cdn: "https://cdn-id.cloudfront.net/",
-  },
   mailgun: {
-    // subdomain to use when sending emails, if you don't have a subdomain, just remove it. Highly recommended to have one (i.e. mg.yourdomain.com or mail.yourdomain.com)
     subdomain: "mg",
-    // REQUIRED — Email 'From' field to be used when sending magic login links
-    fromNoReply: `ShipFast <noreply@mg.showmemoney.app>`,
-    // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-    fromAdmin: `Marc at ShipFast <marc@mg.showmemoney.app>`,
-    // Email shown to customer if need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
-    supportEmail: "marc@mg.showmemoney.app",
-    // When someone replies to supportEmail sent by the app, forward it to the email below (otherwise it's lost). If you set supportEmail to empty, this will be ignored.
-    forwardRepliesTo: "marc.louvion@gmail.com",
+    fromNoReply: `ShowMeMoney <noreply@mg.showmemoney.app>`,
+    fromAdmin: `Matt at ShowMeMoney <matt@mg.showmemoney.app>`,
+    supportEmail: "matt@mg.showmemoney.app",
+    forwardRepliesTo: "matthewtiti@gmail.com",
   },
   colors: {
-    // REQUIRED — The DaisyUI theme to use (added to the main layout.js). Leave blank for default (light & dark mode). If you any other theme than light/dark, you need to add it in config.tailwind.js in daisyui.themes.
     theme: "dark",
-    // REQUIRED — This color will be reflected on the whole app outside of the document (loading bar, Chrome tabs, etc..). By default it takes the primary color from your DaisyUI theme (make sure to update your the theme name after "data-theme=")
-    // OR you can just do this to use a custom color: main: "#f37055". HEX only.
     main: themes["light"]["primary"],
     toast: "#000000",
   },
