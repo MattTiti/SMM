@@ -50,6 +50,7 @@ import {
   AlertDialogCancel,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
+import { set } from "mongoose";
 
 const Expenses = ({
   selectedMonth,
@@ -115,26 +116,39 @@ const Expenses = ({
     setLoading(true);
     try {
       const response = await axios.post("/api/parse", {
-        smartAddValue,
+        bankStatement: smartAddValue,
       });
 
       const newExpenses = Array.isArray(response.data.expenses)
         ? response.data.expenses
         : [response.data.expenses];
-      setSavedRows([...rows, ...newExpenses]);
-      setRows([...rows, ...newExpenses]);
 
-      toast.success("Expenses parsed successfully!");
+      try {
+        // Saving the response data before updating state because the state update is async
+        const response = await axios.put("/api/expenses", {
+          userId,
+          month: selectedMonth,
+          budget,
+          expenses: [...rows, ...newExpenses],
+        });
+        console.log("Expenses and budget saved:", response.data);
+        toast.success("Expenses saved successfully!");
+      } catch (error) {
+        toast.error("Error saving expenses");
+      } finally {
+        setLoading(false);
+        setUpdate(!update);
+      }
       setOpen(false);
     } catch (error) {
-      toast.error("Error adding expenses");
+      toast.error("Error using OpenAI to parse expenses");
     } finally {
       setLoading(false);
     }
   };
 
   const handleReset = async () => {
-    setRows([{ name: "", cost: "", category: "" }]);
+    setSavedRows([{ name: "", cost: "", category: "" }]);
     try {
       const response = await axios.put("/api/expenses", {
         userId,
@@ -145,6 +159,8 @@ const Expenses = ({
       toast.success("Expenses cleared successfully!");
     } catch (error) {
       toast.error("Error saving expenses");
+    } finally {
+      setUpdate(!update);
     }
   };
 

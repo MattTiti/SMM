@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import { OpenAI } from 'openai';
+import { NextResponse } from "next/server";
+import { OpenAI } from "openai";
 
 export async function POST(req) {
   const { bankStatement } = await req.json();
@@ -10,21 +10,32 @@ export async function POST(req) {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
-          content: "You are a helpful assistant that parses bank statements and extracts expense details like name, cost, and category. You only respond with an array of expenses in JSON string format.",
+          content:
+            "You are a specialized assistant tasked with accurately parsing bank statements. Your goal is to extract expense details such as the exact name and cost directly from the statement text, without making up or altering any information. Categories should be inferred from the content based on predefined categories.",
         },
         {
           role: "user",
-          content: `Extract expenses from the following bank statement and return them in JSON string format with the fields: name, cost, and category: ${bankStatement}. Only use these categories: groceries, dining, entertainment, transportation, other. Make the names readable.`,
+          content: `Please extract the expenses from the following bank statement. For each expense:
+- **Name**: Take the name exactly as it appears in the statement.
+- **Cost**: Take the cost as a numeric value directly from the statement.
+- **Category**: Infer the category from the context using these categories: groceries, dining, entertainment, transportation, housing, subscriptions, health, vacation, and other.
+
+**Do not generate or infer names or costs that are not explicitly mentioned in the bank statement.** Return the data as a valid JSON string array in this format:
+\`[{"name": "Exact name from statement", "cost": "Cost from statement", "category": "Inferred category"}]\`
+
+Here is the bank statement:
+${bankStatement}`,
         },
       ],
     });
 
     // Log the response content before parsing
     let content = completion.choices[0].message.content;
+    console.log("Bank statement:", bankStatement);
     console.log("OpenAI API response:", content);
 
     // Use a regex to extract the content inside the square brackets
@@ -41,6 +52,9 @@ export async function POST(req) {
     return NextResponse.json({ expenses: parsedExpenses });
   } catch (error) {
     console.error("Error parsing bank statement:", error);
-    return NextResponse.json({ error: "Error parsing bank statement" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Error parsing bank statement" },
+      { status: 500 }
+    );
   }
 }
