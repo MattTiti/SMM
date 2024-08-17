@@ -9,7 +9,11 @@ import DashboardMonthlyCharts from "@/components/DashboardMonthlyCharts";
 import DashboardYearlyCharts from "@/components/DashboardYearlyCharts";
 import ButtonCheckout from "@/components/ButtonCheckout";
 import ButtonAccount from "@/components/ButtonAccount";
+import Link from "next/link";
 export const dynamic = "force-dynamic";
+import config from "@/config";
+import logo from "@/app/icon.png";
+import Image from "next/image";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -59,8 +63,24 @@ export default function Dashboard() {
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
-      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-end border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+      <div className="flex flex-col sm:gap-4 sm:py-4">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+          <Link
+            className="flex items-center gap-2 shrink-0"
+            href="/"
+            title={`${config.appName} hompage`}
+          >
+            <Image
+              src={logo}
+              alt={`${config.appName} logo`}
+              className="w-8"
+              placeholder="blur"
+              priority={true}
+              width={32}
+              height={32}
+            />
+            <span className="font-extrabold text-lg">{config.appName}</span>
+          </Link>
           <ButtonAccount />
         </header>
         <div className="grid flex-1 grid-cols-1 gap-4 p-4 sm:px-6 sm:py-0 md:grid-cols-3 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">

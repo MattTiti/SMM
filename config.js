@@ -3,7 +3,7 @@ import themes from "daisyui/src/theming/themes";
 const config = {
   appName: "ShowMeMoney",
   appDescription:
-    "The NextJS boilerplate with all you need to build your SaaS, AI tool, or any other web app.",
+    "The expense tracker powered by OpenAI to help you save time and money.",
   domainName: "showmemoney.app",
   crisp: {
     // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
@@ -35,6 +35,7 @@ const config = {
           { name: "Database" },
           { name: "Emails" },
         ],
+        buttonMessage: "Pay now, save later.",
       },
       {
         // This plan will look different on the pricing page, it will be highlighted. You can only have one plan with isFeatured: true
@@ -56,6 +57,7 @@ const config = {
           { name: "1 year of updates" },
           { name: "24/7 support" },
         ],
+        buttonMessage: "Pay once, save forever.",
       },
     ],
   },

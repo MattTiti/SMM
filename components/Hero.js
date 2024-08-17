@@ -1,6 +1,6 @@
 import Image from "next/image";
-import TestimonialsAvatars from "./TestimonialsAvatars";
 import config from "@/config";
+import ButtonCheckout from "./ButtonCheckout";
 
 const Hero = () => {
   return (
@@ -10,14 +10,14 @@ const Hero = () => {
           See how much you spend with AI
         </h1>
         <p className="text-lg opacity-80 leading-relaxed">
-          The NextJS boilerplate with all you need to build your SaaS, AI tool,
-          or any other web app. From idea to production in 5 minutes.
+          The expense tracker powered by OpenAI to help you save time and money.
         </p>
-        <button className="btn btn-primary btn-wide">
-          Get {config.appName}
-        </button>
-
-        <TestimonialsAvatars priority={true} />
+        <div className="w-56">
+          <ButtonCheckout
+            priceId={config.stripe.plans[1].priceId}
+            mode={config.stripe.plans[1].mode}
+          />
+        </div>
       </div>
       <div className="lg:w-full">
         <Image

@@ -10,9 +10,8 @@ const Pricing = () => {
     <section className="bg-base-200 overflow-hidden" id="pricing">
       <div className="py-24 px-8 max-w-5xl mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
-          <p className="font-medium text-primary mb-8">Pricing</p>
           <h2 className="font-bold text-3xl lg:text-5xl tracking-tight">
-            Save hours of repetitive code and ship faster!
+            Pricing
           </h2>
         </div>
 
@@ -22,7 +21,7 @@ const Pricing = () => {
               {plan.isFeatured && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                   <span
-                    className={`badge text-xs text-primary-content font-semibold border-0 bg-primary`}
+                    className={`badge text-xs text-primary-content font-semibold border-0 bg-violet-400`}
                   >
                     POPULAR
                   </span>
@@ -31,7 +30,7 @@ const Pricing = () => {
 
               {plan.isFeatured && (
                 <div
-                  className={`absolute -inset-[1px] rounded-[9px] bg-primary z-10`}
+                  className={`absolute -inset-[1px] rounded-[9px] bg-violet-400 z-10`}
                 ></div>
               )}
 
@@ -92,7 +91,7 @@ const Pricing = () => {
                   <ButtonCheckout priceId={plan.priceId} mode={plan.mode} />
 
                   <p className="flex items-center justify-center gap-2 text-sm text-center text-base-content/80 font-medium relative">
-                    Pay once. Access forever.
+                    {plan.buttonMessage}
                   </p>
                 </div>
               </div>

@@ -117,12 +117,12 @@ const Item = ({ feature, isOpen, setFeatureSelected }) => {
         }}
         aria-expanded={isOpen}
       >
-        <span className={`duration-100 ${isOpen ? "text-primary" : ""}`}>
+        <span className={`duration-100 ${isOpen ? "text-violet-400" : ""}`}>
           {svg}
         </span>
         <span
           className={`flex-1 text-base-content ${
-            isOpen ? "text-primary font-semibold" : ""
+            isOpen ? "text-violet-400 font-semibold" : ""
           }`}
         >
           <h3 className="inline">{title}</h3>
@@ -196,9 +196,9 @@ const FeaturesAccordion = () => {
     >
       <div className="px-8">
         <h2 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-12 md:mb-24">
-          All you need to ship your startup fast
-          <span className="bg-neutral text-neutral-content px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed whitespace-nowrap">
-            and get profitable
+          All you need to track your expenses
+          <span className="bg-violet-500 text-white px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed whitespace-nowrap">
+            and start saving
           </span>
         </h2>
         <div className=" flex flex-col md:flex-row gap-12 md:gap-24">
