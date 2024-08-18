@@ -30,10 +30,7 @@ const DashboardPieChart = ({
           strokeWidth={5}
         >
           {data.map((entry, index) => (
-            <Cell
-              key={`cell-${index}`}
-              fill={`hsl(var(--chart-${index + 1}))`}
-            />
+            <Cell key={`cell-${index}`} fill={entry.fill} />
           ))}
           <Label
             content={({ viewBox }) => {

@@ -35,9 +35,9 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
+  SelectTriggerColor,
 } from "@/components/ui/select";
 import {
   AlertDialog,
@@ -67,7 +67,9 @@ const Expenses = ({
   const [smartAddValue, setSmartAddValue] = useState("");
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
-  const [rows, setRows] = useState([{ name: "", cost: "", category: "" }]);
+  const [rows, setRows] = useState([
+    { name: "", cost: "", category: "", label: "" },
+  ]);
 
   useEffect(() => {
     if (savedRows) {
@@ -78,7 +80,7 @@ const Expenses = ({
     }
   }, [savedRows]);
   const addRow = () => {
-    setRows([...rows, { name: "", cost: "", category: "" }]);
+    setRows([...rows, { name: "", cost: "", category: "", label: "" }]);
   };
 
   const handleCategoryChange = (index, category) => {
@@ -158,13 +160,13 @@ const Expenses = ({
   };
 
   const handleReset = async () => {
-    setSavedRows([{ name: "", cost: "", category: "" }]);
+    setSavedRows([{ name: "", cost: "", category: "", label: "" }]);
     try {
       const response = await axios.put("/api/expenses", {
         userId,
         month: selectedMonth,
         budget,
-        expenses: [{ name: "", cost: "", category: "" }],
+        expenses: [{ name: "", cost: "", category: "", label: "" }],
       });
       toast.success("Expenses cleared successfully!");
     } catch (error) {
@@ -212,70 +214,125 @@ const Expenses = ({
           {loading ? (
             <Spinner />
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Expense Name</TableHead>
-                  <TableHead>Price</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead></TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {rows &&
-                  rows.map((row, index) => (
-                    <TableRow key={index}>
-                      <TableCell>
-                        <Input
-                          placeholder="Enter name"
-                          value={row.name}
-                          onChange={(e) =>
-                            setRows(
-                              rows.map((r, i) =>
-                                i === index ? { ...r, name: e.target.value } : r
+            <div className="max-h-[100vh] overflow-y-scroll">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Price</TableHead>
+                    <TableHead>Category</TableHead>
+                    <TableHead>Label</TableHead>
+                    <TableHead></TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {rows &&
+                    rows.map((row, index) => (
+                      <TableRow key={index}>
+                        <TableCell>
+                          <Input
+                            placeholder="Enter name"
+                            value={row.name}
+                            onChange={(e) =>
+                              setRows(
+                                rows.map((r, i) =>
+                                  i === index
+                                    ? { ...r, name: e.target.value }
+                                    : r
+                                )
                               )
-                            )
-                          }
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Input
-                          placeholder="Enter cost"
-                          type="number"
-                          value={row.cost}
-                          onChange={(e) =>
-                            setRows(
-                              rows.map((r, i) =>
-                                i === index ? { ...r, cost: e.target.value } : r
+                            }
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Input
+                            placeholder="Enter cost"
+                            type="number"
+                            value={row.cost}
+                            onChange={(e) =>
+                              setRows(
+                                rows.map((r, i) =>
+                                  i === index
+                                    ? { ...r, cost: e.target.value }
+                                    : r
+                                )
                               )
-                            )
-                          }
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <CategoryCombobox
-                          selectedCategory={row.category || ""}
-                          onCategoryChange={(category) =>
-                            handleCategoryChange(index, category)
-                          }
-                        />
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleDeleteRow(index)}
-                        >
-                          <FaTrash className="text-zinc-200" />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
+                            }
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <CategoryCombobox
+                            selectedCategory={row.category || ""}
+                            onCategoryChange={(category) =>
+                              handleCategoryChange(index, category)
+                            }
+                          />
+                        </TableCell>
+                        <TableCell className="flex justify-center mr-1">
+                          <Select
+                            value={row.label}
+                            onValueChange={(label) =>
+                              setRows(
+                                rows.map((r, i) =>
+                                  i === index ? { ...r, label } : r
+                                )
+                              )
+                            }
+                          >
+                            <SelectTriggerColor
+                              className={
+                                row.label === "red"
+                                  ? `bg-${row.label}-600`
+                                  : `bg-${row.label}-500`
+                              }
+                            ></SelectTriggerColor>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectItem
+                                  value="green"
+                                  className="bg-green-500 dark:focus:bg-green-600"
+                                >
+                                  <span className="inline-block w-full h-8 bg-blue-500 rounded"></span>
+                                </SelectItem>
+                                <SelectItem
+                                  value="yellow"
+                                  className="bg-yellow-500 dark:focus:bg-yellow-600"
+                                >
+                                  <span className="inline-block w-full h-8 bg-yellow-500 rounded"></span>
+                                </SelectItem>
+                                <SelectItem
+                                  value="red"
+                                  className="bg-red-600 dark:focus:bg-red-700"
+                                >
+                                  <span className="inline-block w-full h-8 bg-red-600 rounded"></span>
+                                </SelectItem>
+                                <SelectItem value="none" className="pl-10">
+                                  <span className="flex items-center justify-center w-full h-8 rounded">
+                                    None
+                                  </span>
+                                </SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleDeleteRow(index)}
+                          >
+                            <FaTrash className="text-zinc-200" />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </div>
           )}
         </CardContent>
+
         <CardFooter className="flex justify-between">
           <div className="flex gap-4">
             <Button type="button" onClick={addRow}>

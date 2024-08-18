@@ -19,55 +19,58 @@ import DashboardHorizontalBar from "./DashboardHorizontalBar";
 import DashboardPieChart from "./DashboardPieChart";
 import { capitalizeFirstLetter, formatCurrency } from "@/lib/utils";
 
-const DashboardMonthlyCharts = ({ monthlyExpenses = [], selectedMonth }) => {
+const DashboardLabelCharts = ({ monthlyExpenses = [], selectedMonth }) => {
   const [selectedChart, setSelectedChart] = useState("pie");
 
-  const spendingByCategory = useMemo(() => {
-    const categoryMap = {};
+  const spendingByLabel = useMemo(() => {
+    const labelMap = {};
 
     monthlyExpenses?.forEach((row) => {
-      const category = capitalizeFirstLetter(row.category) || "Other";
+      const label = capitalizeFirstLetter(row.label) || "None";
       const cost = parseFloat(row.cost || 0);
 
-      if (categoryMap[category]) {
-        categoryMap[category] += cost;
+      if (labelMap[label]) {
+        labelMap[label] += cost;
       } else {
-        categoryMap[category] = cost;
+        labelMap[label] = cost;
       }
     });
+    const customOrder = ["Green", "Yellow", "Red"];
 
-    return Object.entries(categoryMap).map(([category, cost]) => ({
-      category,
-      cost,
-      fill: `hsl(var(--color-${category.toLowerCase()}))`,
-    }));
+    return Object.entries(labelMap)
+      .map(([label, cost]) => ({
+        label,
+        cost,
+        fill: `hsl(var(--color-${label.toLowerCase()}))`,
+      }))
+      .filter(({ label }) => label !== "None")
+      .sort(
+        (a, b) => customOrder.indexOf(a.label) - customOrder.indexOf(b.label)
+      );
   }, [monthlyExpenses]);
 
-  const highestCategory = spendingByCategory.reduce(
+  const highestLabel = spendingByLabel.reduce(
     (max, curr) => (curr.cost > max.cost ? curr : max),
-    spendingByCategory[0] || { category: "N/A", cost: 0 }
+    spendingByLabel[0] || { label: "N/A", cost: 0 }
   );
 
-  const lowestCategory = spendingByCategory.reduce(
+  const lowestLabel = spendingByLabel.reduce(
     (min, curr) => (curr.cost < min.cost ? curr : min),
-    spendingByCategory[0] || { category: "N/A", cost: 0 }
+    spendingByLabel[0] || { label: "N/A", cost: 0 }
   );
 
   const renderChart = () => {
     switch (selectedChart) {
       case "bar":
         return (
-          <DashboardHorizontalBar
-            data={spendingByCategory}
-            dataKey="category"
-          />
+          <DashboardHorizontalBar data={spendingByLabel} dataKey="label" />
         );
       case "pie":
         return (
           <DashboardPieChart
-            data={spendingByCategory}
+            data={spendingByLabel}
             dataKey="cost"
-            nameKey="category"
+            nameKey="label"
             totalLabel="Total Spending"
           />
         );
@@ -81,7 +84,7 @@ const DashboardMonthlyCharts = ({ monthlyExpenses = [], selectedMonth }) => {
       <CardHeader className="items-center pb-0">
         <div className="flex w-full justify-between">
           <div>
-            <CardTitle>Spending by Category</CardTitle>
+            <CardTitle>Spending by Label</CardTitle>
             <CardDescription>
               {capitalizeFirstLetter(selectedMonth)} 2024
             </CardDescription>
@@ -102,16 +105,16 @@ const DashboardMonthlyCharts = ({ monthlyExpenses = [], selectedMonth }) => {
       <CardContent className="flex-1 pb-0">{renderChart()}</CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Highest expense category — {highestCategory.category} (
-          {formatCurrency(highestCategory.cost)})
+          Highest expense label — {highestLabel.label} (
+          {formatCurrency(highestLabel.cost)})
         </div>
         <div className="leading-none text-muted-foreground">
-          Lowest expense category — {lowestCategory.category} (
-          {formatCurrency(lowestCategory.cost)})
+          Lowest expense label — {lowestLabel.label} (
+          {formatCurrency(lowestLabel.cost)})
         </div>
       </CardFooter>
     </Card>
   );
 };
 
-export default DashboardMonthlyCharts;
+export default DashboardLabelCharts;

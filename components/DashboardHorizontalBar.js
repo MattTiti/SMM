@@ -19,40 +19,49 @@ const chartConfig = {
   },
 };
 
-const DashboardHorizontalBar = ({ data }) => {
+const DashboardHorizontalBar = ({ data, dataKey }) => {
+  console.log(data, dataKey);
   return (
-    <ChartContainer config={chartConfig}>
-      <BarChart data={data} layout="vertical" margin={{ right: 16 }}>
-        <CartesianGrid horizontal={false} />
-        <YAxis
-          dataKey="category"
-          type="category"
-          tickLine={false}
-          tickMargin={10}
-          axisLine={false}
-          hide
-        />
-        <ChartTooltip
-          cursor={false}
-          content={<ChartTooltipContent nameKey="category" />}
-        />
-        <XAxis type="number" hide />
-        <Bar
-          dataKey="cost"
-          layout="vertical"
-          fill="var(--color-desktop)"
-          radius={4}
-        >
-          <LabelList
-            dataKey="category"
-            position="insideLeft"
-            offset={8}
-            className="fill-[--color-label]"
-            fontSize={12}
-          />
-        </Bar>
-      </BarChart>
-    </ChartContainer>
+    <>
+      {data.length === 0 ? (
+        <div className="text-center text-sm text-muted-foreground p-24">
+          No data available
+        </div>
+      ) : (
+        <ChartContainer config={chartConfig} className="my-2">
+          <BarChart data={data} layout="vertical" margin={{ right: 16 }}>
+            <CartesianGrid horizontal={false} />
+            <YAxis
+              dataKey={dataKey}
+              type="category"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              hide
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent nameKey={dataKey} />}
+            />
+            <XAxis type="number" hide />
+            <Bar
+              dataKey="cost"
+              layout="vertical"
+              fill="var(--color-desktop)"
+              radius={4}
+            >
+              <LabelList
+                dataKey={dataKey === "label" ? "" : dataKey}
+                position="insideLeft"
+                offset={8}
+                className="fill-[--color-label]"
+                fontSize={12}
+              />
+            </Bar>
+          </BarChart>
+        </ChartContainer>
+      )}
+    </>
   );
 };
 

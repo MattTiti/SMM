@@ -7,25 +7,25 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import DashboardMonthlyCharts from "@/components/DashboardMonthlyCharts";
 import DashboardYearlyCharts from "@/components/DashboardYearlyCharts";
-import ButtonCheckout from "@/components/ButtonCheckout";
 import ButtonAccount from "@/components/ButtonAccount";
 import Link from "next/link";
 export const dynamic = "force-dynamic";
 import config from "@/config";
 import logo from "@/app/icon.png";
 import Image from "next/image";
+import DashboardLabelCharts from "@/components/DashboardLabelCharts";
 
 export default function Dashboard() {
   const { data: session } = useSession();
   const userId = session?.user?.id;
-  console.log(session);
+
   const [selectedMonth, setSelectedMonth] = useState("august");
   const [budget, setBudget] = useState("0");
   const [monthlyExpenses, setMonthlyExpenses] = useState([
-    { name: "", cost: "", category: "" },
+    { name: "", cost: "", category: "", label: "" },
   ]);
   const [yearlyExpenses, setYearlyExpenses] = useState([
-    { name: "", cost: "", category: "" },
+    { name: "", cost: "", category: "", label: "" },
   ]);
   const [loading, setLoading] = useState(true);
   const [update, setUpdate] = useState(false);
@@ -44,10 +44,12 @@ export default function Dashboard() {
         const data = response?.data?.monthlyExpenses[0];
         console.log(response);
         setMonthlyExpenses(
-          data?.expenses || [{ name: "", cost: "", category: "" }]
+          data?.expenses || [{ name: "", cost: "", category: "", label: "" }]
         );
         setYearlyExpenses(
-          response?.data?.allExpenses || [{ name: "", cost: "", category: "" }]
+          response?.data?.allExpenses || [
+            { name: "", cost: "", category: "", label: "" },
+          ]
         );
         setBudget(data?.budget || "0");
       } catch (error) {
@@ -113,6 +115,10 @@ export default function Dashboard() {
               />
               <DashboardYearlyCharts
                 yearlyExpenses={yearlyExpenses}
+                selectedMonth={selectedMonth}
+              />
+              <DashboardLabelCharts
+                monthlyExpenses={monthlyExpenses}
                 selectedMonth={selectedMonth}
               />
             </div>

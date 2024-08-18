@@ -12,7 +12,7 @@ import Image from "next/image";
 // - alt: The alt text of the image (if type is 'image')
 const features = [
   {
-    title: "Emails",
+    title: "Smart Add",
     description:
       "Send transactional emails, setup your DNS to avoid spam folder (DKIM, DMARC, SPF in subdomain), and listen to webhook to receive & forward emails",
     type: "video",
@@ -35,7 +35,7 @@ const features = [
     ),
   },
   {
-    title: "Payments",
+    title: "Charts",
     description:
       "Create checkout sessions, handle webhooks to update user's account (subscriptions, one-time payments...) and tips to setup your account & reduce chargebacks",
     type: "image",
