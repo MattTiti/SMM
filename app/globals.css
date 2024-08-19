@@ -45,6 +45,19 @@
     --color-yellow: 45 93% 47%;
     --color-green: 139 64% 45%;
     --color-red:  0 72.2% 50.6%;
+    --color-january: 220 70% 50%;
+    --color-february: 139 64% 45%;
+    --color-march: 45 93% 47%;
+    --color-april: 280 65% 60%;
+    --color-may:  340 75% 55%;
+    --color-june:  190 60% 50%;
+    --color-july:  250 60% 50%;
+    --color-august:  0 72.2% 50.6%;
+    --color-september: 420 75% 55%;
+    --color-october: 45 93% 47%;
+    --color-november: 139 64% 45%;
+    --color-december:  0 72.2% 50.6%;
+
   }
 
   .dark {

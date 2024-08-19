@@ -13,32 +13,26 @@ const config = {
     onlyShowOnRoutes: ["/"],
   },
   stripe: {
-    // Create multiple plans in your Stripe dashboard, then add them here. You can add as many plans as you want, just make sure to add the priceId
     plans: [
       {
         priceId:
           process.env.NODE_ENV === "development"
             ? "price_1PoDXsDrCLxk48BS4z8Na468"
             : "price_1PoDXsDrCLxk48BS4z8Na468",
-        //  REQUIRED - Name of the plan, displayed on the pricing page
         name: "Yearly",
         mode: "subscription",
-        // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
         description: "Full access to all features for a year",
-        // The price you want to display, the one user will be charged on Stripe.
         price: 9.99,
-        // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
         priceAnchor: 14.99,
         features: [
-          { name: "NextJS boilerplate" },
-          { name: "User oauth" },
-          { name: "Database" },
-          { name: "Emails" },
+          { name: "Smart Add" },
+          { name: "Charts and Visualizations" },
+          { name: "Organization Tools" },
+          { name: "Access to future updates" },
         ],
         buttonMessage: "Pay now, save later.",
       },
       {
-        // This plan will look different on the pricing page, it will be highlighted. You can only have one plan with isFeatured: true
         isFeatured: true,
         priceId:
           process.env.NODE_ENV === "development"
@@ -50,11 +44,10 @@ const config = {
         price: 14.99,
         priceAnchor: 24.99,
         features: [
-          { name: "NextJS boilerplate" },
-          { name: "User oauth" },
-          { name: "Database" },
-          { name: "Emails" },
-          { name: "1 year of updates" },
+          { name: "Smart Add" },
+          { name: "Charts and Visualizations" },
+          { name: "Organization Tools" },
+          { name: "Access to future updates" },
           { name: "24/7 support" },
         ],
         buttonMessage: "Pay once, save forever.",
@@ -74,9 +67,8 @@ const config = {
     toast: "#000000",
   },
   auth: {
-    // REQUIRED — the path to log in users. It's use to protect private routes (like /dashboard). It's used in apiClient (/libs/api.js) upon 401 errors from our API
     loginUrl: "/api/auth/signin",
-    // REQUIRED — the path you want to redirect users after successfull login (i.e. /dashboard, /private). This is normally a private page for users to manage their accounts. It's used in apiClient (/libs/api.js) upon 401 errors from our API & in ButtonSignin.js
+    // Path to redirect to after a successful login
     callbackUrl: "/dashboard",
   },
 };

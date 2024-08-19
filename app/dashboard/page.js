@@ -14,11 +14,14 @@ import config from "@/config";
 import logo from "@/app/icon.png";
 import Image from "next/image";
 import DashboardLabelCharts from "@/components/DashboardLabelCharts";
+import { FaArrowUp } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
 
 export default function Dashboard() {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState("august");
   const [budget, setBudget] = useState("0");
   const [monthlyExpenses, setMonthlyExpenses] = useState([
@@ -51,6 +54,7 @@ export default function Dashboard() {
             { name: "", cost: "", category: "", label: "" },
           ]
         );
+        console.log(monthlyExpenses, yearlyExpenses);
         setBudget(data?.budget || "0");
       } catch (error) {
         console.error("Error fetching expenses:", error);
@@ -62,6 +66,26 @@ export default function Dashboard() {
 
     fetchExpenses();
   }, [userId, selectedMonth, update]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > window.innerHeight) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -125,6 +149,16 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      {showScrollTop && (
+        <Button
+          onClick={scrollToTop}
+          variant="outline"
+          size="icon"
+          className="fixed bottom-4 right-8 p-2 h-12 w-12 rounded-full dark:bg-white dark:hover:bg-zinc-100 dark:text-zinc-950 dark:hover:text-zinc-900"
+        >
+          <FaArrowUp size={16} />
+        </Button>
+      )}
     </div>
   );
 }

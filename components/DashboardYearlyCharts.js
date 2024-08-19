@@ -55,6 +55,7 @@ const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
       return {
         month: capitalizeFirstLetter(monthData?.month),
         totalSpending,
+        fill: `hsl(var(--color-${monthData?.month?.toLowerCase()}))`,
       };
     })
     .sort(

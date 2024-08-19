@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -18,13 +17,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { FaInfoCircle } from "react-icons/fa";
 import axios from "axios";
 import { CategoryCombobox } from "@/components/CategoryCombobox";
 import { FaTrash } from "react-icons/fa";
@@ -39,18 +36,7 @@ import {
   SelectValue,
   SelectTriggerColor,
 } from "@/components/ui/select";
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
-import { CirclePlus, WandSparkles } from "lucide-react";
+import ExpensesFooter from "./ExpensesFooter";
 
 const Expenses = ({
   selectedMonth,
@@ -156,6 +142,7 @@ const Expenses = ({
       toast.error("Error using OpenAI to parse expenses");
     } finally {
       setLoading(false);
+      setSmartAddValue("");
     }
   };
 
@@ -214,15 +201,34 @@ const Expenses = ({
           {loading ? (
             <Spinner />
           ) : (
-            <div className="max-h-[100vh] overflow-y-scroll">
+            <div className="">
               <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Name</TableHead>
                     <TableHead>Price</TableHead>
                     <TableHead>Category</TableHead>
-                    <TableHead>Label</TableHead>
-                    <TableHead></TableHead>
+                    <TableHead className="flex items-center px-2 w-10">
+                      <span>Label</span>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="dark:hover:bg-muted/0 justify-start ml-2"
+                          >
+                            <FaInfoCircle />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-64">
+                          <div className="text-sm">
+                            Labels allow for additional categorization of
+                            expenses (e.g. Green = Good, Red = Bad)
+                          </div>
+                        </PopoverContent>
+                      </Popover>
+                    </TableHead>
+                    <TableHead className="px-0"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -268,7 +274,7 @@ const Expenses = ({
                             }
                           />
                         </TableCell>
-                        <TableCell className="flex justify-center mr-1">
+                        <TableCell className="flex mt-1 justify-start ml-1">
                           <Select
                             value={row.label}
                             onValueChange={(label) =>
@@ -315,7 +321,7 @@ const Expenses = ({
                             </SelectContent>
                           </Select>
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="px-0">
                           <Button
                             type="button"
                             variant="ghost"
@@ -332,73 +338,18 @@ const Expenses = ({
             </div>
           )}
         </CardContent>
-
-        <CardFooter className="flex justify-between">
-          <div className="flex gap-4">
-            <Button type="button" onClick={addRow}>
-              <CirclePlus size={16} className="mr-1" /> Add Row
-            </Button>
-            <Dialog open={open} onOpenChange={setOpen}>
-              <DialogTrigger asChild>
-                <Button type="button" onClick={() => setOpen(true)}>
-                  <WandSparkles size={14} className="mr-1" /> Smart Add
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Smart Add</DialogTitle>
-                  <DialogDescription>
-                    Paste or type values below and click Smart Add to extract
-                    expenses. Longer text will take longer to process.
-                  </DialogDescription>
-                </DialogHeader>
-                {loading ? (
-                  <Spinner />
-                ) : (
-                  <>
-                    <textarea
-                      placeholder="Paste or type values here..."
-                      className="w-full h-24 p-2 border rounded"
-                      value={smartAddValue}
-                      onChange={(e) => setSmartAddValue(e.target.value)}
-                    />
-                    <Button onClick={handleSmartAdd} className="mt-2">
-                      <CirclePlus size={16} className="mr-1" /> Add
-                    </Button>
-                  </>
-                )}
-              </DialogContent>
-            </Dialog>
-          </div>
-          <div className="flex gap-4">
-            <AlertDialog
-              open={resetDialogOpen}
-              onOpenChange={setResetDialogOpen}
-            >
-              <AlertDialogTrigger asChild>
-                <Button type="button" variant="ghost">
-                  Reset
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Confirm Reset</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Are you sure you want to reset all expenses? This action
-                    cannot be undone.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleReset}>
-                    Confirm Reset
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-            <Button type="submit">Save</Button>
-          </div>
-        </CardFooter>
+        <ExpensesFooter
+          addRow={addRow}
+          open={open}
+          setOpen={setOpen}
+          smartAddValue={smartAddValue}
+          setSmartAddValue={setSmartAddValue}
+          handleSmartAdd={handleSmartAdd}
+          loading={loading}
+          resetDialogOpen={resetDialogOpen}
+          setResetDialogOpen={setResetDialogOpen}
+          handleReset={handleReset}
+        />
       </Card>
     </form>
   );
