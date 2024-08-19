@@ -1,6 +1,6 @@
 import Image from "next/image";
 import config from "@/config";
-import ButtonCheckout from "./ButtonCheckout";
+import ButtonCheckout from "@/components/ButtonCheckout";
 import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";

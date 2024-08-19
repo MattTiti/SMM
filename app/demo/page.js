@@ -1,15 +1,15 @@
 "use client";
-import DemoExpenses from "@/components/DemoExpenses";
-import DemoDashboardSummary from "@/components/DemoDashboardSummary";
+import DemoExpenses from "@/components/demo/DemoExpenses";
+import DemoDashboardSummary from "@/components/demo/DemoDashboardSummary";
 import { useState, useEffect } from "react";
-import DashboardMonthlyCharts from "@/components/DashboardMonthlyCharts";
-import DashboardYearlyCharts from "@/components/DashboardYearlyCharts";
+import DashboardMonthlyCharts from "@/components/dashboard/DashboardMonthlyCharts";
+import DashboardYearlyCharts from "@/components/dashboard/DashboardYearlyCharts";
 import Link from "next/link";
 export const dynamic = "force-dynamic";
 import config from "@/config";
 import logo from "@/app/icon.png";
 import Image from "next/image";
-import DashboardLabelCharts from "@/components/DashboardLabelCharts";
+import DashboardLabelCharts from "@/components/dashboard/DashboardLabelCharts";
 import { FaArrowUp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { FaInfoCircle } from "react-icons/fa";
@@ -442,8 +442,8 @@ export default function Demo() {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <div className="flex align-items-center justify-start p-1 italic bg-muted/90 border-white/80 border-solid border-2 mx-6 rounded text-sm text-white">
-          <FaInfoCircle className="ml-1 mr-1 mt-0.5" />
+        <div className="flex align-items-center justify-start p-1 bg-muted/90 border-white/80 border-solid border-2 mx-6 rounded text-sm text-white">
+          <FaInfoCircle className="ml-1 mr-1 mt-0.5" size={16} />
           <span>
             This demo page offers limited functionality, showcasing the
             dashboard&apos;s UI. For full access to your personalized dashboard,

@@ -3,18 +3,12 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { WandSparkles, ChartSpline, Users, NotepadText } from "lucide-react";
-// The features array is a list of features that will be displayed in the accordion.
-// - title: The title of the feature
-// - description: The description of the feature (when clicked)
-// - type: The type of media (video or image)
-// - path: The path to the media (for better SEO, try to use a local path)
-// - format: The format of the media (if type is 'video')
-// - alt: The alt text of the image (if type is 'image')
+
 const features = [
   {
     title: "Smart Add",
     description:
-      "Send transactional emails, setup your DNS to avoid spam folder (DKIM, DMARC, SPF in subdomain), and listen to webhook to receive & forward emails",
+      "The Smart Add feature, powered by OpenAI, automatically processes and categorizes your financial data, saving you time and effort. Effortlessly input anything from plain text to bank statements.",
     type: "video",
     path: "/smart-add.m4v",
     format: "video/webm",
@@ -23,7 +17,7 @@ const features = [
   {
     title: "Charts",
     description:
-      "Create checkout sessions, handle webhooks to update user's account (subscriptions, one-time payments...) and tips to setup your account & reduce chargebacks",
+      "Visualize your spending habits with a variety of interactive charts. Explore your data through line charts, bar charts, and pie charts, offering a clear and comprehensive view of your financial trends over time.",
     type: "video",
     path: "/charts.m4v",
     format: "video/webm",
@@ -32,7 +26,7 @@ const features = [
   {
     title: "Organization",
     description:
-      "Magic links setup, login with Google walkthrough, save user in MongoDB/Supabase, private/protected pages & API calls",
+      "Categorize your expenses by custom categories, months, and labels, making it easy to track and manage your spending across different periods and purposes.",
     type: "video",
     path: "/organization.m4v",
     format: "video/webm",
@@ -41,8 +35,11 @@ const features = [
   {
     title: "Community",
     description:
-      "Components, animations & sections (like this features section), 20+ themes with daisyUI, automatic dark mode",
+      "As a solo developer, I’m dedicated to building a product that truly serves its users. Join our community and directly influence the development of new features.",
     icon: <Users />,
+    type: "image",
+    path: "/community.svg",
+    format: "image/svg+xml",
   },
 ];
 

@@ -1,19 +1,19 @@
 "use client";
-import Expenses from "@/components/Expenses";
-import DashboardSummary from "@/components/DashboardSummary";
+import Expenses from "@/components/dashboard/Expenses";
+import DashboardSummary from "@/components/dashboard/DashboardSummary";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import DashboardMonthlyCharts from "@/components/DashboardMonthlyCharts";
-import DashboardYearlyCharts from "@/components/DashboardYearlyCharts";
+import DashboardMonthlyCharts from "@/components/dashboard/DashboardMonthlyCharts";
+import DashboardYearlyCharts from "@/components/dashboard/DashboardYearlyCharts";
 import ButtonAccount from "@/components/ButtonAccount";
 import Link from "next/link";
 export const dynamic = "force-dynamic";
 import config from "@/config";
 import logo from "@/app/icon.png";
 import Image from "next/image";
-import DashboardLabelCharts from "@/components/DashboardLabelCharts";
+import DashboardLabelCharts from "@/components/dashboard/DashboardLabelCharts";
 import { FaArrowUp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 

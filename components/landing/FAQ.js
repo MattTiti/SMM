@@ -1,14 +1,29 @@
 "use client";
 
 import { useRef, useState } from "react";
-
-// <FAQ> component is a lsit of <Item> component
-// Just import the FAQ & add your FAQ content to the const faqList
+import Link from "next/link";
 
 const faqList = [
   {
     question: "What do I get exactly?",
-    answer: <div className="space-y-2 leading-relaxed">Loreum Ipseum</div>,
+    answer: (
+      <div className="space-y-2 leading-relaxed">
+        All the features listed above and any features added in the future.
+      </div>
+    ),
+  },
+  {
+    question: "Is there a free trial?",
+    answer: (
+      <div className="space-y-2 leading-relaxed">
+        There is no free trial at the moment, but there is a{" "}
+        <Link href="/" className="underline text-violet-400">
+          demo page
+        </Link>
+        . This page has limited functionality, but will give you a general feel
+        of the app.
+      </div>
+    ),
   },
   {
     question: "Can I get a refund?",

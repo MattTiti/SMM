@@ -35,7 +35,7 @@ import {
   SelectValue,
   SelectTriggerColor,
 } from "@/components/ui/select";
-import ExpensesFooter from "./ExpensesFooter";
+import ExpensesFooter from "@/components/dashboard/ExpensesFooter";
 
 const DemoExpenses = ({
   selectedMonth,

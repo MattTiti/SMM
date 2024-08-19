@@ -1,11 +1,11 @@
 import { Suspense } from "react";
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import Problem from "@/components/Problem";
-import FeaturesAccordion from "@/components/FeaturesAccordion";
-import Pricing from "@/components/Pricing";
-import FAQ from "@/components/FAQ";
-import Footer from "@/components/Footer";
+import Header from "@/components/landing/Header";
+import Hero from "@/components/landing/Hero";
+import Problem from "@/components/landing/Problem";
+import FeaturesAccordion from "@/components/landing/FeaturesAccordion";
+import Pricing from "@/components/landing/Pricing";
+import FAQ from "@/components/landing/FAQ";
+import Footer from "@/components/landing/Footer";
 
 export default function Home() {
   return (
