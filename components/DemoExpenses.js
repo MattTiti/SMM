@@ -22,7 +22,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { FaInfoCircle } from "react-icons/fa";
-import axios from "axios";
 import { CategoryCombobox } from "@/components/CategoryCombobox";
 import { FaTrash } from "react-icons/fa";
 import { toast } from "react-hot-toast";
@@ -41,14 +40,10 @@ import ExpensesFooter from "./ExpensesFooter";
 const DemoExpenses = ({
   selectedMonth,
   setSelectedMonth,
-  budget,
   savedRows,
   setSavedRows,
-  userId,
   loading,
   setLoading,
-  setUpdate,
-  update,
 }) => {
   const [smartAddValue, setSmartAddValue] = useState("");
   const [resetDialogOpen, setResetDialogOpen] = useState(false);

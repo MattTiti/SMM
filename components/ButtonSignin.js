@@ -7,9 +7,9 @@ import config from "@/config";
 import { Button } from "@/components/ui/button";
 import { ArrowBigRightDash } from "lucide-react";
 
-const ButtonSignin = ({ text = "Get started", extraStyle }) => {
+const ButtonSignin = ({ text = "Get started" }) => {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { data: status } = useSession();
 
   const handleClick = () => {
     if (status === "authenticated") {

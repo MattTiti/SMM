@@ -24,8 +24,6 @@ import {
 import { FaUserCircle } from "react-icons/fa";
 
 export default function Demo() {
-  const userId = "";
-
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState("august");
   const [budget, setBudget] = useState("1000");
@@ -384,7 +382,6 @@ export default function Demo() {
     },
   ]);
   const [loading, setLoading] = useState(true);
-  const [update, setUpdate] = useState(false);
 
   // Fetch expenses on component mount
   useEffect(() => {
@@ -449,7 +446,7 @@ export default function Demo() {
           <FaInfoCircle className="ml-1 mr-1 mt-0.5" />
           <span>
             This demo page offers limited functionality, showcasing the
-            dashboard's UI. For full access to your personalized dashboard,
+            dashboard&apos;s UI. For full access to your personalized dashboard,
             please return to the{" "}
             <Link href="/" className="underline text-violet-400">
               home page
@@ -462,21 +459,15 @@ export default function Demo() {
             <DemoDashboardSummary
               setBudget={setBudget}
               budget={budget}
-              userId={userId}
-              selectedMonth={selectedMonth}
               rows={monthlyExpenses}
             />
             <DemoExpenses
               selectedMonth={selectedMonth}
               setSelectedMonth={setSelectedMonth}
-              budget={budget}
               savedRows={monthlyExpenses}
               setSavedRows={setMonthlyExpenses}
-              userId={userId}
               loading={loading}
               setLoading={setLoading}
-              update={update}
-              setUpdate={setUpdate}
             />
           </div>
           <div className="self-start">

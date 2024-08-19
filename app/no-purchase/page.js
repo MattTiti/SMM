@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ButtonCheckout from "@/components/ButtonCheckout";
 import config from "@/config";
-import Pricing from "@/components/Pricing";
+
 const NoPurchase = () => {
   return (
     <div className="relative h-screen flex flex-col items-center justify-center">

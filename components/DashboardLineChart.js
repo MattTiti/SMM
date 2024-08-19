@@ -1,4 +1,4 @@
-import { LineChart, Line, CartesianGrid, XAxis, LabelList } from "recharts";
+import { LineChart, Line, CartesianGrid, XAxis } from "recharts";
 import {
   ChartContainer,
   ChartTooltip,

@@ -20,13 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "react-hot-toast";
 
-const DemoDashboardSummary = ({
-  setBudget,
-  budget,
-  rows,
-  selectedMonth,
-  userId,
-}) => {
+const DemoDashboardSummary = ({ setBudget, budget, rows }) => {
   const [open, setOpen] = useState(false);
 
   // Calculate the total cost from the rows
