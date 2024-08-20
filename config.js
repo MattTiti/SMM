@@ -17,13 +17,13 @@ const config = {
       {
         priceId:
           process.env.NODE_ENV === "development"
-            ? "price_1PpfciDrCLxk48BSmsmAJw80"
-            : "price_1PpfciDrCLxk48BSmsmAJw80",
+            ? "price_1PpgaCDrCLxk48BSaW04skiO"
+            : "price_1PpgaCDrCLxk48BSaW04skiO",
         name: "Yearly",
         mode: "subscription",
         description: "Full access to all features for a year",
-        price: 9.99,
-        priceAnchor: 14.99,
+        price: 6.99,
+        priceAnchor: 11.99,
         features: [
           { name: "Smart Add" },
           { name: "Charts and Visualizations" },
@@ -41,8 +41,8 @@ const config = {
         name: "Unlimited",
         mode: "payment",
         description: "A one-time payment for lifetime access",
-        price: 14.99,
-        priceAnchor: 24.99,
+        price: 11.99,
+        priceAnchor: 16.99,
         features: [
           { name: "Smart Add" },
           { name: "Charts and Visualizations" },
