@@ -17,7 +17,7 @@ const faqList = [
     answer: (
       <div className="space-y-2 leading-relaxed">
         There is no free trial at the moment, but there is a{" "}
-        <Link href="/" className="underline text-violet-400">
+        <Link href="/demo" className="underline text-violet-400">
           demo page
         </Link>
         . This page has limited functionality, but will give you a general feel
