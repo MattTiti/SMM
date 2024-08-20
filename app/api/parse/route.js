@@ -35,8 +35,6 @@ ${bankStatement}`,
 
     // Log the response content before parsing
     let content = completion.choices[0].message.content;
-    console.log("Bank statement:", bankStatement);
-    console.log("OpenAI API response:", content);
 
     // Use a regex to extract the content inside the square brackets
     const jsonArrayMatch = content.match(/\[.*\]/s);

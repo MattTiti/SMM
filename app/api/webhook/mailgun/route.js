@@ -11,13 +11,6 @@ export async function POST(req) {
     const subject = formData.get("Subject");
     const html = formData.get("body-html");
 
-    console.log({
-      sender,
-      subject,
-      html,
-      forwardTo: config.mailgun.forwardRepliesTo,
-    });
-
     if (config.mailgun.forwardRepliesTo && html && subject && sender) {
       await sendEmail({
         to: config.mailgun.forwardRepliesTo,

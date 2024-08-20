@@ -45,7 +45,7 @@ export default function Dashboard() {
         });
 
         const data = response?.data?.monthlyExpenses[0];
-        console.log(response);
+
         setMonthlyExpenses(
           data?.expenses || [{ name: "", cost: "", category: "", label: "" }]
         );
@@ -54,7 +54,7 @@ export default function Dashboard() {
             { name: "", cost: "", category: "", label: "" },
           ]
         );
-        console.log(monthlyExpenses, yearlyExpenses);
+
         setBudget(data?.budget || "0");
       } catch (error) {
         console.error("Error fetching expenses:", error);

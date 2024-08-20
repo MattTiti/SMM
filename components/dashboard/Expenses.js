@@ -82,7 +82,6 @@ const Expenses = ({
     setLoading(true);
     setSavedRows(rows);
 
-    console.log("Saving expenses:", rows, "Budget:", budget);
     try {
       const response = await axios.put("/api/expenses", {
         userId,
@@ -90,7 +89,6 @@ const Expenses = ({
         budget,
         expenses: rows,
       });
-      console.log("Expenses and budget saved:", response.data);
       toast.success("Expenses saved successfully!");
     } catch (error) {
       toast.error("Error saving expenses");
@@ -129,7 +127,7 @@ const Expenses = ({
           budget,
           expenses: newRows,
         });
-        console.log("Expenses and budget saved:", saveResponse.data);
+
         toast.success("Expenses saved successfully!");
       } catch (error) {
         toast.error("Error saving expenses");

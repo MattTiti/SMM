@@ -20,7 +20,6 @@ const chartConfig = {
 };
 
 const DashboardHorizontalBar = ({ data, dataKey }) => {
-  console.log(data, dataKey);
   return (
     <>
       {data.length === 0 || (data.length === 1 && data[0].cost === 0) ? (
