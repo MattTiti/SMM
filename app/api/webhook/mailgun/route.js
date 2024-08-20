@@ -6,13 +6,18 @@ import config from "@/config";
 // See more: https://shipfa.st/docs/features/emails
 export async function POST(req) {
   try {
-    // extract the email content, subject and sender
     const formData = await req.formData();
     const sender = formData.get("From");
     const subject = formData.get("Subject");
     const html = formData.get("body-html");
 
-    // send email to the admin if forwardRepliesTo is et & emailData exists
+    console.log({
+      sender,
+      subject,
+      html,
+      forwardTo: config.mailgun.forwardRepliesTo,
+    });
+
     if (config.mailgun.forwardRepliesTo && html && subject && sender) {
       await sendEmail({
         to: config.mailgun.forwardRepliesTo,
@@ -24,7 +29,7 @@ export async function POST(req) {
 
     return NextResponse.json({});
   } catch (e) {
-    console.error(e?.message);
+    console.error("Error in Mailgun webhook:", e);
     return NextResponse.json({ error: e?.message }, { status: 500 });
   }
 }
