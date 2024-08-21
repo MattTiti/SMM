@@ -10,7 +10,7 @@ const features = [
     description:
       "The Smart Add feature, powered by OpenAI, automatically processes and categorizes your financial data, saving you time and effort. Effortlessly input anything from plain text to bank statements.",
     type: "video",
-    path: "/smart-add.m4v",
+    path: "/smart-add.mp4",
     format: "video/webm",
     icon: <WandSparkles />,
   },
@@ -19,7 +19,7 @@ const features = [
     description:
       "Visualize your spending habits with a variety of interactive charts. Explore your data through line charts, bar charts, and pie charts, offering a clear and comprehensive view of your financial trends over time.",
     type: "video",
-    path: "/charts.m4v",
+    path: "/charts.mp4",
     format: "video/webm",
     icon: <ChartSpline />,
   },
@@ -28,7 +28,7 @@ const features = [
     description:
       "Categorize your expenses by custom categories, months, and labels, making it easy to track and manage your spending across different periods and purposes.",
     type: "video",
-    path: "/organization.m4v",
+    path: "/organization.mp4",
     format: "video/webm",
     icon: <NotepadText />,
   },
@@ -138,7 +138,7 @@ const FeaturesAccordion = () => {
       <div className="px-8">
         <h2 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-12 md:mb-24">
           All you need to track your expenses
-          <span className="bg-violet-500 text-white px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed whitespace-nowrap">
+          <span className="bg-violet-500 text-white px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed sm:whitespace-nowrap">
             and start saving
           </span>
         </h2>

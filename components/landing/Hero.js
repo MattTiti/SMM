@@ -21,26 +21,26 @@ const Hero = () => {
             priceId={config.stripe.plans[1].priceId}
             mode={config.stripe.plans[1].mode}
           />
-          <div className="flex justify-start items-center gap-6 mt-20">
-            <Link href="/demo">
-              <Button
-                variant="ghost"
-                className="p-0 items-end dark:hover:bg-transparent dark:hover:text-violet-500 dark:text-violet-400 underline"
-              >
-                Check out the interactive demo
-                <FaArrowRight className="ml-1 mb-0.5" size={14} />
-              </Button>
-            </Link>
-            <Link href="/#features">
-              <Button
-                variant="ghost"
-                className="p-0 items-end dark:hover:bg-transparent dark:hover:text-violet-500 dark:text-violet-400 underline"
-              >
-                Learn more about current features
-                <FaArrowRight className="ml-1 mb-0.5" size={14} />
-              </Button>
-            </Link>
-          </div>
+        </div>
+        <div className="sm:flex justify-start items-center gap-6 mt-12">
+          <Link href="/demo">
+            <Button
+              variant="ghost"
+              className="p-0 items-center dark:hover:bg-transparent dark:hover:text-violet-500 dark:text-violet-400 underline"
+            >
+              Check out the interactive demo
+              <FaArrowRight className="ml-1 mb-0.5" size={14} />
+            </Button>
+          </Link>
+          <Link href="/#features">
+            <Button
+              variant="ghost"
+              className="p-0 items-center dark:hover:bg-transparent dark:hover:text-violet-500 dark:text-violet-400 underline"
+            >
+              Learn more about current features
+              <FaArrowRight className="ml-1 mb-0.5" size={14} />
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="lg:w-full">
