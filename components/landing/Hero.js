@@ -14,7 +14,7 @@ const Hero = () => {
           <span className="italic text-violet-400">really</span> spend
         </h1>
         <p className="text-lg opacity-80 leading-relaxed">
-          AI-powered expense tracking for smarter spending and saving.
+          AI-powered expense tracking for smarter spending and saving
         </p>
         <div className="w-56">
           <ButtonCheckout

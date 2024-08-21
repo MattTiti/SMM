@@ -3,7 +3,7 @@ import themes from "daisyui/src/theming/themes";
 const config = {
   appName: "ShowMeMoney",
   appDescription:
-    "The expense tracker powered by OpenAI to help you save time and money.",
+    "The expense tracker powered by OpenAI to help you save time and money",
   domainName: "showmemoney.app",
   crisp: {
     // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
