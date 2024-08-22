@@ -6,10 +6,7 @@ const config = {
     "The expense tracker powered by OpenAI to help you save time and money",
   domainName: "showmemoney.app",
   crisp: {
-    // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
-    // id: "17f9c26c-fa15-4ec3-9696-37686a1950dbv",
     id: "",
-    // Hide Crisp by default, except on route "/". Crisp is toggled with <ButtonSupport/>. If you want to show Crisp on every routes, just remove this below
     onlyShowOnRoutes: ["/"],
   },
   stripe: {
@@ -68,7 +65,6 @@ const config = {
   },
   auth: {
     loginUrl: "/api/auth/signin",
-    // Path to redirect to after a successful login
     callbackUrl: "/dashboard",
   },
 };
