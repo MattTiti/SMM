@@ -20,6 +20,9 @@ import { Button } from "@/components/ui/button";
 export default function Dashboard() {
   const { data: session } = useSession();
   const userId = session?.user?.id;
+  const [rows, setRows] = useState([
+    { name: "", cost: "", category: "", label: "" },
+  ]);
 
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState("august");
@@ -47,6 +50,9 @@ export default function Dashboard() {
         const data = response?.data?.monthlyExpenses[0];
 
         setMonthlyExpenses(
+          data?.expenses || [{ name: "", cost: "", category: "", label: "" }]
+        );
+        setRows(
           data?.expenses || [{ name: "", cost: "", category: "", label: "" }]
         );
         setYearlyExpenses(
@@ -122,8 +128,8 @@ export default function Dashboard() {
               selectedMonth={selectedMonth}
               setSelectedMonth={setSelectedMonth}
               budget={budget}
-              savedRows={monthlyExpenses}
-              setSavedRows={setMonthlyExpenses}
+              rows={rows}
+              setRows={setRows}
               userId={userId}
               loading={loading}
               setLoading={setLoading}

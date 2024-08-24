@@ -42,8 +42,8 @@ const Expenses = ({
   selectedMonth,
   setSelectedMonth,
   budget,
-  savedRows,
-  setSavedRows,
+  rows,
+  setRows,
   userId,
   loading,
   setLoading,
@@ -53,18 +53,7 @@ const Expenses = ({
   const [smartAddValue, setSmartAddValue] = useState("");
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
-  const [rows, setRows] = useState([
-    { name: "", cost: "", category: "", label: "" },
-  ]);
 
-  useEffect(() => {
-    if (savedRows) {
-      setRows(savedRows);
-      setLoading(false);
-    } else {
-      setLoading(true);
-    }
-  }, [savedRows]);
   const addRow = () => {
     setRows([...rows, { name: "", cost: "", category: "", label: "" }]);
   };
@@ -80,7 +69,6 @@ const Expenses = ({
   const handleSave = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setSavedRows(rows);
 
     try {
       const response = await axios.put("/api/expenses", {
@@ -145,7 +133,7 @@ const Expenses = ({
   };
 
   const handleReset = async () => {
-    setSavedRows([{ name: "", cost: "", category: "", label: "" }]);
+    setRows([{ name: "", cost: "", category: "", label: "" }]);
     try {
       const response = await axios.put("/api/expenses", {
         userId,
