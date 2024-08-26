@@ -67,6 +67,7 @@ const config = {
     loginUrl: "/api/auth/signin",
     callbackUrl: "/dashboard",
   },
+  googleAnalyticsId: "G-Y2GFJQ65SZ",
 };
 
 export default config;

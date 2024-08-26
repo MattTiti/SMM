@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -54,8 +54,20 @@ const Expenses = ({
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const lastRowRef = useRef(null);
+  const shouldScrollRef = useRef(false);
+
+  useEffect(() => {
+    if (shouldScrollRef.current && lastRowRef.current) {
+      // Only scrolls when a new row is added
+      lastRowRef.current.scrollIntoView({ behavior: "smooth" });
+      shouldScrollRef.current = false;
+    }
+  }, [rows]);
+
   const addRow = () => {
     setRows([...rows, { name: "", cost: "", category: "", label: "" }]);
+    shouldScrollRef.current = true;
   };
 
   const handleCategoryChange = (index, category) => {
@@ -106,6 +118,8 @@ const Expenses = ({
           row.cost.trim() !== "" ||
           row.category.trim() !== ""
       );
+
+      shouldScrollRef.current = true;
 
       try {
         // Saving the response data before updating state because the state update is async
@@ -187,7 +201,7 @@ const Expenses = ({
           {loading ? (
             <Spinner />
           ) : (
-            <div className="">
+            <div className="max-h-[100vh] overflow-y-scroll">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -220,7 +234,10 @@ const Expenses = ({
                 <TableBody>
                   {rows &&
                     rows.map((row, index) => (
-                      <TableRow key={index}>
+                      <TableRow
+                        key={index}
+                        ref={index === rows.length - 1 ? lastRowRef : null}
+                      >
                         <TableCell>
                           <Input
                             placeholder="Enter name"
