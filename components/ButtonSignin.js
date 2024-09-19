@@ -12,14 +12,14 @@ const ButtonSignin = ({ text = "Get started" }) => {
   const { data: status } = useSession();
 
   const handleClick = () => {
-    if (status === "authenticated") {
+    if (status) {
       router.push(config.auth.callbackUrl);
     } else {
       signIn(undefined, { callbackUrl: config.auth.callbackUrl });
     }
   };
 
-  if (status === "authenticated") {
+  if (status) {
     return (
       <Button
         className="p-6 group"
