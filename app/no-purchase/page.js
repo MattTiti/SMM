@@ -8,26 +8,7 @@ const NoPurchase = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <div className="bg-white overflow-hidden min-h-screen">
         <Header />
-        <div className="py-12 px-8 max-w-5xl mx-auto">
-          <Link
-            href="/"
-            className="btn btn-ghost mb-8 inline-flex items-center"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="w-5 h-5 mr-2"
-            >
-              <path
-                fillRule="evenodd"
-                d="M15 10a.75.75 0 01-.75.75H7.612l2.158 1.96a.75.75 0 11-1.04 1.08l-3.5-3.25a.75.75 0 010-1.08l3.5-3.25a.75.75 0 111.04 1.08L7.612 9.25h6.638A.75.75 0 0115 10z"
-                clipRule="evenodd"
-              />
-            </svg>
-            Back
-          </Link>
-
+        <div className="py-12 px-8 max-w-5xl mx-auto flex flex-col justify-center mt-20">
           <div className="flex flex-col text-center w-full mb-12">
             <h1 className="font-bold text-xl lg:text-3xl tracking-tight text-gray-900">
               Complete checkout to access dashboard

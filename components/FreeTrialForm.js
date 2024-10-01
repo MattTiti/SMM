@@ -36,7 +36,7 @@ export default function FreeTrialForm() {
   };
 
   return (
-    <div className="text-center pb-6">
+    <div className="text-center">
       <Button onClick={handleStartTrial} disabled={isLoading}>
         {isLoading ? "Starting trial..." : "Start Your Free Trial"}
       </Button>
