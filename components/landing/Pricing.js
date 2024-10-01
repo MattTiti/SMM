@@ -7,10 +7,10 @@ import ButtonCheckout from "@/components/ButtonCheckout";
 
 const Pricing = () => {
   return (
-    <section className="bg-base-200 overflow-hidden" id="pricing">
+    <section className="bg-white overflow-hidden" id="pricing">
       <div className="py-24 px-8 max-w-5xl mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
-          <h2 className="font-bold text-3xl lg:text-5xl tracking-tight">
+          <h2 className="font-bold text-3xl lg:text-5xl tracking-tight text-gray-900">
             Pricing
           </h2>
         </div>
@@ -21,7 +21,7 @@ const Pricing = () => {
               {plan.isFeatured && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                   <span
-                    className={`badge text-xs text-primary-content font-semibold border-0 bg-violet-400`}
+                    className={`badge text-xs text-white font-semibold border-0 bg-black`}
                   >
                     POPULAR
                   </span>
@@ -30,18 +30,23 @@ const Pricing = () => {
 
               {plan.isFeatured && (
                 <div
-                  className={`absolute -inset-[1px] rounded-[9px] bg-violet-400 z-10`}
+                  className={`absolute -inset-[1px] rounded-[9px] bg-black z-10`}
+                ></div>
+              )}
+              {!plan.isFeatured && (
+                <div
+                  className={`absolute -inset-[1px] rounded-[9px] bg-gray-200 z-10`}
                 ></div>
               )}
 
-              <div className="relative flex flex-col h-full gap-5 lg:gap-8 z-10 bg-base-100 p-8 rounded-lg">
+              <div className="relative flex flex-col h-full gap-5 lg:gap-8 z-10 bg-white p-8 rounded-lg shadow-md">
                 <div className="flex justify-between items-center gap-4">
                   <div>
-                    <p className="text-lg lg:text-xl font-bold">{plan.name}</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-900">
+                      {plan.name}
+                    </p>
                     {plan.description && (
-                      <p className="text-base-content/80 mt-2">
-                        {plan.description}
-                      </p>
+                      <p className="text-gray-600 mt-2">{plan.description}</p>
                     )}
                   </div>
                 </div>
@@ -68,12 +73,15 @@ const Pricing = () => {
                 {plan.features && (
                   <ul className="space-y-2.5 leading-relaxed text-base flex-1">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2">
+                      <li
+                        key={i}
+                        className="flex items-center gap-2 text-gray-700"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
-                          className="w-[18px] h-[18px] opacity-80 shrink-0"
+                          className="w-[18px] h-[18px] text-black shrink-0"
                         >
                           <path
                             fillRule="evenodd"

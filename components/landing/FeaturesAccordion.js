@@ -58,12 +58,14 @@ const Item = ({ feature, isOpen, setFeatureSelected }) => {
         }}
         aria-expanded={isOpen}
       >
-        <span className={`duration-100 ${isOpen ? "text-violet-400" : ""}`}>
+        <span
+          className={`duration-100 ${isOpen ? "text-black" : "text-gray-500"}`}
+        >
           {icon}
         </span>
         <span
-          className={`flex-1 text-base-content ${
-            isOpen ? "text-violet-400 font-semibold" : ""
+          className={`flex-1 ${
+            isOpen ? "text-black font-semibold" : "text-gray-500"
           }`}
         >
           <h3 className="inline">{title}</h3>
@@ -72,7 +74,7 @@ const Item = ({ feature, isOpen, setFeatureSelected }) => {
 
       <div
         ref={accordion}
-        className={`transition-all duration-300 ease-in-out text-base-content-secondary overflow-hidden`}
+        className={`transition-all duration-300 ease-in-out text-gray-600 overflow-hidden`}
         style={
           isOpen
             ? { maxHeight: accordion?.current?.scrollHeight, opacity: 1 }
@@ -132,13 +134,13 @@ const FeaturesAccordion = () => {
 
   return (
     <section
-      className="py-24 md:py-32 space-y-24 md:space-y-32 max-w-7xl mx-auto bg-base-100 "
+      className="py-24 md:py-32 space-y-24 md:space-y-32 max-w-7xl mx-auto bg-white"
       id="features"
     >
       <div className="px-8">
-        <h2 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-12 md:mb-24">
+        <h2 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-12 md:mb-24 text-gray-900">
           All you need to track your expenses
-          <span className="bg-violet-500 text-white px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed sm:whitespace-nowrap">
+          <span className="bg-black text-white px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed sm:whitespace-nowrap">
             and start saving
           </span>
         </h2>

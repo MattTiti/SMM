@@ -94,9 +94,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40">
+    <div className="flex min-h-screen w-full flex-col bg-neutral-100">
       <div className="flex flex-col sm:gap-4 sm:py-4">
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-neutral-50 px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 text-black">
           <Link
             className="flex items-center gap-2 shrink-0"
             href="/"
@@ -111,7 +111,9 @@ export default function Dashboard() {
               width={32}
               height={32}
             />
-            <span className="font-extrabold text-lg">{config.appName}</span>
+            <span className="font-semibold text-lg text-black">
+              {config.appName}
+            </span>
           </Link>
           <ButtonAccount />
         </header>

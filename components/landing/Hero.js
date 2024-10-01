@@ -1,57 +1,40 @@
-import Image from "next/image";
+import React from "react";
 import config from "@/config";
 import ButtonCheckout from "@/components/ButtonCheckout";
 import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
+import FallingMoney from "@/components/FallingMoney";
 
 const Hero = () => {
   return (
-    <section className="max-w-7xl mx-auto bg-base-100 flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-20 px-8 py-8 lg:py-20">
-      <div className="flex flex-col gap-10 lg:gap-14 items-center justify-center text-center lg:text-left lg:items-start">
-        <h1 className="font-extrabold text-4xl lg:text-6xl tracking-tight md:-mb-4">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden shadow-md">
+      <FallingMoney />
+      <div className="relative z-10 text-center px-8 max-w-3xl">
+        <h1 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-8 text-gray-900">
           See how much you{" "}
-          <span className="italic text-violet-400">really</span> spend
+          <span className="bg-black text-white px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed sm:whitespace-nowrap">
+            really
+          </span>
+          spend
         </h1>
-        <p className="text-lg opacity-80 leading-relaxed">
+        <p className="text-lg text-gray-600 leading-relaxed mb-10">
           AI-powered expense tracking for smarter spending and saving
         </p>
-        <div className="w-56">
-          <ButtonCheckout
-            priceId={config.stripe.plans[1].priceId}
-            mode={config.stripe.plans[1].mode}
-          />
-        </div>
-        <div className="sm:flex justify-start items-center gap-6 mt-12">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="w-1/2">
+            <ButtonCheckout
+              priceId={config.stripe.plans[1].priceId}
+              mode={config.stripe.plans[1].mode}
+            />
+          </div>
           <Link href="/demo">
-            <Button
-              variant="ghost"
-              className="p-0 items-center dark:hover:bg-transparent dark:hover:text-violet-500 dark:text-violet-400 underline"
-            >
-              Check out the interactive demo
-              <FaArrowRight className="ml-1 mb-0.5" size={14} />
-            </Button>
-          </Link>
-          <Link href="/#features">
-            <Button
-              variant="ghost"
-              className="p-0 items-center dark:hover:bg-transparent dark:hover:text-violet-500 dark:text-violet-400 underline"
-            >
-              Learn more about current features
-              <FaArrowRight className="ml-1 mb-0.5" size={14} />
+            <Button variant="outline" className="p-6">
+              Start a free trial
+              <FaArrowRight className="ml-2" size={14} />
             </Button>
           </Link>
         </div>
-      </div>
-      <div className="lg:w-full">
-        <Image
-          src="/saving-3.svg"
-          alt="Product Demo"
-          className="w-full"
-          priority={true}
-          width={500}
-          height={500}
-        />
       </div>
     </section>
   );

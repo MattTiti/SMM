@@ -13,7 +13,7 @@ export default function Home() {
       <Suspense>
         <Header />
       </Suspense>
-      <main className="bg-base-100">
+      <main className="bg-white text-black">
         <Hero />
         <Problem />
         <FeaturesAccordion />

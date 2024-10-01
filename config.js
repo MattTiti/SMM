@@ -19,8 +19,8 @@ const config = {
         name: "Yearly",
         mode: "subscription",
         description: "Full access to all features for a year",
-        price: 6.99,
-        priceAnchor: 11.99,
+        price: 49.99,
+        priceAnchor: 69.99,
         features: [
           { name: "Smart Add" },
           { name: "Charts and Visualizations" },
@@ -38,8 +38,8 @@ const config = {
         name: "Unlimited",
         mode: "payment",
         description: "A one-time payment for lifetime access",
-        price: 11.99,
-        priceAnchor: 16.99,
+        price: 79.99,
+        priceAnchor: 99.99,
         features: [
           { name: "Smart Add" },
           { name: "Charts and Visualizations" },
@@ -59,7 +59,7 @@ const config = {
     forwardRepliesTo: "matthewtiti@gmail.com",
   },
   colors: {
-    theme: "dark",
+    theme: "light",
     main: themes["light"]["primary"],
     toast: "#000000",
   },

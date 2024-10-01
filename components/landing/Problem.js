@@ -3,7 +3,7 @@ const Arrow = ({ extraStyle }) => {
     <svg
       className={`shrink-0 w-12 opacity-70 ${extraStyle}`}
       viewBox="0 0 138 138"
-      fill="#a78bfa"
+      fill="#8b5cf6" // Changed to a lighter purple color
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>
@@ -21,23 +21,24 @@ const Arrow = ({ extraStyle }) => {
     </svg>
   );
 };
+
 const Step = ({ emoji, text }) => {
   return (
     <div className="w-full md:w-48 flex flex-col gap-2 items-center justify-center">
       <span className="text-4xl">{emoji}</span>
-      <h3 className="font-bold">{text}</h3>
+      <h3 className="font-bold text-gray-800">{text}</h3>
     </div>
   );
 };
 
 const Problem = () => {
   return (
-    <section className="bg-neutral text-neutral-content">
+    <section className="bg-white text-gray-800">
       <div className="max-w-7xl mx-auto px-8 py-16 md:py-32 text-center">
-        <h2 className="max-w-3xl mx-auto font-extrabold text-4xl md:text-5xl tracking-tight mb-6 md:mb-8">
+        <h2 className="max-w-3xl mx-auto font-extrabold text-4xl md:text-5xl tracking-tight mb-6 md:mb-8 text-gray-900">
           83% of Americans say they overspend
         </h2>
-        <p className="max-w-xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-20">
+        <p className="max-w-xl mx-auto text-lg text-gray-600 leading-relaxed mb-12 md:mb-20">
           Tracking payments across cards and accounts... and cash. There&apos;s
           too much to keep up with manually.
         </p>

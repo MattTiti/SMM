@@ -205,11 +205,11 @@ const Expenses = ({
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Price</TableHead>
-                    <TableHead>Category</TableHead>
+                    <TableHead className="text-gray-700">Name</TableHead>
+                    <TableHead className="text-gray-700">Price</TableHead>
+                    <TableHead className="text-gray-700">Category</TableHead>
                     <TableHead className="flex items-center px-2 w-10">
-                      <span>Label</span>
+                      <span className="text-gray-700">Label</span>
                       <Popover>
                         <PopoverTrigger asChild>
                           <Button
@@ -331,7 +331,7 @@ const Expenses = ({
                             size="icon"
                             onClick={() => handleDeleteRow(index)}
                           >
-                            <FaTrash className="text-zinc-200" />
+                            <FaTrash className="text-gray-400" />
                           </Button>
                         </TableCell>
                       </TableRow>

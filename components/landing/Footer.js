@@ -8,7 +8,7 @@ import logo from "@/app/icon.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-base-200 border-t border-base-content/10">
+    <footer className="bg-white border-t border-base-content/10">
       <div className="max-w-7xl mx-auto px-8 py-24">
         <div className=" flex lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
@@ -25,7 +25,7 @@ const Footer = () => {
                 width={24}
                 height={24}
               />
-              <strong className="font-extrabold tracking-tight text-base md:text-lg">
+              <strong className="font-semibold tracking-tight text-black md:text-lg">
                 {config.appName}
               </strong>
             </Link>
@@ -37,7 +37,7 @@ const Footer = () => {
               Copyright © {new Date().getFullYear()} - All rights reserved
             </p>
           </div>
-          <div className="flex-grow flex flex-wrap justify-center -mb-10 md:mt-0 mt-10 text-center">
+          <div className="flex-grow flex flex-wrap justify-center -mb-10 md:mt-0 mt-10 text-center text-black/60">
             <div className="lg:w-1/3 md:w-1/2 w-full px-4">
               <div className="footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3">
                 LINKS
