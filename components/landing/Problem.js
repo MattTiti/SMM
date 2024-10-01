@@ -3,7 +3,7 @@ const Arrow = ({ extraStyle }) => {
     <svg
       className={`shrink-0 w-12 opacity-70 ${extraStyle}`}
       viewBox="0 0 138 138"
-      fill="#8b5cf6" // Changed to a lighter purple color
+      fill="#000" // Changed to a lighter purple color
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>

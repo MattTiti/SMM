@@ -16,12 +16,10 @@ const faqList = [
     question: "Is there a free trial?",
     answer: (
       <div className="space-y-2 leading-relaxed">
-        There is no free trial at the moment, but there is a{" "}
-        <Link href="/demo" className="underline text-violet-400">
-          demo page
+        Yes, there is a 48-hour{" "}
+        <Link href="/free-trial" className="underline text-blue-500">
+          free trial
         </Link>
-        . This page has limited functionality, but will give you a general feel
-        of the app.
       </div>
     ),
   },
@@ -39,7 +37,10 @@ const faqList = [
     answer: (
       <div className="space-y-2 leading-relaxed">
         Send me an{" "}
-        <a href="mailto:matt@mg.showmemoney.app" className="underline">
+        <a
+          href="mailto:matt@mg.showmemoney.app"
+          className="underline text-blue-500"
+        >
           email
         </a>
         !
@@ -62,9 +63,7 @@ const Item = ({ item }) => {
         }}
         aria-expanded={isOpen}
       >
-        <span
-          className={`flex-1 text-base-content ${isOpen ? "text-primary" : ""}`}
-        >
+        <span className={`flex-1 text-black/60 ${isOpen ? "text-black" : ""}`}>
           {item?.question}
         </span>
         <svg
