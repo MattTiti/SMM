@@ -66,7 +66,9 @@ const DashboardSummary = ({
         <CardHeader className="pb-2">
           <div className="flex justify-between">
             <div>
-              <CardDescription>This Month</CardDescription>
+              <CardDescription className="text-black/80">
+                This Month
+              </CardDescription>
               <CardTitle className="text-4xl">
                 {`${formatCurrency(totalCost)} / ${formatCurrency(budget)}`}
               </CardTitle>
@@ -99,7 +101,7 @@ const DashboardSummary = ({
           </div>
         </CardHeader>
         <CardContent>
-          <div className="text-xs text-muted-foreground">
+          <div className="text-xs text-black/60">
             {`${formatCurrency(budget - totalCost)} left`}
           </div>
         </CardContent>
@@ -107,7 +109,7 @@ const DashboardSummary = ({
           <Progress
             value={totalCost > budget ? 100 : (totalCost / budget) * 100}
             aria-label="Progress"
-            color={totalCost > budget ? "bg-red-500" : "bg-primary"}
+            color={totalCost > budget ? "bg-red-500" : "bg-green-500"}
           />
         </CardFooter>
       </Card>

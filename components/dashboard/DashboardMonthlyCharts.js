@@ -101,11 +101,11 @@ const DashboardMonthlyCharts = ({ monthlyExpenses = [], selectedMonth }) => {
       </CardHeader>
       <CardContent className="flex-1 pb-0">{renderChart()}</CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
+        <div className="flex items-center gap-2 font-medium leading-none text-black/80">
           Highest expense category — {highestCategory.category} (
           {formatCurrency(highestCategory.cost)})
         </div>
-        <div className="leading-none text-muted-foreground">
+        <div className="leading-none text-black/60">
           Lowest expense category — {lowestCategory.category} (
           {formatCurrency(lowestCategory.cost)})
         </div>

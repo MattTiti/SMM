@@ -32,6 +32,12 @@ const NoPurchase = () => {
             <h1 className="font-bold text-xl lg:text-3xl tracking-tight text-gray-900">
               Complete checkout to access dashboard
             </h1>
+            <p className="text-sm text-black/60">
+              Already purchased?{" "}
+              <Link href="/dashboard" className="underline text-black/60">
+                Go to dashboard
+              </Link>
+            </p>
           </div>
 
           <div className="relative flex justify-center flex-col lg:flex-row items-center lg:items-stretch gap-8">

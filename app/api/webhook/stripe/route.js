@@ -77,6 +77,8 @@ export async function POST(req) {
         user.priceId = priceId;
         user.customerId = customerId;
         user.hasAccess = true;
+        user.trialStart = null;
+        user.trialEnd = null;
         await user.save();
 
         // Extra: send email with user link, product page, etc...

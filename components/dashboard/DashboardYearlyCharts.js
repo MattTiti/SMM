@@ -142,13 +142,17 @@ const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
           <div className="flex gap-2 font-medium leading-none">
             {percentageChange >= 0 ? (
               <>
-                Trending up by {percentageChange.toFixed(2)}% this month
+                <span className="text-black/80">
+                  Trending up by {percentageChange.toFixed(2)}% this month
+                </span>
                 <TrendingUp className="h-4 w-4" />
               </>
             ) : (
               <>
-                Trending down by {Math.abs(percentageChange).toFixed(2)}% this
-                month
+                <span className="text-black/80">
+                  Trending down by {Math.abs(percentageChange).toFixed(2)}% this
+                  month
+                </span>
                 <TrendingDown className="h-4 w-4" />
               </>
             )}

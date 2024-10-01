@@ -35,7 +35,7 @@ const ExpensesFooter = ({
   handleReset,
 }) => {
   return (
-    <CardFooter className="flex justify-between">
+    <CardFooter className="flex justify-between border-t border-black/10 pt-4">
       <div className="flex gap-4">
         <Button type="button" onClick={addRow}>
           <CirclePlus size={16} className="mr-1" /> Add Row

@@ -166,7 +166,7 @@ const Expenses = ({
   return (
     <form onSubmit={handleSave} className="lg:col-span-2">
       <Card className="sm:col-span-2">
-        <CardHeader className="pb-3 flex justify-between items-start">
+        <CardHeader className="pb-3 flex justify-between items-start border-b border-black/10">
           <div className="flex w-full justify-between">
             <div>
               <CardTitle>Track Your Expenses</CardTitle>
@@ -197,13 +197,13 @@ const Expenses = ({
             </Select>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pb-0">
           {loading ? (
             <Spinner />
           ) : (
             <div className="max-h-[100vh] overflow-y-scroll">
               <Table>
-                <TableHeader>
+                <TableHeader className="text-black/80">
                   <TableRow>
                     <TableHead className="text-gray-700">Name</TableHead>
                     <TableHead className="text-gray-700">Price</TableHead>

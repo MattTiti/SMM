@@ -14,8 +14,6 @@ import config from "@/config";
 import logo from "@/app/icon.png";
 import Image from "next/image";
 import DashboardLabelCharts from "@/components/dashboard/DashboardLabelCharts";
-import { FaArrowUp } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
 import { getCurrentMonthName } from "@/lib/utils";
 
 export default function Dashboard() {
@@ -25,7 +23,6 @@ export default function Dashboard() {
     { name: "", cost: "", category: "", label: "" },
   ]);
 
-  const [showScrollTop, setShowScrollTop] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState(getCurrentMonthName());
   const [budget, setBudget] = useState("0");
   const [monthlyExpenses, setMonthlyExpenses] = useState([
@@ -73,26 +70,6 @@ export default function Dashboard() {
 
     fetchExpenses();
   }, [userId, selectedMonth, update]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > window.innerHeight) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-neutral-100">
@@ -158,16 +135,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      {showScrollTop && (
-        <Button
-          onClick={scrollToTop}
-          variant="outline"
-          size="icon"
-          className="fixed bottom-4 right-8 p-2 h-12 w-12 rounded-full dark:bg-white dark:hover:bg-zinc-100 dark:text-zinc-950 dark:hover:text-zinc-900"
-        >
-          <FaArrowUp size={16} />
-        </Button>
-      )}
     </div>
   );
 }

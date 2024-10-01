@@ -18,7 +18,7 @@ const DashboardPieChart = ({
   return (
     <>
       {data.length === 0 || totalSpending === 0 ? (
-        <div className="text-center text-sm text-muted-foreground p-24">
+        <div className="text-center text-sm text-black p-24">
           No data available
         </div>
       ) : (
@@ -51,14 +51,14 @@ const DashboardPieChart = ({
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-xl font-bold"
+                          className="fill-black/80 text-xl font-bold"
                         >
                           {formatLabel(totalSpending)}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
+                          className="fill-black/60"
                         >
                           {totalLabel}
                         </tspan>

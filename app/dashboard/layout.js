@@ -4,6 +4,7 @@ import { authOptions } from "@/libs/next-auth";
 import config from "@/config";
 import connectMongo from "@/libs/mongoose";
 import User from "@/models/User";
+export const dynamic = "force-dynamic";
 
 // This is a server-side component to ensure the user is logged in.
 // If not, it will redirect to the login page.

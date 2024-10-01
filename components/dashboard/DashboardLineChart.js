@@ -22,7 +22,7 @@ const DashboardLineChart = ({
           <LineChart
             accessibilityLayer
             data={data}
-            margin={{ top: 20, left: 12, right: 12 }}
+            margin={{ top: 20, left: 20, right: 20 }}
           >
             <CartesianGrid vertical={false} />
             <XAxis
