@@ -36,6 +36,13 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    // New fields for trial functionality
+    trialStart: {
+      type: Date,
+    },
+    trialEnd: {
+      type: Date,
+    },
   },
   {
     timestamps: true,
@@ -45,5 +52,14 @@ const userSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 userSchema.plugin(toJSON);
+
+// Add a virtual property to check if the trial is active
+userSchema.virtual("isTrialActive").get(function () {
+  if (this.trialStart && this.trialEnd) {
+    const now = new Date();
+    return now >= this.trialStart && now <= this.trialEnd;
+  }
+  return false;
+});
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

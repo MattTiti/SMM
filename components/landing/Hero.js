@@ -28,7 +28,7 @@ const Hero = () => {
               mode={config.stripe.plans[1].mode}
             />
           </div>
-          <Link href="/demo">
+          <Link href="/free-trial">
             <Button variant="outline" className="p-6">
               Start a free trial
               <FaArrowRight className="ml-2" size={14} />

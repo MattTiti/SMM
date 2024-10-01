@@ -215,7 +215,7 @@ const Expenses = ({
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="dark:hover:bg-muted/0 justify-start ml-2"
+                            className="hover:bg-muted/0 justify-start ml-2"
                           >
                             <FaInfoCircle />
                           </Button>
@@ -290,7 +290,9 @@ const Expenses = ({
                           >
                             <SelectTriggerColor
                               className={
-                                row.label === "red"
+                                row.label === "white" || row.label === ""
+                                  ? "bg-white"
+                                  : row.label === "red"
                                   ? `bg-${row.label}-600`
                                   : `bg-${row.label}-500`
                               }
@@ -299,23 +301,26 @@ const Expenses = ({
                               <SelectGroup>
                                 <SelectItem
                                   value="green"
-                                  className="bg-green-500 dark:focus:bg-green-600"
+                                  className="bg-green-500 focus:bg-green-600"
                                 >
                                   <span className="inline-block w-full h-8 bg-blue-500 rounded"></span>
                                 </SelectItem>
                                 <SelectItem
                                   value="yellow"
-                                  className="bg-yellow-500 dark:focus:bg-yellow-600"
+                                  className="bg-yellow-500 focus:bg-yellow-600"
                                 >
                                   <span className="inline-block w-full h-8 bg-yellow-500 rounded"></span>
                                 </SelectItem>
                                 <SelectItem
                                   value="red"
-                                  className="bg-red-600 dark:focus:bg-red-700"
+                                  className="bg-red-600 focus:bg-red-700"
                                 >
                                   <span className="inline-block w-full h-8 bg-red-600 rounded"></span>
                                 </SelectItem>
-                                <SelectItem value="none" className="pl-10">
+                                <SelectItem
+                                  value="white"
+                                  className="pl-10 bg-white"
+                                >
                                   <span className="flex items-center justify-center w-full h-8 rounded">
                                     None
                                   </span>
@@ -328,10 +333,11 @@ const Expenses = ({
                           <Button
                             type="button"
                             variant="ghost"
+                            className="hover:bg-transparent"
                             size="icon"
                             onClick={() => handleDeleteRow(index)}
                           >
-                            <FaTrash className="text-gray-400" />
+                            <FaTrash className="text-gray-400 hover:text-gray-800" />
                           </Button>
                         </TableCell>
                       </TableRow>

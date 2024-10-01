@@ -16,6 +16,7 @@ import Image from "next/image";
 import DashboardLabelCharts from "@/components/dashboard/DashboardLabelCharts";
 import { FaArrowUp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { getCurrentMonthName } from "@/lib/utils";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -25,7 +26,7 @@ export default function Dashboard() {
   ]);
 
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [selectedMonth, setSelectedMonth] = useState("august");
+  const [selectedMonth, setSelectedMonth] = useState(getCurrentMonthName());
   const [budget, setBudget] = useState("0");
   const [monthlyExpenses, setMonthlyExpenses] = useState([
     { name: "", cost: "", category: "", label: "" },

@@ -17,24 +17,5 @@ export default async function LayoutPrivate({ children }) {
   }
   await connectMongo();
 
-  const user = await User.findById(session?.user?.id);
-
-  if (!user) {
-    console.error("User not found");
-    redirect(config.auth.loginUrl);
-  }
-
-  const now = new Date();
-
-  // Check if trial has ended
-  if (user.hasAccess && user.trialEnd && now > user.trialEnd) {
-    user.hasAccess = false;
-    await user.save();
-  }
-
-  if (!user.hasAccess) {
-    redirect("/no-purchase");
-  }
-
   return <>{children}</>;
 }

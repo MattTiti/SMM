@@ -109,7 +109,7 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between text-muted-foreground"
+          className="w-full justify-between text-muted-foreground hover:bg-white hover:text-muted-foreground"
         >
           {value ? (
             <div className="flex items-center">
@@ -122,8 +122,8 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
-        <Command>
+      <PopoverContent className="w-full p-0 bg-white">
+        <Command className="bg-white">
           <CommandInput placeholder="Search category..." />
           <CommandList>
             <CommandEmpty>No category found.</CommandEmpty>
