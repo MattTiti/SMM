@@ -29,6 +29,7 @@ const DashboardBarChart = ({ data, selectedMonth, chartConfig }) => {
               tickMargin={10}
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 3)}
+              tick={{ style: { fill: "black" } }}
             />
             <ChartTooltip
               cursor={false}

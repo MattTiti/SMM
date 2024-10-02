@@ -23,12 +23,16 @@ const DashboardHorizontalBar = ({ data, dataKey }) => {
   return (
     <>
       {data.length === 0 || (data.length === 1 && data[0].cost === 0) ? (
-        <div className="text-center text-sm text-muted-foreground p-24">
+        <div className="text-center text-sm text-black p-24">
           No data available
         </div>
       ) : (
         <ChartContainer config={chartConfig} className="my-2">
-          <BarChart data={data} layout="vertical" margin={{ right: 16 }}>
+          <BarChart
+            data={data}
+            layout="vertical"
+            margin={{ right: 50, left: 0 }}
+          >
             <CartesianGrid horizontal={false} />
             <YAxis
               dataKey={dataKey}
@@ -51,7 +55,7 @@ const DashboardHorizontalBar = ({ data, dataKey }) => {
             >
               <LabelList
                 dataKey={dataKey === "label" ? "" : dataKey}
-                position="insideLeft"
+                position="right"
                 offset={8}
                 className="fill-[--color-label]"
                 fontSize={12}
