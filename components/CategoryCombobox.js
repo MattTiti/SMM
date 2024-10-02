@@ -109,7 +109,7 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between text-muted-foreground hover:bg-white hover:text-muted-foreground"
+          className="w-full justify-between text-black hover:bg-white hover:text-black"
         >
           {value ? (
             <div className="flex items-center">
@@ -117,7 +117,7 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
               {selectedCategoryData.label}
             </div>
           ) : (
-            "Select category"
+            <span className="text-muted-foreground">Select category</span>
           )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
