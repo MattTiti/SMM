@@ -75,7 +75,7 @@ const ExpensesFooter = ({
       <div className="flex gap-4">
         <AlertDialog open={resetDialogOpen} onOpenChange={setResetDialogOpen}>
           <AlertDialogTrigger asChild>
-            <Button type="button" variant="ghost">
+            <Button type="button" variant="outline">
               Reset
             </Button>
           </AlertDialogTrigger>

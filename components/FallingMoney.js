@@ -21,8 +21,7 @@ const FallingMoney = () => {
     // Money bills
     const bills = [];
     const billImage = new Image();
-    billImage.src = "/dollar-bill.png"; // Make sure to add this image to your public folder
-
+    billImage.src = "/dollar-bill.png";
     for (let i = 0; i < 20; i++) {
       bills.push({
         x: Math.random() * canvas.width,
@@ -30,6 +29,8 @@ const FallingMoney = () => {
         speed: 1 + Math.random() * 3,
         rotation: Math.random() * 360,
         rotationSpeed: (Math.random() - 0.5) * 2,
+        width: 100,
+        height: 40,
       });
     }
 
@@ -40,14 +41,21 @@ const FallingMoney = () => {
         ctx.save();
         ctx.translate(bill.x, bill.y);
         ctx.rotate((bill.rotation * Math.PI) / 180);
-        ctx.drawImage(billImage, -25, -10, 50, 20);
+        // Use the new width and height when drawing the image
+        ctx.drawImage(
+          billImage,
+          -bill.width / 2,
+          -bill.height / 2,
+          bill.width,
+          bill.height
+        );
         ctx.restore();
 
         bill.y += bill.speed;
         bill.rotation += bill.rotationSpeed;
 
         if (bill.y > canvas.height) {
-          bill.y = -20;
+          bill.y = -bill.height;
           bill.x = Math.random() * canvas.width;
         }
       });

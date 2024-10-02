@@ -75,24 +75,26 @@ export default function Dashboard() {
     <div className="flex min-h-screen w-full flex-col bg-neutral-100">
       <div className="flex flex-col sm:gap-4 sm:py-4">
         <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-neutral-50 px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 text-black">
-          <Link
-            className="flex items-center gap-2 shrink-0"
-            href="/"
-            title={`${config.appName} hompage`}
-          >
-            <Image
-              src={logo}
-              alt={`${config.appName} logo`}
-              className="w-8"
-              placeholder="blur"
-              priority={true}
-              width={32}
-              height={32}
-            />
-            <span className="font-semibold text-lg text-black">
-              {config.appName}
-            </span>
-          </Link>
+          <div className="bg-white p-2 rounded-lg border border-neutral-200 hover:bg-neutral-100">
+            <Link
+              className="flex items-center gap-2 shrink-0"
+              href="/"
+              title={`${config.appName} homepage`}
+            >
+              <Image
+                src={logo}
+                alt={`${config.appName} logo`}
+                className="w-8"
+                placeholder="blur"
+                priority={true}
+                width={32}
+                height={32}
+              />
+              <span className="font-semibold text-lg text-black">
+                {config.appName}
+              </span>
+            </Link>
+          </div>
           <ButtonAccount />
         </header>
         <div className="grid flex-1 grid-cols-1 gap-4 p-4 sm:px-6 sm:py-0 md:grid-cols-3 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
