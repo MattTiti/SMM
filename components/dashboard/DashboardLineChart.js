@@ -14,7 +14,7 @@ const DashboardLineChart = ({
   return (
     <>
       {data.length === 0 ? (
-        <div className="text-center text-sm text-muted-foreground p-24">
+        <div className="text-center text-sm text-muted-foreground p-12 sm:p-24">
           No data available
         </div>
       ) : (

@@ -19,7 +19,7 @@ const config = {
         name: "Yearly",
         mode: "subscription",
         description: "Full access to all features for a year",
-        price: 49.99,
+        price: 39.99,
         priceAnchor: 69.99,
         features: [
           { name: "Smart Add" },
@@ -38,7 +38,7 @@ const config = {
         name: "Unlimited",
         mode: "payment",
         description: "A one-time payment for lifetime access",
-        price: 79.99,
+        price: 69.99,
         priceAnchor: 99.99,
         features: [
           { name: "Smart Add" },

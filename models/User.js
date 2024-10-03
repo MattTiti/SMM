@@ -43,6 +43,11 @@ const userSchema = mongoose.Schema(
     trialEnd: {
       type: Date,
     },
+    // Plaid access token field
+    plaidAccessToken: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,

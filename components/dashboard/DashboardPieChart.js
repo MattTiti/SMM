@@ -18,7 +18,7 @@ const DashboardPieChart = ({
   return (
     <>
       {data.length === 0 || totalSpending === 0 ? (
-        <div className="text-center text-sm text-black p-24">
+        <div className="text-center text-sm text-black p-12 sm:p-24">
           No data available
         </div>
       ) : (

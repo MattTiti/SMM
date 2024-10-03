@@ -1,15 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { CardFooter } from "@/components/ui/card";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import Spinner from "@/components/Spinner";
-import {
   AlertDialog,
   AlertDialogTrigger,
   AlertDialogContent,
@@ -20,62 +11,31 @@ import {
   AlertDialogCancel,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
-import { CirclePlus, WandSparkles } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 
 const ExpensesFooter = ({
   addRow,
-  open,
-  setOpen,
-  smartAddValue,
-  setSmartAddValue,
-  handleSmartAdd,
-  loading,
   resetDialogOpen,
   setResetDialogOpen,
   handleReset,
 }) => {
   return (
-    <CardFooter className="flex justify-between border-t border-black/10 pt-4">
-      <div className="flex gap-4">
-        <Button type="button" onClick={addRow}>
-          <CirclePlus size={16} className="mr-1" /> Add Row
-        </Button>
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button type="button" onClick={() => setOpen(true)}>
-              <WandSparkles size={14} className="mr-1" /> Smart Add
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Smart Add</DialogTitle>
-              <DialogDescription>
-                Paste or type values below and click add to extract expenses.
-                Longer text will take longer to process.
-              </DialogDescription>
-            </DialogHeader>
-            {loading ? (
-              <Spinner />
-            ) : (
-              <>
-                <textarea
-                  placeholder="Paste or type values here..."
-                  className="w-full h-24 p-2 border rounded"
-                  value={smartAddValue}
-                  onChange={(e) => setSmartAddValue(e.target.value)}
-                />
-                <Button onClick={handleSmartAdd} className="mt-2">
-                  <CirclePlus size={16} className="mr-1" /> Add
-                </Button>
-              </>
-            )}
-          </DialogContent>
-        </Dialog>
-      </div>
-      <div className="flex gap-4">
+    <CardFooter className="flex flex-col sm:flex-row justify-between border-t border-black/10 pt-4 gap-4">
+      <Button
+        type="button"
+        onClick={addRow}
+        className="w-full sm:w-auto order-1 sm:order-none"
+      >
+        <CirclePlus size={16} className="mr-1" /> Add Row
+      </Button>
+      <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
         <AlertDialog open={resetDialogOpen} onOpenChange={setResetDialogOpen}>
           <AlertDialogTrigger asChild>
-            <Button type="button" variant="outline">
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full sm:w-auto"
+            >
               Reset
             </Button>
           </AlertDialogTrigger>
@@ -95,7 +55,9 @@ const ExpensesFooter = ({
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-        <Button type="submit">Save</Button>
+        <Button type="submit" className="w-full sm:w-auto">
+          Save
+        </Button>
       </div>
     </CardFooter>
   );

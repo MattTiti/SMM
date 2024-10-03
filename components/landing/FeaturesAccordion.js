@@ -138,10 +138,10 @@ const FeaturesAccordion = () => {
       id="features"
     >
       <div className="px-8">
-        <h2 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-12 md:mb-24 text-gray-900">
-          All you need to track your expenses
+        <h2 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-12 md:mb-24 text-gray-900 max-w-4xl">
+          All you need to track your expenses and
           <span className="bg-black text-white px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed sm:whitespace-nowrap">
-            and start saving
+            start saving
           </span>
         </h2>
         <div className=" flex flex-col md:flex-row gap-12 md:gap-24">

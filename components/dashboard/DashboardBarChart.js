@@ -10,7 +10,7 @@ const DashboardBarChart = ({ data, selectedMonth, chartConfig }) => {
   return (
     <>
       {data.length === 0 ? (
-        <div className="text-center text-sm text-black p-24">
+        <div className="text-center text-sm text-black p-12 sm:p-24">
           No data available
         </div>
       ) : (
@@ -46,13 +46,6 @@ const DashboardBarChart = ({ data, selectedMonth, chartConfig }) => {
                   }
                 />
               ))}
-              <LabelList
-                position="top"
-                offset={12}
-                className="fill-white"
-                fontSize={12}
-                formatter={(value) => formatCurrency(value)}
-              />
             </Bar>
           </BarChart>
         </ChartContainer>

@@ -69,13 +69,13 @@ const DashboardSummary = ({
               <CardDescription className="text-black/80">
                 This Month
               </CardDescription>
-              <CardTitle className="text-4xl">
+              <CardTitle className="text-lg sm:text-4xl">
                 {`${formatCurrency(totalCost)} / ${formatCurrency(budget)}`}
               </CardTitle>
             </div>
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline" className="ml-4">
+                <Button variant="outline" className="ml-0 sm:ml-4">
                   Set Budget
                 </Button>
               </DialogTrigger>

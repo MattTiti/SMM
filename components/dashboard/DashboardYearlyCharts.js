@@ -119,7 +119,9 @@ const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
       <CardHeader className="flex justify-between">
         <div className="flex w-full justify-between">
           <div>
-            <CardTitle>Spending by Month</CardTitle>
+            <CardTitle className="text-lg sm:text-xl">
+              Spending by Month
+            </CardTitle>
             <CardDescription>Yearly Spending Overview</CardDescription>
           </div>
           <Select onValueChange={setSelectedChart} value={selectedChart}>

@@ -9,12 +9,13 @@ import DashboardMonthlyCharts from "@/components/dashboard/DashboardMonthlyChart
 import DashboardYearlyCharts from "@/components/dashboard/DashboardYearlyCharts";
 import ButtonAccount from "@/components/ButtonAccount";
 import Link from "next/link";
-export const dynamic = "force-dynamic";
 import config from "@/config";
 import logo from "@/app/icon.png";
 import Image from "next/image";
 import DashboardLabelCharts from "@/components/dashboard/DashboardLabelCharts";
 import { getCurrentMonthName } from "@/lib/utils";
+import PlaidLink from "@/components/PlaidLink";
+export const dynamic = "force-dynamic";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -33,6 +34,21 @@ export default function Dashboard() {
   ]);
   const [loading, setLoading] = useState(true);
   const [update, setUpdate] = useState(false);
+
+  const handlePlaidSuccess = (transactions) => {
+    let transactionsArray = [];
+    transactions.map((transaction) => {
+      transactionsArray.push({
+        name: transaction.name,
+        cost: transaction.amount,
+        category: "Other",
+        label: "",
+      });
+    });
+    setRows((prevRows) => [...prevRows, ...transactionsArray]);
+    console.log("Plaid connected successfully");
+    console.log(transactions);
+  };
 
   // Fetch expenses on component mount
   useEffect(() => {
@@ -74,7 +90,7 @@ export default function Dashboard() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-neutral-100">
       <div className="flex flex-col sm:gap-4 sm:py-4">
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-neutral-50 px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 text-black">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between shadow-sm px-4 sm:shadow-none sm:static sm:h-auto bg-white/50 sm:bg-transparent sm:px-6 text-black">
           <div className="bg-white p-2 rounded-lg border border-neutral-200 hover:bg-neutral-100">
             <Link
               className="flex items-center gap-2 shrink-0"
@@ -107,12 +123,12 @@ export default function Dashboard() {
               rows={monthlyExpenses}
             />
             <Expenses
+              userId={userId}
               selectedMonth={selectedMonth}
               setSelectedMonth={setSelectedMonth}
               budget={budget}
               rows={rows}
               setRows={setRows}
-              userId={userId}
               loading={loading}
               setLoading={setLoading}
               update={update}

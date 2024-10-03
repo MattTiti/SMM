@@ -84,7 +84,9 @@ const DashboardLabelCharts = ({ monthlyExpenses = [], selectedMonth }) => {
       <CardHeader className="items-center pb-0">
         <div className="flex w-full justify-between">
           <div>
-            <CardTitle>Spending by Label</CardTitle>
+            <CardTitle className="text-lg sm:text-xl">
+              Spending by Label
+            </CardTitle>
             <CardDescription>
               {capitalizeFirstLetter(selectedMonth)} 2024
             </CardDescription>
