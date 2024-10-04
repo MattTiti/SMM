@@ -31,7 +31,7 @@ export async function POST(req) {
       products: ["transactions"],
       country_codes: ["US"],
       language: "en",
-      redirect_uri: "https://showmemoney.com/dashboard",
+      redirect_uri: "https://showmemoney.app/dashboard",
     });
     console.log("Link token created successfully");
     return NextResponse.json({

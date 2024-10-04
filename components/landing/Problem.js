@@ -39,8 +39,8 @@ const Problem = () => {
           83% of Americans say they overspend
         </h2>
         <p className="max-w-xl mx-auto text-lg text-gray-600 leading-relaxed mb-12 md:mb-20">
-          Tracking payments across cards and accounts... and cash. There&apos;s
-          too much to keep up with manually.
+          Tracking payments across cards and accounts . . . and cash.
+          There&apos;s too much to keep up with manually.
         </p>
 
         <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-6">

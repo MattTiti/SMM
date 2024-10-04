@@ -2,7 +2,13 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { WandSparkles, ChartSpline, Users, NotepadText } from "lucide-react";
+import {
+  WandSparkles,
+  ChartSpline,
+  Users,
+  NotepadText,
+  CreditCard,
+} from "lucide-react";
 
 const features = [
   {
@@ -13,6 +19,15 @@ const features = [
     path: "/smart-add.mp4",
     format: "video/webm",
     icon: <WandSparkles />,
+  },
+  {
+    title: "Auto Sync",
+    description:
+      "Connect your bank account to automatically import your transactions and categorize them. No need to manually input every expense.",
+    type: "video",
+    path: "/plaid-integration.mp4",
+    format: "video/webm",
+    icon: <CreditCard />,
   },
   {
     title: "Charts",
@@ -31,15 +46,6 @@ const features = [
     path: "/organization.mp4",
     format: "video/webm",
     icon: <NotepadText />,
-  },
-  {
-    title: "Community",
-    description:
-      "As a solo developer, I’m dedicated to building a product that truly serves its users. Join our community and directly influence the development of new features.",
-    icon: <Users />,
-    type: "image",
-    path: "/community.svg",
-    format: "image/svg+xml",
   },
 ];
 
