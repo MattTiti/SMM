@@ -3,6 +3,8 @@ import { usePlaidLink } from "react-plaid-link";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { CreditCard } from "lucide-react";
+import toast from "react-hot-toast";
+
 const PlaidLink = ({ selectedMonth, onSuccess, setLoading }) => {
   const [hasExistingToken, setHasExistingToken] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +31,7 @@ const PlaidLink = ({ selectedMonth, onSuccess, setLoading }) => {
         const response = await axios.post("/api/plaid/create-link-token");
         setToken(response.data.link_token);
       } catch (error) {
+        toast.error("Error connecting to Plaid. Please try again later.");
         console.error("Error creating link token:", error);
       }
     }
@@ -42,6 +45,7 @@ const PlaidLink = ({ selectedMonth, onSuccess, setLoading }) => {
       });
       onSuccess(response.data.transactions);
     } catch (error) {
+      toast.error("Error syncing transactions");
       console.error("Error syncing transactions:", error);
     } finally {
       setLoading(false);
