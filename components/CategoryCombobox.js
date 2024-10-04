@@ -112,12 +112,12 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
           className="w-full justify-between text-black hover:bg-white hover:text-black"
         >
           {value ? (
-            <div className="flex items-center">
+            <div className="flex items-center font-normal">
               <selectedCategoryData.icon className="mr-2 h-4 w-4" />
               {selectedCategoryData.label}
             </div>
           ) : (
-            <span className="text-muted-foreground">Select category</span>
+            <span className="text-black/50 font-normal">Select category</span>
           )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

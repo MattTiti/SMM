@@ -24,8 +24,8 @@ import {
 import { FaInfoCircle } from "react-icons/fa";
 import axios from "axios";
 import { CategoryCombobox } from "@/components/CategoryCombobox";
-import { FaTrash } from "react-icons/fa";
 import { toast } from "react-hot-toast";
+import { X } from "lucide-react";
 import Spinner from "@/components/Spinner";
 import {
   Select,
@@ -250,7 +250,7 @@ const Expenses = ({
                             <Button
                               variant="ghost"
                               size="icon"
-                              className="hover:bg-muted/0 justify-start ml-2"
+                              className="hover:bg-muted/0 justify-start ml-2 text-black/70"
                             >
                               <FaInfoCircle />
                             </Button>
@@ -374,7 +374,7 @@ const Expenses = ({
                               size="icon"
                               onClick={() => handleDeleteRow(index)}
                             >
-                              <FaTrash className="text-gray-400 hover:text-gray-800" />
+                              <X className="h-5 w-5 text-black hover:text-black/60" />
                             </Button>
                           </TableCell>
                         </TableRow>

@@ -22,7 +22,7 @@ import DashboardLineChart from "./DashboardLineChart";
 import { capitalizeFirstLetter } from "@/lib/utils";
 
 const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
-  const [selectedChart, setSelectedChart] = useState("bar");
+  const [selectedChart, setSelectedChart] = useState("line");
 
   const chartConfig = {
     totalSpending: {
@@ -130,9 +130,9 @@ const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
+                <SelectItem value="line">Line</SelectItem>
                 <SelectItem value="bar">Bar</SelectItem>
                 <SelectItem value="pie">Pie</SelectItem>
-                <SelectItem value="line">Line</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

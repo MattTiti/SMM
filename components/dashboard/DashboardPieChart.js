@@ -19,7 +19,7 @@ const DashboardPieChart = ({
     <>
       {data.length === 0 || totalSpending === 0 ? (
         <div className="text-center text-sm text-black p-12 sm:p-24">
-          No data available
+          Not enough data available
         </div>
       ) : (
         <ChartContainer className="mx-auto aspect-square max-h-[250px]">

@@ -62,7 +62,7 @@ const PlaidLink = ({ selectedMonth, onSuccess, setLoading }) => {
 
   return (
     <>
-      <Button onClick={handleConnectBank}>Connect a bank account</Button>
+      <Button onClick={handleConnectBank}>Connect a Bank</Button>
       {token && (
         <PlaidLinkComponent
           token={token}
