@@ -23,9 +23,9 @@ const config = {
         priceAnchor: 69.99,
         features: [
           { name: "Smart Add" },
+          { name: "Auto Sync" },
           { name: "Charts and Visualizations" },
           { name: "Organization Tools" },
-          { name: "Access to future updates" },
         ],
         buttonMessage: "Pay now, save later.",
       },
@@ -42,9 +42,9 @@ const config = {
         priceAnchor: 99.99,
         features: [
           { name: "Smart Add" },
+          { name: "Auto Sync" },
           { name: "Charts and Visualizations" },
           { name: "Organization Tools" },
-          { name: "Access to future updates" },
           { name: "24/7 support" },
         ],
         buttonMessage: "Pay once, save forever.",

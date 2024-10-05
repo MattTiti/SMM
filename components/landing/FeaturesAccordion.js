@@ -16,25 +16,25 @@ const features = [
     description:
       "The Smart Add feature, powered by OpenAI, automatically processes and categorizes your financial data, saving you time and effort. Effortlessly input anything from plain text to bank statements.",
     type: "video",
-    path: "/smart-add.mp4",
+    path: "/smm-smart.mp4",
     format: "video/webm",
     icon: <WandSparkles />,
   },
   {
     title: "Auto Sync",
     description:
-      "Connect your bank account to automatically import your transactions and categorize them. No need to manually input every expense.",
+      "Connect to your bank to automatically import your transactions across all your accounts. No need to manually input every expense, log and categorize all your transactions in one click with Auto Sync.",
     type: "video",
-    path: "/plaid-integration.mp4",
+    path: "/smm-sync.mp4",
     format: "video/webm",
     icon: <CreditCard />,
   },
   {
     title: "Charts",
     description:
-      "Visualize your spending habits with a variety of interactive charts. Explore your data through line charts, bar charts, and pie charts, offering a clear and comprehensive view of your financial trends over time.",
+      "Visualize your spending habits with a variety of interactive charts. Explore your monthly and yearly data through line charts, bar charts, and pie charts, offering a clear and comprehensive view of your financial trends over time.",
     type: "video",
-    path: "/charts.mp4",
+    path: "/smm-charts.mp4",
     format: "video/webm",
     icon: <ChartSpline />,
   },
@@ -43,7 +43,7 @@ const features = [
     description:
       "Categorize your expenses by custom categories, months, and labels, making it easy to track and manage your spending across different periods and purposes.",
     type: "video",
-    path: "/organization.mp4",
+    path: "/smm-cat.mp4",
     format: "video/webm",
     icon: <NotepadText />,
   },

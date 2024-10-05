@@ -165,18 +165,54 @@ const Expenses = ({
   };
 
   const handlePlaidSuccess = (transactions) => {
-    let transactionsArray = [];
-    transactions.map((transaction) => {
-      transactionsArray.push({
-        name: transaction.name,
-        cost: transaction.amount,
-        category: "Other",
-        label: "",
-      });
+    let transactionsArray = transactions.map((transaction) => ({
+      name: transaction.name,
+      cost: transaction.amount,
+      category: determineCategory(transaction),
+      label: "",
+    }));
+
+    setRows((prevRows) => {
+      // Filter out any completely empty rows from prevRows
+      const filteredPrevRows = prevRows.filter(
+        (row) =>
+          row.name.trim() !== "" ||
+          row.cost.trim() !== "" ||
+          row.category.trim() !== ""
+      );
+      return [...filteredPrevRows, ...transactionsArray];
     });
-    setRows((prevRows) => [...prevRows, ...transactionsArray]);
-    console.log("Plaid connected successfully");
-    console.log(transactions);
+
+    shouldScrollRef.current = true;
+  };
+
+  const determineCategory = (transaction) => {
+    const category = transaction.category[0];
+    if (category.includes("Groceries")) {
+      return "groceries";
+    } else if (category.includes("Transportation")) {
+      return "transportation";
+    } else if (category.includes("Housing")) {
+      return "housing";
+    } else if (category.includes("Utilities")) {
+      return "utilities";
+    } else if (category.includes("Entertainment")) {
+      return "entertainment";
+    } else if (category.includes("Subscriptions")) {
+      return "subscriptions";
+    } else if (category.includes("Health")) {
+      return "health";
+    } else if (category.includes("Travel")) {
+      return "vacation";
+    } else if (
+      category.includes("Dining") ||
+      category.includes("Food") ||
+      category.includes("Restaurants")
+    ) {
+      return "dining";
+    } else {
+      return "other";
+    }
   };
 
   return (

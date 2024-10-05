@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import config from "@/config";
 import ButtonCheckout from "@/components/ButtonCheckout";
 import { Button } from "@/components/ui/button";
@@ -7,13 +8,24 @@ import Link from "next/link";
 import FallingMoney from "@/components/FallingMoney";
 
 const Hero = () => {
+  const [isHighlighted, setIsHighlighted] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsHighlighted(true), 500); // Delay the highlight effect
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden shadow-md">
       <FallingMoney />
       <div className="relative z-10 text-center px-8 max-w-3xl">
         <h1 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-8 text-gray-900">
           See how much you{" "}
-          <span className="bg-black text-white px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed sm:whitespace-nowrap">
+          <span
+            className={`highlight-transition px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed sm:whitespace-nowrap ${
+              isHighlighted ? "highlighted" : ""
+            }`}
+          >
             really
           </span>
           spend

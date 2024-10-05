@@ -117,3 +117,30 @@
     @apply bg-background text-foreground;
   }
 }
+
+.highlight-transition {
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.highlight-transition::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8%;
+  height: 75%;
+  width: 0%;
+  background-color: black;
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.highlight-transition.highlighted {
+  color: white;
+}
+
+.highlight-transition.highlighted::before {
+  width: 100%;
+}

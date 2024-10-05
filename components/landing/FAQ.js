@@ -13,6 +13,28 @@ const faqList = [
     ),
   },
   {
+    question: "Do I have to connect my bank account?",
+    answer: (
+      <div className="space-y-2 leading-relaxed">
+        No, connecting your bank account is optional. You can manually track
+        your expenses or use Smart Add without having to connect your bank
+        account.
+      </div>
+    ),
+  },
+  {
+    question: "Is it secure to connect my bank account?",
+    answer: (
+      <div className="space-y-2 leading-relaxed">
+        Yes, it is secure. We use Plaid, a secure and compliant platform, to
+        connect your bank account. We only access your transaction history for
+        auto sync, so we do not have access to any of your other financial
+        information. Additionally, we only save the transactions that you choose
+        to save.
+      </div>
+    ),
+  },
+  {
     question: "Is there a free trial?",
     answer: (
       <div className="space-y-2 leading-relaxed">
