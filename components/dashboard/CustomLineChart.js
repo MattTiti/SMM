@@ -5,7 +5,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const DashboardLineChart = ({
+const CustomLineChart = ({
   data,
   selectedKey = "month",
   dataKey = "totalSpending",
@@ -51,4 +51,4 @@ const DashboardLineChart = ({
   );
 };
 
-export default DashboardLineChart;
+export default CustomLineChart;

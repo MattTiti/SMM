@@ -16,12 +16,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import DashboardBarChart from "./DashboardBarChart";
-import DashboardPieChart from "./DashboardPieChart";
-import DashboardLineChart from "./DashboardLineChart";
+import CustomBarChart from "./CustomBarChart";
+import CustomPieChart from "./CustomPieChart";
+import CustomLineChart from "./CustomLineChart";
 import { capitalizeFirstLetter } from "@/lib/utils";
 
-const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
+const ChartsByMonth = ({ yearlyExpenses, selectedMonth }) => {
   const [selectedChart, setSelectedChart] = useState("line");
 
   const chartConfig = {
@@ -85,7 +85,7 @@ const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
     switch (selectedChart) {
       case "bar":
         return (
-          <DashboardBarChart
+          <CustomBarChart
             data={monthlySpending}
             selectedMonth={selectedMonth}
             dataKey="totalSpending"
@@ -94,7 +94,7 @@ const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
         );
       case "pie":
         return (
-          <DashboardPieChart
+          <CustomPieChart
             data={monthlySpending}
             dataKey="totalSpending"
             nameKey="month"
@@ -102,7 +102,7 @@ const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
         );
       case "line":
         return (
-          <DashboardLineChart
+          <CustomLineChart
             data={monthlySpending}
             selectedKey="month"
             dataKey="totalSpending"
@@ -165,4 +165,4 @@ const DashboardYearlyCharts = ({ yearlyExpenses, selectedMonth }) => {
   );
 };
 
-export default DashboardYearlyCharts;
+export default ChartsByMonth;

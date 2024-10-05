@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/chart";
 import { capitalizeFirstLetter, formatCurrency } from "@/lib/utils";
 
-const DashboardBarChart = ({ data, selectedMonth, chartConfig }) => {
+const CustomBarChart = ({ data, selectedMonth, chartConfig }) => {
   if (data.length <= 1) {
     return (
       <div className="text-center text-sm text-black p-12 sm:p-24">
@@ -54,4 +54,4 @@ const DashboardBarChart = ({ data, selectedMonth, chartConfig }) => {
   );
 };
 
-export default DashboardBarChart;
+export default CustomBarChart;

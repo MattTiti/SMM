@@ -1,9 +1,15 @@
 import { NextResponse } from "next/server";
 import connectMongo from "@/libs/mongoose";
 import Expense from "@/models/Expense";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/libs/next-auth";
 
 export async function GET(req) {
-  const userId = req.nextUrl.searchParams.get("userId");
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const userId = session.user.id;
   const month = req.nextUrl.searchParams.get("month");
 
   if (!userId || !month) {

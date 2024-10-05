@@ -45,7 +45,6 @@ const Expenses = ({
   budget,
   rows,
   setRows,
-  userId,
   loading,
   setLoading,
   setUpdate,
@@ -85,7 +84,6 @@ const Expenses = ({
 
     try {
       const response = await axios.put("/api/expenses", {
-        userId,
         month: selectedMonth,
         budget,
         expenses: rows,
@@ -125,7 +123,6 @@ const Expenses = ({
       try {
         // Saving the response data before updating state because the state update is async
         const saveResponse = await axios.put("/api/expenses", {
-          userId,
           month: selectedMonth,
           budget,
           expenses: newRows,
@@ -151,7 +148,6 @@ const Expenses = ({
     setRows([{ name: "", cost: "", category: "", label: "" }]);
     try {
       const response = await axios.put("/api/expenses", {
-        userId,
         month: selectedMonth,
         budget,
         expenses: [{ name: "", cost: "", category: "", label: "" }],
@@ -218,7 +214,6 @@ const Expenses = ({
   return (
     <>
       <AdvancedActions
-        userId={userId}
         selectedMonth={selectedMonth}
         handlePlaidSuccess={handlePlaidSuccess}
         open={open}

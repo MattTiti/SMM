@@ -21,13 +21,7 @@ import { Progress } from "@/components/ui/progress";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
-const DashboardSummary = ({
-  setBudget,
-  budget,
-  rows,
-  selectedMonth,
-  userId,
-}) => {
+const Summary = ({ setBudget, budget, rows, selectedMonth }) => {
   const [open, setOpen] = useState(false);
 
   // Calculate the total cost from the rows
@@ -46,7 +40,6 @@ const DashboardSummary = ({
   const handleSaveBudget = async () => {
     try {
       await axios.put("/api/expenses", {
-        userId,
         month: selectedMonth,
         budget,
         expenses: rows,
@@ -117,4 +110,4 @@ const DashboardSummary = ({
   );
 };
 
-export default DashboardSummary;
+export default Summary;

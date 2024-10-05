@@ -1,12 +1,19 @@
 import { NextResponse } from "next/server";
 import connectMongo from "@/libs/mongoose";
 import Expense from "@/models/Expense";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/libs/next-auth";
 
 export async function PUT(req) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const userId = session.user.id;
   await connectMongo();
 
   try {
-    const { userId, month, budget, expenses } = await req.json();
+    const { month, budget, expenses } = await req.json();
 
     if (!userId || !month || !budget || !expenses || !Array.isArray(expenses)) {
       return NextResponse.json({ message: "Invalid data" }, { status: 400 });

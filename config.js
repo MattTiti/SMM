@@ -24,8 +24,10 @@ const config = {
         features: [
           { name: "Smart Add" },
           { name: "Auto Sync" },
+          { name: "Email Notifications & Reports" },
           { name: "Charts and Visualizations" },
           { name: "Organization Tools" },
+          { name: "Price Lock" },
         ],
         buttonMessage: "Pay now, save later.",
       },
@@ -43,6 +45,7 @@ const config = {
         features: [
           { name: "Smart Add" },
           { name: "Auto Sync" },
+          { name: "Email Notifications & Reports" },
           { name: "Charts and Visualizations" },
           { name: "Organization Tools" },
           { name: "24/7 support" },

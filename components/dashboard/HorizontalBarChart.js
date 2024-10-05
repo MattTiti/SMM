@@ -19,7 +19,7 @@ const chartConfig = {
   },
 };
 
-const DashboardHorizontalBar = ({ data, dataKey }) => {
+const HorizontalBarChart = ({ data, dataKey }) => {
   return (
     <>
       {data.length <= 1 ? (
@@ -68,4 +68,4 @@ const DashboardHorizontalBar = ({ data, dataKey }) => {
   );
 };
 
-export default DashboardHorizontalBar;
+export default HorizontalBarChart;

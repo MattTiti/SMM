@@ -19,7 +19,6 @@ export default function FreeTrialForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId: session.user.id }),
       });
       console.log(response);
       if (response.ok) {

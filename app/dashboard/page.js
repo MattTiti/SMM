@@ -1,25 +1,23 @@
 "use client";
 import Expenses from "@/components/dashboard/Expenses";
-import DashboardSummary from "@/components/dashboard/DashboardSummary";
+import Summary from "@/components/dashboard/Summary";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import DashboardMonthlyCharts from "@/components/dashboard/DashboardMonthlyCharts";
-import DashboardYearlyCharts from "@/components/dashboard/DashboardYearlyCharts";
+import ChartsByCategory from "@/components/dashboard/ChartsByCategory";
+import ChartsByMonth from "@/components/dashboard/ChartsByMonth";
 import ButtonAccount from "@/components/ButtonAccount";
 import Link from "next/link";
 import config from "@/config";
 import logo from "@/app/icon.png";
 import Image from "next/image";
-import DashboardLabelCharts from "@/components/dashboard/DashboardLabelCharts";
+import ChartsByLabel from "@/components/dashboard/ChartsByLabel";
 import { getCurrentMonthName } from "@/lib/utils";
-import PlaidLink from "@/components/PlaidLink";
 export const dynamic = "force-dynamic";
 
 export default function Dashboard() {
   const { data: session } = useSession();
-  const userId = session?.user?.id;
   const [rows, setRows] = useState([
     { name: "", cost: "", category: "", label: "" },
   ]);
@@ -53,12 +51,10 @@ export default function Dashboard() {
   // Fetch expenses on component mount
   useEffect(() => {
     const fetchExpenses = async () => {
-      if (!userId) return;
-
       setLoading(true);
       try {
         const response = await axios.get(`/api/dashboard`, {
-          params: { userId, month: selectedMonth },
+          params: { month: selectedMonth },
         });
 
         const data = response?.data?.monthlyExpenses[0];
@@ -85,7 +81,7 @@ export default function Dashboard() {
     };
 
     fetchExpenses();
-  }, [userId, selectedMonth, update]);
+  }, [selectedMonth, update]);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-neutral-100">
@@ -115,15 +111,13 @@ export default function Dashboard() {
         </header>
         <div className="grid flex-1 grid-cols-1 gap-4 p-4 sm:px-6 sm:py-0 md:grid-cols-3 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
           <div className="md:col-span-2 space-y-4">
-            <DashboardSummary
+            <Summary
               setBudget={setBudget}
               budget={budget}
-              userId={userId}
               selectedMonth={selectedMonth}
               rows={monthlyExpenses}
             />
             <Expenses
-              userId={userId}
               selectedMonth={selectedMonth}
               setSelectedMonth={setSelectedMonth}
               budget={budget}
@@ -137,15 +131,15 @@ export default function Dashboard() {
           </div>
           <div className="self-start">
             <div className="space-y-4">
-              <DashboardMonthlyCharts
+              <ChartsByCategory
                 monthlyExpenses={monthlyExpenses}
                 selectedMonth={selectedMonth}
               />
-              <DashboardYearlyCharts
+              <ChartsByMonth
                 yearlyExpenses={yearlyExpenses}
                 selectedMonth={selectedMonth}
               />
-              <DashboardLabelCharts
+              <ChartsByLabel
                 monthlyExpenses={monthlyExpenses}
                 selectedMonth={selectedMonth}
               />

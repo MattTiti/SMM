@@ -15,11 +15,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import DashboardHorizontalBar from "./DashboardHorizontalBar";
-import DashboardPieChart from "./DashboardPieChart";
+import HorizontalBarChart from "./HorizontalBarChart";
+import CustomPieChart from "./CustomPieChart";
 import { capitalizeFirstLetter, formatCurrency } from "@/lib/utils";
 
-const DashboardMonthlyCharts = ({ monthlyExpenses = [], selectedMonth }) => {
+const ChartsByCategory = ({ monthlyExpenses = [], selectedMonth }) => {
   const [selectedChart, setSelectedChart] = useState("pie");
 
   const spendingByCategory = useMemo(() => {
@@ -57,14 +57,11 @@ const DashboardMonthlyCharts = ({ monthlyExpenses = [], selectedMonth }) => {
     switch (selectedChart) {
       case "bar":
         return (
-          <DashboardHorizontalBar
-            data={spendingByCategory}
-            dataKey="category"
-          />
+          <HorizontalBarChart data={spendingByCategory} dataKey="category" />
         );
       case "pie":
         return (
-          <DashboardPieChart
+          <CustomPieChart
             data={spendingByCategory}
             dataKey="cost"
             nameKey="category"
@@ -116,4 +113,4 @@ const DashboardMonthlyCharts = ({ monthlyExpenses = [], selectedMonth }) => {
   );
 };
 
-export default DashboardMonthlyCharts;
+export default ChartsByCategory;

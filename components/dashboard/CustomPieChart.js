@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/chart";
 import { formatCurrency } from "@/lib/utils";
 
-const DashboardPieChart = ({
+const CustomPieChart = ({
   data,
   dataKey = "totalSpending",
   nameKey = "month",
@@ -75,4 +75,4 @@ const DashboardPieChart = ({
   );
 };
 
-export default DashboardPieChart;
+export default CustomPieChart;

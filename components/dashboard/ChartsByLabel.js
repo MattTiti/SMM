@@ -15,11 +15,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import DashboardHorizontalBar from "./DashboardHorizontalBar";
-import DashboardPieChart from "./DashboardPieChart";
+import DashboardHorizontalBar from "./HorizontalBarChart";
+import DashboardPieChart from "./CustomPieChart";
 import { capitalizeFirstLetter, formatCurrency } from "@/lib/utils";
 
-const DashboardLabelCharts = ({ monthlyExpenses = [], selectedMonth }) => {
+const ChartsByLabel = ({ monthlyExpenses = [], selectedMonth }) => {
   const [selectedChart, setSelectedChart] = useState("pie");
 
   const spendingByLabel = useMemo(() => {
@@ -119,4 +119,4 @@ const DashboardLabelCharts = ({ monthlyExpenses = [], selectedMonth }) => {
   );
 };
 
-export default DashboardLabelCharts;
+export default ChartsByLabel;

@@ -20,7 +20,7 @@ export async function POST(req) {
     await connectMongo();
     console.log("Connected to MongoDB");
 
-    const { userId } = await req.json();
+    const userId = session.user.id;
     console.log("Received userId:", userId);
 
     let user = await User.findById(userId);
