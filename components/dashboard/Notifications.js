@@ -86,7 +86,7 @@ const Notifications = () => {
             />
           </div>
           <span className="text-sm text-black/50">
-            Get alerts when you're close to your budget limit
+            Get alerts when you&apos;re close to your budget limit
           </span>
           <div className="flex items-center justify-between gap-2">
             <Label htmlFor="weekly-reports" className="flex flex-col">
