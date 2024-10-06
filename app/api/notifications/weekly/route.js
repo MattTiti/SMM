@@ -4,6 +4,7 @@ import Notification from "@/models/Notification";
 import User from "@/models/User";
 import Expense from "@/models/Expense";
 import { sendEmail } from "@/libs/mailgun";
+import { formatWeeklyReport } from "@/libs/emails";
 
 export async function GET() {
   await connectMongo();
@@ -27,15 +28,32 @@ export async function GET() {
           return sum + (isNaN(cost) ? 0 : cost);
         }, 0);
 
-        const report = `Weekly Expense Report:
-        Total Spent: $${totalSpent.toFixed(2)}
-        Budget: $${parseFloat(expense.budget).toFixed(2)}
-        Remaining: $${(parseFloat(expense.budget) - totalSpent).toFixed(2)}`;
+        const budget = parseFloat(expense.budget);
+        const remaining = budget - totalSpent;
+        const percentageSpent = (totalSpent / budget) * 100;
+
+        const categorySpending = expense.expenses.reduce((acc, exp) => {
+          const category = exp.category || "Other";
+          const cost = parseFloat(exp.cost) || 0;
+          acc[category] = (acc[category] || 0) + cost;
+          return acc;
+        }, {});
+
+        const reportData = {
+          totalSpent,
+          budget,
+          remaining,
+          percentageSpent,
+          categorySpending,
+          expenses: expense.expenses,
+        };
+
+        const report = await formatWeeklyReport(reportData);
 
         await sendEmail({
           to: user.email,
           subject: "Weekly Expense Report",
-          text: report,
+          html: report,
         });
       }
     }
