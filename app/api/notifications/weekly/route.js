@@ -22,14 +22,15 @@ export async function GET() {
       });
 
       if (expense) {
-        const totalSpent = expense.expenses.reduce(
-          (sum, exp) => sum + exp.cost,
-          0
-        );
+        const totalSpent = expense.expenses.reduce((sum, exp) => {
+          const cost = parseFloat(exp.cost);
+          return sum + (isNaN(cost) ? 0 : cost);
+        }, 0);
+
         const report = `Weekly Expense Report:
         Total Spent: $${totalSpent.toFixed(2)}
-        Budget: $${expense.budget}
-        Remaining: $${(expense.budget - totalSpent).toFixed(2)}`;
+        Budget: $${parseFloat(expense.budget).toFixed(2)}
+        Remaining: $${(parseFloat(expense.budget) - totalSpent).toFixed(2)}`;
 
         await sendEmail({
           to: user.email,
