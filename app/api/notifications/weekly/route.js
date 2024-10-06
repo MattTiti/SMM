@@ -5,12 +5,16 @@ import User from "@/models/User";
 import Expense from "@/models/Expense";
 import { sendEmail } from "@/libs/mailgun";
 import { formatWeeklyReport } from "@/libs/emails";
+import { headers } from "next/headers";
 
-export async function GET() {
+export async function GET(req) {
   await connectMongo();
 
   try {
     const notifications = await Notification.find({ weeklyReports: true });
+    const headersList = headers();
+    const domain = headersList.get("host") || "localhost:3000";
+    const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
 
     for (const notification of notifications) {
       const user = await User.findById(notification.userId);
@@ -79,10 +83,16 @@ export async function GET() {
 
         const report = await formatWeeklyReport(reportData);
 
+        // Replace relative URLs with absolute URLs
+        const htmlWithAbsoluteUrls = report.replace(
+          /src="\/chart-/g,
+          `src="${protocol}://${domain}/chart-`
+        );
+
         await sendEmail({
           to: user.email,
           subject: "Weekly Expense Report",
-          html: report,
+          html: htmlWithAbsoluteUrls,
         });
       }
     }
