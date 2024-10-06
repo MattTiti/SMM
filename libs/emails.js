@@ -5,6 +5,8 @@ export async function formatWeeklyReport(data) {
     remaining,
     percentageSpent,
     categorySpending,
+    labelSpending,
+    monthlySpending,
     expenses,
   } = data;
 
@@ -22,9 +24,14 @@ export async function formatWeeklyReport(data) {
         <p>Remaining: $${remaining.toFixed(2)}</p>
         <p>Percentage Spent: ${percentageSpent.toFixed(2)}%</p>
 
-        <h2>Category-wise Spending</h2>
-        <canvas id="pieChart" width="400" height="200"></canvas>
-        <canvas id="barChart" width="400" height="200"></canvas>
+        <h2>Spending by Category</h2>
+        <canvas id="categoryPieChart" width="400" height="200"></canvas>
+
+        <h2>Spending by Label</h2>
+        <canvas id="labelPieChart" width="400" height="200"></canvas>
+
+        <h2>Spending by Month</h2>
+        <canvas id="monthlyBarChart" width="600" height="300"></canvas>
 
         <h2>Recent Expenses</h2>
         <table>
@@ -32,6 +39,7 @@ export async function formatWeeklyReport(data) {
             <th>Name</th>
             <th>Cost</th>
             <th>Category</th>
+            <th>Label</th>
           </tr>
           ${expenses
             .slice(0, 10)
@@ -41,6 +49,7 @@ export async function formatWeeklyReport(data) {
               <td>${exp.name}</td>
               <td>$${parseFloat(exp.cost).toFixed(2)}</td>
               <td>${exp.category}</td>
+              <td>${exp.label || "N/A"}</td>
             </tr>
           `
             )
@@ -48,16 +57,13 @@ export async function formatWeeklyReport(data) {
         </table>
 
         <script>
-          const categoryData = ${JSON.stringify(categorySpending)};
-          const categories = Object.keys(categoryData);
-          const values = Object.values(categoryData);
-
-          new Chart(document.getElementById('pieChart'), {
+          // Category Pie Chart
+          new Chart(document.getElementById('categoryPieChart'), {
             type: 'pie',
             data: {
-              labels: categories,
+              labels: ${JSON.stringify(Object.keys(categorySpending))},
               datasets: [{
-                data: values,
+                data: ${JSON.stringify(Object.values(categorySpending))},
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.8)',
                   'rgba(54, 162, 235, 0.8)',
@@ -67,22 +73,70 @@ export async function formatWeeklyReport(data) {
                 ],
               }]
             },
+            options: {
+              responsive: true,
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Spending by Category'
+                }
+              }
+            }
           });
 
-          new Chart(document.getElementById('barChart'), {
+          // Label Pie Chart
+          new Chart(document.getElementById('labelPieChart'), {
+            type: 'pie',
+            data: {
+              labels: ${JSON.stringify(Object.keys(labelSpending))},
+              datasets: [{
+                data: ${JSON.stringify(Object.values(labelSpending))},
+                backgroundColor: [
+                  'rgba(255, 159, 64, 0.8)',
+                  'rgba(75, 192, 192, 0.8)',
+                  'rgba(54, 162, 235, 0.8)',
+                  'rgba(153, 102, 255, 0.8)',
+                  'rgba(201, 203, 207, 0.8)',
+                ],
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Spending by Label'
+                }
+              }
+            }
+          });
+
+          // Monthly Bar Chart
+          new Chart(document.getElementById('monthlyBarChart'), {
             type: 'bar',
             data: {
-              labels: categories,
+              labels: ${JSON.stringify(Object.keys(monthlySpending))},
               datasets: [{
-                label: 'Spending by Category',
-                data: values,
+                label: 'Monthly Spending',
+                data: ${JSON.stringify(Object.values(monthlySpending))},
                 backgroundColor: 'rgba(75, 192, 192, 0.8)',
               }]
             },
             options: {
+              responsive: true,
               scales: {
                 y: {
-                  beginAtZero: true
+                  beginAtZero: true,
+                  title: {
+                    display: true,
+                    text: 'Amount Spent ($)'
+                  }
+                },
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Month'
+                  }
                 }
               }
             }

@@ -39,12 +39,41 @@ export async function GET() {
           return acc;
         }, {});
 
+        const labelSpending = expense.expenses.reduce((acc, exp) => {
+          const label = exp.label || "Unlabeled";
+          const cost = parseFloat(exp.cost) || 0;
+          acc[label] = (acc[label] || 0) + cost;
+          return acc;
+        }, {});
+
+        // Fetch expenses for the last 6 months
+        const sixMonthsAgo = new Date();
+        sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5);
+        const monthlyExpenses = await Expense.find({
+          userId: user._id,
+          createdAt: { $gte: sixMonthsAgo },
+        }).sort({ createdAt: 1 });
+
+        const monthlySpending = monthlyExpenses.reduce((acc, exp) => {
+          const month = exp.createdAt.toLocaleString("default", {
+            month: "long",
+          });
+          const totalSpent = exp.expenses.reduce(
+            (sum, e) => sum + parseFloat(e.cost || 0),
+            0
+          );
+          acc[month] = totalSpent;
+          return acc;
+        }, {});
+
         const reportData = {
           totalSpent,
           budget,
           remaining,
           percentageSpent,
           categorySpending,
+          labelSpending,
+          monthlySpending,
           expenses: expense.expenses,
         };
 
