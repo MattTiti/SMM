@@ -50,7 +50,7 @@ const features = [
   {
     title: "Notifications",
     description:
-      "Get notified when you're close to your budget limit. Set up email notifications to keep track of your spending and stay on top of your budget.",
+      "Get notified when you're close to your budget limit. Set up email notifications and connect to your bank to keep track of your spending and stay on top of your budget.",
     type: "video",
     path: "/smm-notif.mp4",
     format: "video/webm",
@@ -216,10 +216,16 @@ const FeaturesAccordion = () => {
       id="features"
     >
       <div className="px-8">
-        <h2 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-12 md:mb-24 text-gray-900 max-w-4xl">
+        <h2 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-12 md:mb-24 text-gray-900 max-w-4xl hidden sm:block">
           All you need to track your expenses and
           <span className="bg-black text-white px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed sm:whitespace-nowrap">
             start saving
+          </span>
+        </h2>
+        <h2 className="font-extrabold text-4xl tracking-tight mb-12 md:mb-24 text-gray-900 sm:hidden">
+          <p>Start tracking</p>
+          <span className="bg-black text-white px-2 leading-relaxed">
+            Start saving
           </span>
         </h2>
         <div className=" flex flex-col md:flex-row gap-12 md:gap-24">

@@ -1,6 +1,7 @@
 import config from "@/config";
 import ButtonCheckout from "@/components/ButtonCheckout";
 import InfoIcon from "@/components/InfoIcon";
+import { Badge } from "@/components/ui/badge";
 // <Pricing/> displays the pricing plans for your app
 // It's your Stripe config in config.js.stripe.plans[] that will be used to display the plans
 // <ButtonCheckout /> renders a button that will redirect the user to Stripe checkout called the /api/stripe/create-checkout API endpoint with the correct priceId
@@ -40,13 +41,24 @@ const Pricing = () => {
               )}
 
               <div className="relative flex flex-col h-full gap-5 lg:gap-8 z-10 bg-white p-8 rounded-lg shadow-md">
-                <div className="flex justify-between items-center gap-4">
-                  <div>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">
-                      {plan.name}
-                    </p>
+                <div className="flex justify-between items-center gap-4 w-full">
+                  <div className="w-full">
+                    <div className="flex justify-between w-full">
+                      <p className="text-lg lg:text-xl text-neutral-700 font-bold">
+                        {plan.name}
+                      </p>
+                      {plan.monthlyPrice && (
+                        <Badge className="bg-neutral-200 text-white">
+                          <p className="text-md text-black uppercase font-semibold">
+                            {`$${plan.monthlyPrice}/month`}
+                          </p>
+                        </Badge>
+                      )}
+                    </div>
                     {plan.description && (
-                      <p className="text-gray-600 mt-2">{plan.description}</p>
+                      <p className="text-neutral-700/80 hidden sm:block mt-2">
+                        {plan.description}
+                      </p>
                     )}
                   </div>
                 </div>

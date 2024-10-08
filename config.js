@@ -33,6 +33,7 @@ const config = {
               "If subscription prices ever rise, you'll be locked in at the price you signed up with (and you'll be able to renew yearly at the same price).",
           },
         ],
+        monthlyPrice: 3.33,
         buttonMessage: "Pay now, save later.",
       },
       {
@@ -41,7 +42,7 @@ const config = {
           process.env.NODE_ENV === "development"
             ? "price_1Q5CjDDrCLxk48BSAntMjerb"
             : "price_1Q5CjDDrCLxk48BSAntMjerb",
-        name: "Unlimited",
+        name: "Lifetime",
         mode: "payment",
         description: "A one-time payment for lifetime access",
         price: 69.99,
