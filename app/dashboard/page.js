@@ -57,7 +57,7 @@ export default function Dashboard() {
           ]
         );
 
-        setBudget(data?.budget || "0");
+        setBudget(data?.budget || "1000");
       } catch (error) {
         console.error("Error fetching expenses:", error);
         toast.error("Error fetching expenses");

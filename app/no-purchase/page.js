@@ -8,15 +8,15 @@ const NoPurchase = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <div className="bg-white overflow-hidden min-h-screen">
         <Header />
-        <div className="py-12 px-8 max-w-5xl mx-auto flex flex-col justify-center mt-20">
+        <div className="py-12 px-8 max-w-5xl mx-auto flex flex-col justify-center mt-12">
           <div className="flex flex-col text-center w-full mb-12">
             <h1 className="font-bold text-xl lg:text-3xl tracking-tight text-gray-900">
               Complete checkout to access dashboard
             </h1>
             <p className="text-sm text-black/60">
-              Already purchased?{" "}
-              <Link href="/dashboard" className="underline text-black/60">
-                Go to dashboard
+              Looking for a free trial?{" "}
+              <Link href="/free-trial" className="underline text-black/60">
+                Go here
               </Link>
             </p>
           </div>
@@ -104,6 +104,12 @@ const NoPurchase = () => {
               </div>
             ))}
           </div>
+          <p className="text-sm text-black/60 mt-4 flex justify-center">
+            Already purchased a plan?{" "}
+            <Link href="/dashboard" className="underline text-black/60 ml-1">
+              Go to dashboard
+            </Link>
+          </p>
         </div>
       </div>
     </Suspense>
