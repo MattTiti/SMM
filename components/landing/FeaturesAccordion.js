@@ -167,7 +167,7 @@ const NotificationAlert = () => {
 
 const Media = ({ feature }) => {
   const { type, path, format, alt, title } = feature;
-  const style = "rounded-2xl aspect-square w-full sm:w-[26rem]";
+  const style = "rounded-2xl aspect-square w-full sm:w-[30rem]";
   const size = {
     width: 500,
     height: 500,

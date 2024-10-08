@@ -32,7 +32,11 @@ const Header = () => {
   }, [searchParams]);
 
   return (
-    <header className="bg-white/80 backdrop-blur-sm shadow-sm fixed top-0 left-0 right-0 z-50">
+    <header
+      className={`bg-white/80 backdrop-blur-sm shadow-sm fixed top-0 left-0 right-0 z-50 ${
+        !isOpen ? "" : "h-full"
+      }`}
+    >
       <nav
         className="container flex items-center justify-between px-8 py-4 mx-auto"
         aria-label="Global"
@@ -119,7 +123,9 @@ const Header = () => {
                 width={32}
                 height={32}
               />
-              <span className="font-extrabold text-lg">{config.appName}</span>
+              <span className="font-semibold text-lg text-black">
+                {config.appName}
+              </span>
             </Link>
             <button
               type="button"
@@ -133,7 +139,7 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-6 h-6 text-black"
               >
                 <path
                   strokeLinecap="round"
@@ -145,7 +151,7 @@ const Header = () => {
           </div>
 
           {/* Your links on small screens */}
-          <div className="flow-root mt-6">
+          <div className="flow-root mt-6 z-50">
             <div className="py-4">
               <div className="flex flex-col gap-y-4 items-start">
                 {links.map((link) => (

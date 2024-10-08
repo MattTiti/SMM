@@ -202,19 +202,19 @@ const Expenses = ({
       />
       <form onSubmit={handleSave} className="lg:col-span-2">
         <Card className="sm:col-span-2">
-          <CardHeader className="pb-3 flex justify-between items-start border-b border-black/10">
+          <CardHeader className="flex justify-between items-start border-b border-black/10 px-3 sm:px-6 pb-3">
             <div className="flex w-full justify-between items-center">
               <div>
-                <CardTitle className="text-md sm:text-xl">
+                <CardTitle className="text-md hidden sm:block">
                   Track Your Expenses
                 </CardTitle>
                 <CardDescription className="hidden sm:block">
                   Enter expenses and save changes to see updated graphics
                 </CardDescription>
               </div>
-              <div className="flex items-end gap-2">
+              <div className="flex items-end gap-2 w-full sm:w-auto">
                 <Select onValueChange={setSelectedMonth} value={selectedMonth}>
-                  <SelectTrigger className="w-[60px] sm:w-[120px]">
+                  <SelectTrigger className="w-full sm:w-[120px]">
                     <SelectValue placeholder="Select Month" />
                   </SelectTrigger>
                   <SelectContent>
@@ -235,7 +235,7 @@ const Expenses = ({
                   </SelectContent>
                 </Select>
                 <Select onValueChange={setSelectedYear} value={selectedYear}>
-                  <SelectTrigger className="w-[50px] sm:w-[90px]">
+                  <SelectTrigger className="w-fullsm:w-[90px]">
                     <SelectValue placeholder="Select Year" />
                   </SelectTrigger>
                   <SelectContent>

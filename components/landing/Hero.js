@@ -30,18 +30,18 @@ const Hero = () => {
           </span>
           spend
         </h1>
-        <p className="text-lg text-gray-600 leading-relaxed mb-10">
+        <p className="text-lg text-black/50 leading-relaxed mb-10">
           AI-powered expense tracking for smarter spending and saving
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <div className="w-1/2">
+          <div className="w-full sm:w-1/2">
             <ButtonCheckout
               priceId={config.stripe.plans[1].priceId}
               mode={config.stripe.plans[1].mode}
             />
           </div>
-          <Link href="/free-trial">
-            <Button variant="outline" className="p-6">
+          <Link href="/free-trial" className="w-full sm:w-1/4">
+            <Button variant="outline" className="p-6 w-full">
               Start a free trial
               <FaArrowRight className="ml-2" size={14} />
             </Button>
