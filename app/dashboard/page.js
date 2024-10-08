@@ -1,7 +1,6 @@
 "use client";
 import Expenses from "@/components/dashboard/Expenses";
 import Summary from "@/components/dashboard/Summary";
-import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
@@ -17,13 +16,15 @@ import { getCurrentMonthName } from "@/lib/utils";
 export const dynamic = "force-dynamic";
 
 export default function Dashboard() {
-  const { data: session } = useSession();
   const [rows, setRows] = useState([
     { name: "", cost: "", category: "", label: "" },
   ]);
 
   const [selectedMonth, setSelectedMonth] = useState(getCurrentMonthName());
-  const [budget, setBudget] = useState("0");
+  const [selectedYear, setSelectedYear] = useState(
+    new Date().getFullYear().toString()
+  );
+  const [budget, setBudget] = useState("1000");
   const [monthlyExpenses, setMonthlyExpenses] = useState([
     { name: "", cost: "", category: "", label: "" },
   ]);
@@ -33,28 +34,13 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [update, setUpdate] = useState(false);
 
-  const handlePlaidSuccess = (transactions) => {
-    let transactionsArray = [];
-    transactions.map((transaction) => {
-      transactionsArray.push({
-        name: transaction.name,
-        cost: transaction.amount,
-        category: "Other",
-        label: "",
-      });
-    });
-    setRows((prevRows) => [...prevRows, ...transactionsArray]);
-    console.log("Plaid connected successfully");
-    console.log(transactions);
-  };
-
   // Fetch expenses on component mount
   useEffect(() => {
     const fetchExpenses = async () => {
       setLoading(true);
       try {
         const response = await axios.get(`/api/dashboard`, {
-          params: { month: selectedMonth },
+          params: { month: selectedMonth, year: selectedYear },
         });
 
         const data = response?.data?.monthlyExpenses[0];
@@ -81,7 +67,7 @@ export default function Dashboard() {
     };
 
     fetchExpenses();
-  }, [selectedMonth, update]);
+  }, [selectedMonth, selectedYear, update]);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-neutral-100">
@@ -120,6 +106,8 @@ export default function Dashboard() {
             <Expenses
               selectedMonth={selectedMonth}
               setSelectedMonth={setSelectedMonth}
+              selectedYear={selectedYear}
+              setSelectedYear={setSelectedYear}
               budget={budget}
               rows={rows}
               setRows={setRows}

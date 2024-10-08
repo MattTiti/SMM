@@ -11,8 +11,9 @@ export async function GET(req) {
   }
   const userId = session.user.id;
   const month = req.nextUrl.searchParams.get("month");
+  const year = req.nextUrl.searchParams.get("year");
 
-  if (!userId || !month) {
+  if (!userId || !month || !year) {
     return NextResponse.json(
       { error: "User ID and Month are required" },
       { status: 400 }
@@ -23,8 +24,8 @@ export async function GET(req) {
     await connectMongo();
 
     // Fetch expenses for the user and month
-    const monthlyExpenses = await Expense.find({ userId, month }).lean();
-    const allExpenses = await Expense.find({ userId }).lean();
+    const monthlyExpenses = await Expense.find({ userId, month, year }).lean();
+    const allExpenses = await Expense.find({ userId, year }).lean();
 
     return NextResponse.json({ monthlyExpenses, allExpenses });
   } catch (error) {

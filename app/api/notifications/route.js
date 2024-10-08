@@ -15,15 +15,26 @@ export async function POST(req) {
   try {
     // Parse the request body
     const body = await req.json();
-    const { budgetNotifications, weeklyReports, monthlyReports } = body;
+    const {
+      budgetNotifications,
+      budgetThresholds,
+      weeklyReports,
+      monthlyReports,
+    } = body;
 
     console.log("budgetNotifications", budgetNotifications);
+    console.log("budgetThresholds", budgetThresholds);
     console.log("weeklyReports", weeklyReports);
     console.log("monthlyReports", monthlyReports);
 
     const notification = await Notification.findOneAndUpdate(
       { userId: session.user.id },
-      { budgetNotifications, weeklyReports, monthlyReports },
+      {
+        budgetNotifications,
+        budgetThresholds,
+        weeklyReports,
+        monthlyReports,
+      },
       { upsert: true, new: true }
     );
     console.log("updated notification", notification);
@@ -48,8 +59,18 @@ export async function GET(req) {
     });
     if (!notification) {
       return NextResponse.json({
-        success: false,
-        message: "Notifications not found",
+        success: true,
+        data: {
+          budgetNotifications: false,
+          budgetThresholds: {
+            fifty: false,
+            seventyFive: false,
+            ninety: false,
+            hundred: false,
+          },
+          weeklyReports: false,
+          monthlyReports: false,
+        },
       });
     }
     console.log("get notification", notification);

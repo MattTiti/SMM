@@ -143,4 +143,5 @@
 
 .highlight-transition.highlighted::before {
   width: 100%;
+  rotate: -2deg;
 }

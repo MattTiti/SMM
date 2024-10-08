@@ -8,14 +8,13 @@ const WithWithout = () => {
 
         <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-12">
           <div className="bg-error/20 text-error p-8 rounded-lg w-full ">
-            <h3 className="font-bold text-lg mb-4">Our competitors</h3>
+            <h3 className="font-bold text-lg mb-3">Our competitors</h3>
 
             <ul className="list-disc list-inside space-y-1.5 ">
               {[
                 "Expensive subscriptions",
                 "Only process formatted bank statements",
                 "Complicated visualizations",
-                "Limited email reporting",
                 "Features and pages you don't need",
               ].map((item, index) => (
                 <li key={index} className="flex gap-2 items-center">
@@ -34,14 +33,13 @@ const WithWithout = () => {
           </div>
 
           <div className="bg-success/20 text-success p-8 rounded-lg w-full">
-            <h3 className="font-bold text-lg mb-4">ShowMeMoney</h3>
+            <h3 className="font-bold text-lg mb-3">ShowMeMoney</h3>
 
             <ul className="list-disc list-inside space-y-1.5 ">
               {[
                 "Affordable subscription or one-time payment",
                 `Process any bank statements or text`,
                 "Simple and comprehensive visualizations",
-                "Customizable email reports",
                 "Everything you need and nothing you don't",
               ].map((item, index) => (
                 <li key={index} className="flex gap-2 items-center">

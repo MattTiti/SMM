@@ -1,6 +1,6 @@
 import config from "@/config";
 import ButtonCheckout from "@/components/ButtonCheckout";
-
+import InfoIcon from "@/components/InfoIcon";
 // <Pricing/> displays the pricing plans for your app
 // It's your Stripe config in config.js.stripe.plans[] that will be used to display the plans
 // <ButtonCheckout /> renders a button that will redirect the user to Stripe checkout called the /api/stripe/create-checkout API endpoint with the correct priceId
@@ -91,6 +91,14 @@ const Pricing = () => {
                         </svg>
 
                         <span>{feature.name} </span>
+                        {feature.infoIcon && (
+                          <span className="-ml-2">
+                            <InfoIcon
+                              description={feature.infoIcon}
+                              type="info"
+                            />
+                          </span>
+                        )}
                       </li>
                     ))}
                   </ul>

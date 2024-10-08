@@ -24,10 +24,14 @@ const config = {
         features: [
           { name: "Smart Add" },
           { name: "Auto Sync" },
-          { name: "Email Notifications & Reports" },
+          { name: "Budget Notifications" },
           { name: "Charts and Visualizations" },
           { name: "Organization Tools" },
-          { name: "Price Lock" },
+          {
+            name: "Price Lock",
+            infoIcon:
+              "If subscription prices ever rise, you'll be locked in at the price you signed up with (and you'll be able to renew yearly at the same price).",
+          },
         ],
         buttonMessage: "Pay now, save later.",
       },
@@ -45,10 +49,10 @@ const config = {
         features: [
           { name: "Smart Add" },
           { name: "Auto Sync" },
-          { name: "Email Notifications & Reports" },
+          { name: "Budget Notifications" },
           { name: "Charts and Visualizations" },
           { name: "Organization Tools" },
-          { name: "24/7 support" },
+          { name: "No Recurring Fees" },
         ],
         buttonMessage: "Pay once, save forever.",
       },
@@ -67,7 +71,7 @@ const config = {
     toast: "#000000",
   },
   auth: {
-    loginUrl: "/api/auth/signin",
+    loginUrl: "/login",
     callbackUrl: "/dashboard",
   },
   googleAnalyticsId: "G-Y2GFJQ65SZ",

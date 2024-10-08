@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
@@ -18,8 +18,12 @@ import { toast } from "react-hot-toast";
 const Notifications = () => {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [budgetNotifications, setBudgetNotifications] = useState(false);
-  const [weeklyReports, setWeeklyReports] = useState(false);
-  const [monthlyReports, setMonthlyReports] = useState(false);
+  const [budgetThresholds, setBudgetThresholds] = useState({
+    fifty: false,
+    seventyFive: false,
+    ninety: false,
+    hundred: false,
+  });
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -28,10 +32,16 @@ const Notifications = () => {
         const { data } = response.data;
 
         if (data) {
-          const { budgetNotifications, weeklyReports, monthlyReports } = data;
+          const { budgetNotifications, budgetThresholds } = data;
           setBudgetNotifications(budgetNotifications);
-          setWeeklyReports(weeklyReports);
-          setMonthlyReports(monthlyReports);
+          setBudgetThresholds(
+            budgetThresholds || {
+              fifty: false,
+              seventyFive: false,
+              ninety: false,
+              hundred: false,
+            }
+          );
         }
       } catch (error) {
         console.error("Error fetching notifications:", error);
@@ -45,8 +55,7 @@ const Notifications = () => {
     try {
       await axios.post("/api/notifications", {
         budgetNotifications,
-        weeklyReports,
-        monthlyReports,
+        budgetThresholds,
       });
       toast.success("Preferences Saved!");
       setNotificationOpen(false);
@@ -54,6 +63,13 @@ const Notifications = () => {
       console.error("Error saving notifications:", error);
       toast.error("Failed to save notification preferences");
     }
+  };
+
+  const handleThresholdChange = (threshold) => {
+    setBudgetThresholds((prev) => ({
+      ...prev,
+      [threshold]: !prev[threshold],
+    }));
   };
 
   return (
@@ -69,7 +85,7 @@ const Notifications = () => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Notification Settings</DialogTitle>
+          <DialogTitle>Email Notification Settings</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="flex items-center justify-between gap-2">
@@ -88,32 +104,63 @@ const Notifications = () => {
           <span className="text-sm text-black/50">
             Get alerts when you&apos;re close to your budget limit
           </span>
-          <div className="flex items-center justify-between gap-2">
-            <Label htmlFor="weekly-reports" className="flex flex-col">
-              Weekly Reports
-            </Label>
-            <Switch
-              id="weekly-reports"
-              checked={weeklyReports}
-              onCheckedChange={setWeeklyReports}
-            />
-          </div>
-          <span className="text-sm text-black/50">
-            Receive a weekly expense report
-          </span>
-          <div className="flex items-center justify-between gap-2">
-            <Label htmlFor="monthly-reports" className="flex flex-col">
-              Monthly Reports
-            </Label>
-            <Switch
-              id="monthly-reports"
-              checked={monthlyReports}
-              onCheckedChange={setMonthlyReports}
-            />
-          </div>
-          <span className="text-sm text-black/50">
-            Receive a monthly expense report
-          </span>
+
+          {budgetNotifications && (
+            <div className="ml-4 space-y-2">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="fifty"
+                  checked={budgetThresholds.fifty}
+                  onCheckedChange={() => handleThresholdChange("fifty")}
+                />
+                <label
+                  htmlFor="fifty"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  50% of budget
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="seventyFive"
+                  checked={budgetThresholds.seventyFive}
+                  onCheckedChange={() => handleThresholdChange("seventyFive")}
+                />
+                <label
+                  htmlFor="seventyFive"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  75% of budget
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="ninety"
+                  checked={budgetThresholds.ninety}
+                  onCheckedChange={() => handleThresholdChange("ninety")}
+                />
+                <label
+                  htmlFor="ninety"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  90% of budget
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="hundred"
+                  checked={budgetThresholds.hundred}
+                  onCheckedChange={() => handleThresholdChange("hundred")}
+                />
+                <label
+                  htmlFor="hundred"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  100% of budget
+                </label>
+              </div>
+            </div>
+          )}
         </div>
         <div className="mt-6">
           <Button onClick={handleSave} className="w-full">

@@ -38,10 +38,13 @@ import {
 } from "@/components/ui/select";
 import ExpensesFooter from "./ExpensesFooter";
 import AdvancedActions from "./AdvancedActions";
+import { determineCategory } from "@/lib/utils";
 
 const Expenses = ({
   selectedMonth,
   setSelectedMonth,
+  selectedYear,
+  setSelectedYear,
   budget,
   rows,
   setRows,
@@ -85,6 +88,7 @@ const Expenses = ({
     try {
       const response = await axios.put("/api/expenses", {
         month: selectedMonth,
+        year: selectedYear,
         budget,
         expenses: rows,
       });
@@ -149,6 +153,7 @@ const Expenses = ({
     try {
       const response = await axios.put("/api/expenses", {
         month: selectedMonth,
+        year: selectedYear,
         budget,
         expenses: [{ name: "", cost: "", category: "", label: "" }],
       });
@@ -182,35 +187,6 @@ const Expenses = ({
     shouldScrollRef.current = true;
   };
 
-  const determineCategory = (transaction) => {
-    const category = transaction.category[0];
-    if (category.includes("Groceries")) {
-      return "groceries";
-    } else if (category.includes("Transportation")) {
-      return "transportation";
-    } else if (category.includes("Housing")) {
-      return "housing";
-    } else if (category.includes("Utilities")) {
-      return "utilities";
-    } else if (category.includes("Entertainment")) {
-      return "entertainment";
-    } else if (category.includes("Subscriptions")) {
-      return "subscriptions";
-    } else if (category.includes("Health")) {
-      return "health";
-    } else if (category.includes("Travel")) {
-      return "vacation";
-    } else if (
-      category.includes("Dining") ||
-      category.includes("Food") ||
-      category.includes("Restaurants")
-    ) {
-      return "dining";
-    } else {
-      return "other";
-    }
-  };
-
   return (
     <>
       <AdvancedActions
@@ -236,27 +212,41 @@ const Expenses = ({
                   Enter expenses and save changes to see updated graphics
                 </CardDescription>
               </div>
-              <Select onValueChange={setSelectedMonth} value={selectedMonth}>
-                <SelectTrigger className="w-[100px] sm:w-[180px]">
-                  <SelectValue placeholder="Select Month" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="january">January</SelectItem>
-                    <SelectItem value="february">February</SelectItem>
-                    <SelectItem value="march">March</SelectItem>
-                    <SelectItem value="april">April</SelectItem>
-                    <SelectItem value="may">May</SelectItem>
-                    <SelectItem value="june">June</SelectItem>
-                    <SelectItem value="july">July</SelectItem>
-                    <SelectItem value="august">August</SelectItem>
-                    <SelectItem value="september">September</SelectItem>
-                    <SelectItem value="october">October</SelectItem>
-                    <SelectItem value="november">November</SelectItem>
-                    <SelectItem value="december">December</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              <div className="flex items-end gap-2">
+                <Select onValueChange={setSelectedMonth} value={selectedMonth}>
+                  <SelectTrigger className="w-[60px] sm:w-[120px]">
+                    <SelectValue placeholder="Select Month" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="january">January</SelectItem>
+                      <SelectItem value="february">February</SelectItem>
+                      <SelectItem value="march">March</SelectItem>
+                      <SelectItem value="april">April</SelectItem>
+                      <SelectItem value="may">May</SelectItem>
+                      <SelectItem value="june">June</SelectItem>
+                      <SelectItem value="july">July</SelectItem>
+                      <SelectItem value="august">August</SelectItem>
+                      <SelectItem value="september">September</SelectItem>
+                      <SelectItem value="october">October</SelectItem>
+                      <SelectItem value="november">November</SelectItem>
+                      <SelectItem value="december">December</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Select onValueChange={setSelectedYear} value={selectedYear}>
+                  <SelectTrigger className="w-[50px] sm:w-[90px]">
+                    <SelectValue placeholder="Select Year" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="2023">2023</SelectItem>
+                      <SelectItem value="2024">2024</SelectItem>
+                      <SelectItem value="2025">2025</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </CardHeader>
           <CardContent className="p-0">

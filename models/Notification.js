@@ -10,6 +10,12 @@ const NotificationSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  budgetThresholds: {
+    fifty: { type: Boolean, default: false },
+    seventyFive: { type: Boolean, default: false },
+    ninety: { type: Boolean, default: false },
+    hundred: { type: Boolean, default: false },
+  },
   weeklyReports: {
     type: Boolean,
     default: false,

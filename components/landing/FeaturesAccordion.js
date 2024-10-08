@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import {
   WandSparkles,
   ChartSpline,
-  Users,
+  Bell,
   NotepadText,
   CreditCard,
 } from "lucide-react";
@@ -46,6 +46,15 @@ const features = [
     path: "/smm-cat.mp4",
     format: "video/webm",
     icon: <NotepadText />,
+  },
+  {
+    title: "Notifications",
+    description:
+      "Get notified when you're close to your budget limit. Set up email notifications to keep track of your spending and stay on top of your budget.",
+    type: "video",
+    path: "/smm-notif.mp4",
+    format: "video/webm",
+    icon: <Bell />,
   },
 ];
 
@@ -93,17 +102,80 @@ const Item = ({ feature, isOpen, setFeatureSelected }) => {
   );
 };
 
-// A component to display the media (video or image) of the feature. If the type is not specified, it will display an empty div.
-// Video are set to autoplay for best UX.
+const NotificationAlert = () => {
+  const [visibleNotifications, setVisibleNotifications] = useState([]);
+  const notifications = [
+    { id: 1, message: "You've reached 100% of your budget.", time: "now" },
+    { id: 2, message: "You've reached 90% of your budget.", time: "2h ago" },
+    { id: 3, message: "You've reached 80% of your budget.", time: "8h ago" },
+    { id: 4, message: "You've reached 50% of your budget.", time: "Yesterday" },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setVisibleNotifications((prev) => {
+        if (prev.length < notifications.length) {
+          return [
+            notifications[notifications.length - 1 - prev.length],
+            ...prev,
+          ];
+        }
+        return prev;
+      });
+    }, 1500);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="bg-transparent overflow-hidden flex flex-col gap-4 transition-all duration-700 ease-in-out py-4">
+      {visibleNotifications.map((notification, index) => (
+        <div
+          key={notification.id}
+          className="flex items-center p-4 shadow-md rounded-lg bg-neutral-100 transform transition-all duration-700 ease-in-out"
+          style={{
+            opacity: 0,
+            transform: "translateY(-20px)",
+            animation: `fadeSlideIn 700ms ease-out ${index * 150}ms forwards`,
+          }}
+        >
+          <div className="bg-black p-2 rounded-full mr-4">
+            <Bell className="text-white" size={24} />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-sm font-semibold text-gray-900">ShowMeMoney</h3>
+            <p className="text-xs text-gray-600 mt-1">{notification.message}</p>
+          </div>
+          <span className="text-xs text-gray-400">{notification.time}</span>
+        </div>
+      ))}
+      <style jsx>{`
+        @keyframes fadeSlideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
 const Media = ({ feature }) => {
-  const { type, path, format, alt } = feature;
+  const { type, path, format, alt, title } = feature;
   const style = "rounded-2xl aspect-square w-full sm:w-[26rem]";
   const size = {
     width: 500,
     height: 500,
   };
 
-  if (type === "video") {
+  if (title === "Notifications") {
+    return <NotificationAlert />;
+  } else if (type === "video") {
     return (
       <video
         className={style}

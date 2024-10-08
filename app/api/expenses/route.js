@@ -13,15 +13,22 @@ export async function PUT(req) {
   await connectMongo();
 
   try {
-    const { month, budget, expenses } = await req.json();
+    const { month, year, budget, expenses } = await req.json();
 
-    if (!userId || !month || !budget || !expenses || !Array.isArray(expenses)) {
+    if (
+      !userId ||
+      !month ||
+      !budget ||
+      !expenses ||
+      !year ||
+      !Array.isArray(expenses)
+    ) {
       return NextResponse.json({ message: "Invalid data" }, { status: 400 });
     }
 
     // Find the user's existing expenses for the selected month and update them with the new list and budget
     const result = await Expense.findOneAndUpdate(
-      { userId, month }, // Find by userId and month
+      { userId, month, year }, // Find by userId, month, and year
       { budget, expenses }, // Replace expenses and budget with the new data
       { new: true, upsert: true } // Create if doesn't exist and return the new document
     );

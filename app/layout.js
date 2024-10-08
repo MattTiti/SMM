@@ -7,7 +7,7 @@ import "./globals.css";
 const font = Inter({ subsets: ["latin"] });
 
 export const viewport = {
-  themeColor: config.colors.main,
+  themeColor: "#fff",
   width: "device-width",
   initialScale: 1,
 };
