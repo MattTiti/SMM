@@ -102,6 +102,7 @@ export default function Dashboard() {
               budget={budget}
               selectedMonth={selectedMonth}
               rows={monthlyExpenses}
+              selectedYear={selectedYear}
             />
             <Expenses
               selectedMonth={selectedMonth}

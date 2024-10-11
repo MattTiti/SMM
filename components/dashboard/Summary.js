@@ -21,7 +21,7 @@ import { Progress } from "@/components/ui/progress";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
-const Summary = ({ setBudget, budget, rows, selectedMonth }) => {
+const Summary = ({ setBudget, budget, rows, selectedMonth, selectedYear }) => {
   const [open, setOpen] = useState(false);
 
   // Calculate the total cost from the rows
@@ -43,6 +43,7 @@ const Summary = ({ setBudget, budget, rows, selectedMonth }) => {
         month: selectedMonth,
         budget,
         expenses: rows,
+        year: selectedYear,
       });
       toast.success("Budget saved successfully!");
     } catch (error) {

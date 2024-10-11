@@ -25,6 +25,7 @@ import {
   Heart,
   Plane,
   MoreHorizontal,
+  ShoppingBag,
 } from "lucide-react";
 
 const categories = [
@@ -67,6 +68,11 @@ const categories = [
     value: "vacation",
     label: "Vacation",
     icon: Plane,
+  },
+  {
+    value: "shopping",
+    label: "Shopping",
+    icon: ShoppingBag,
   },
   {
     value: "other",
@@ -125,7 +131,7 @@ export function CategoryCombobox({ selectedCategory, onCategoryChange }) {
       <PopoverContent className="w-full p-0 bg-white">
         <Command className="bg-white">
           <CommandInput placeholder="Search category..." />
-          <CommandList>
+          <CommandList className="min-h-[330px] overflow-y-auto">
             <CommandEmpty>No category found.</CommandEmpty>
             <CommandGroup>
               {categories.map((category) => (

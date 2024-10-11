@@ -107,6 +107,7 @@ const Expenses = ({
       const response = await axios.post("/api/parse", {
         bankStatement: smartAddValue,
       });
+      console.log(response.data);
 
       const newExpenses = Array.isArray(response.data.expenses)
         ? response.data.expenses
@@ -122,23 +123,8 @@ const Expenses = ({
           row.category.trim() !== ""
       );
 
+      setRows(newRows);
       shouldScrollRef.current = true;
-
-      try {
-        // Saving the response data before updating state because the state update is async
-        const saveResponse = await axios.put("/api/expenses", {
-          month: selectedMonth,
-          budget,
-          expenses: newRows,
-        });
-
-        toast.success("Expenses saved successfully!");
-      } catch (error) {
-        toast.error("Error saving expenses");
-      } finally {
-        setLoading(false);
-        setUpdate(!update);
-      }
       setOpen(false);
     } catch (error) {
       toast.error("Error using OpenAI to parse expenses");

@@ -44,6 +44,7 @@
     --color-subscriptions:  250 60% 50%;
     --color-health:  0 72.2% 50.6%;
     --color-vacation: 420 75% 55%;
+    --color-shopping: 200 70% 55%;
     --color-yellow: 45 93% 47%;
     --color-green: 139 64% 45%;
     --color-red:  0 72.2% 50.6%;
@@ -95,6 +96,7 @@
     --color-groceries: 220 70% 50%;
     --color-entertainment: 160 60% 45%;
     --color-dining: 30 80% 55%;
+    --color-shopping: 200 70% 55%;
     --color-transportation: 280 65% 60%;
     --color-other:  340 75% 55%;
     --color-housing:  190 60% 50%;

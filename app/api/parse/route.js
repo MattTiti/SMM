@@ -22,7 +22,7 @@ export async function POST(req) {
           content: `Please extract the expenses from the following bank statement. For each expense:
 - **Name**: Take the name exactly as it appears in the statement.
 - **Cost**: Take the cost as a numeric value directly from the statement.
-- **Category**: Infer the category from the context using these categories: groceries, dining, entertainment, transportation, housing, subscriptions, health, vacation, and other.
+- **Category**: Infer the category from the context using these categories: groceries, dining, entertainment, transportation, housing, subscriptions, health, vacation, shopping, and other.
 
 **Do not generate or infer names or costs that are not explicitly mentioned in the bank statement.** Return the data as a valid JSON string array in this format:
 \`[{"name": "Exact name from statement", "cost": "Cost from statement", "category": "Inferred category"}]\`
