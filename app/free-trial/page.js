@@ -18,9 +18,9 @@ export default function FreeTrialPage() {
             <ul className="space-y-4 mb-8">
               {[
                 "Smart Add",
+                "Auto Sync",
                 "Charts and Visualizations",
                 "Organization Tools",
-                "Access to future updates",
               ].map((feature, index) => (
                 <li key={index} className="flex items-center text-gray-600">
                   <svg
