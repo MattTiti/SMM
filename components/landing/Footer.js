@@ -40,6 +40,20 @@ const Footer = () => {
           <div className="flex-grow flex flex-wrap justify-center -mb-10 md:mt-0 mt-10 text-center text-black/60">
             <div className="lg:w-1/3 md:w-1/2 w-full px-4">
               <div className="footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3">
+                LEGAL
+              </div>
+
+              <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
+                <Link href="/tos" className="link link-hover">
+                  Terms of services
+                </Link>
+                <Link href="/privacy-policy" className="link link-hover">
+                  Privacy policy
+                </Link>
+              </div>
+            </div>
+            <div className="lg:w-1/3 md:w-1/2 w-full px-4">
+              <div className="footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3">
                 LINKS
               </div>
 
@@ -57,21 +71,18 @@ const Footer = () => {
                 <Link href="/#pricing" className="link link-hover">
                   Pricing
                 </Link>
-              </div>
-            </div>
-
-            <div className="lg:w-1/3 md:w-1/2 w-full px-4">
-              <div className="footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3">
-                LEGAL
-              </div>
-
-              <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
-                <Link href="/tos" className="link link-hover">
-                  Terms of services
-                </Link>
-                <Link href="/privacy-policy" className="link link-hover">
-                  Privacy policy
-                </Link>
+                <div className="">
+                  <a
+                    href="https://theresanaiforthat.com/ai/showmemoney/?ref=featured&v=2981268"
+                    target="_blank"
+                    rel="nofollow"
+                  >
+                    <img
+                      width="300"
+                      src="https://media.theresanaiforthat.com/featured-on-taaft.png?width=600"
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
