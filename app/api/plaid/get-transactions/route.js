@@ -61,9 +61,6 @@ export async function POST(req) {
     const startDate = new Date(currentYear, monthIndex, 1);
     const endDate = new Date(currentYear, monthIndex + 1, 0);
 
-    console.log("Start Date:", startDate.toISOString());
-    console.log("End Date:", endDate.toISOString());
-
     const request = {
       access_token: accessToken,
       start_date: startDate.toISOString().split("T")[0],
@@ -72,7 +69,6 @@ export async function POST(req) {
 
     const response = await plaidClient.transactionsGet(request);
     let transactions = response.data.transactions;
-    console.log("Number of transactions fetched:", transactions.length);
 
     return NextResponse.json({ transactions });
   } catch (error) {
