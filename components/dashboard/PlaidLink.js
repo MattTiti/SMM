@@ -23,7 +23,7 @@ const PlaidLink = ({ selectedMonth, onSuccess, setLoading }) => {
     };
 
     checkExistingToken();
-  }, []);
+  }, [token]);
 
   const handleConnectBank = useCallback(async () => {
     if (!hasExistingToken) {
