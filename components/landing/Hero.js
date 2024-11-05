@@ -42,7 +42,7 @@ const Hero = () => {
               mode={config.stripe.plans[1].mode}
             />
           </div>
-          <Link href="/free-trial" className="w-full sm:w-1/4">
+          <Link href="/free-trial" className="w-full sm:w-1/3">
             <Button variant="outline" className="p-6 w-full">
               Start a free trial
               <FaArrowRight className="ml-2" size={14} />
