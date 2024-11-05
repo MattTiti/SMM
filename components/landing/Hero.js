@@ -20,15 +20,17 @@ const Hero = () => {
       <FallingMoney />
       <div className="relative z-10 text-center px-8 max-w-3xl">
         <h1 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-8 text-gray-900">
-          See how much you{" "}
-          <span
-            className={`highlight-transition px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed sm:whitespace-nowrap ${
-              isHighlighted ? "highlighted" : ""
-            }`}
-          >
-            really
-          </span>
-          spend
+          <div>See how much you</div>
+          <div>
+            <span
+              className={`highlight-transition px-2 md:px-4 leading-relaxed inline-block ${
+                isHighlighted ? "highlighted" : ""
+              }`}
+            >
+              really
+            </span>{" "}
+            spend
+          </div>
         </h1>
         <p className="text-lg text-black/50 leading-relaxed mb-10">
           AI-powered expense tracking for smarter spending and saving
