@@ -28,7 +28,12 @@ export default async function LayoutPrivate({ children }) {
   const now = new Date();
 
   // Check if trial has ended
-  if (user.hasAccess && user.trialEnd && now > user.trialEnd) {
+  if (
+    user.hasAccess &&
+    !user.customerId &&
+    user.trialEnd &&
+    now > user.trialEnd
+  ) {
     user.hasAccess = false;
     await user.save();
   }
